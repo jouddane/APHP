@@ -17,9 +17,11 @@ public class Probleme {
 	private int[][][][] q_ijkr;
 	private int[] p_i;
 	
+	private int[][][] X_ijk;
+	
 	public Probleme(int nParcours, int nPatients, int nRessources, int nPeriodes, int hOuverture, int hFermeture,
 			int a_MAX, int a_MIN, int[] nG_i, int[][] nS_ij, int[][] cp_ij, int[][][] l_ijk, int[][][][] q_ijkr,
-			int[] p_i) {
+			int[] p_i, int[][][] X_ijk) {
 		this.nParcours = nParcours;
 		this.nPatients = nPatients;
 		this.nRessources = nRessources;
@@ -34,6 +36,15 @@ public class Probleme {
 		this.l_ijk = l_ijk;
 		this.q_ijkr = q_ijkr;
 		this.p_i = p_i;
+		this.X_ijk = X_ijk;
+	}
+
+	public int[][][] getX_ijk() {
+		return X_ijk;
+	}
+
+	public void setX_ijk(int[][][] x_ijk) {
+		X_ijk = x_ijk;
 	}
 
 	public int getnParcours() {
