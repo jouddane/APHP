@@ -13,8 +13,12 @@ public class Ressource {
 		this(0);
 	}
 	
-	public void diminuerDe(int quantite){
+	public void diminuerDisponibilite(int quantite){
 		this.quantiteUtilisee += quantite;
+	}
+	
+	public void augmenterDisponibilite(int quantite){
+		this.quantiteUtilisee -= quantite;
 	}
 	
 	public int quantiteDisponible(){

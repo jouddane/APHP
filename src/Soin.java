@@ -1,23 +1,22 @@
 
 public class Soin {
 
-	private int debut;
-	private int duree;
+	protected int duree;
+	protected int[] ressourcesNecessaires;
 	
-	public Soin(int debut, int duree){
-		this.debut = debut;
+	public Soin(int duree){
 		this.duree = duree;
 	}
 	
 	public Soin(){
-		this(0,0);
-	}
-	
-	public int getDebut(){
-		return this.debut;
+		this(0);
 	}
 	
 	public int getDuree(){
 		return this.duree;
+	}
+	
+	public int[] getRessourcesNecessaires(){
+		return this.ressourcesNecessaires;
 	}
 }

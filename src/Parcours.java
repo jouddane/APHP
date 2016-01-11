@@ -1,25 +1,31 @@
 
 public class Parcours {
 
-	private int nombreDeSoins;
-	private Groupe_Soins[] groupeSoins;
+	protected int nombreDeSoins;
+	protected int nombreDeGroupes;
+	protected GroupeSoins[] groupeSoins;
 	
-	public Parcours(Groupe_Soins[] groupeSoins){
-		this.nombreDeSoins = groupeSoins.length;
-		this.groupeSoins = groupeSoins;
+	public Parcours(GroupeSoins[] groupesSoins){
+		this.nombreDeGroupes = groupesSoins.length;
+		this.nombreDeSoins=0;
+		for(GroupeSoins g : groupesSoins)
+			this.nombreDeSoins+=g.getNombreDeSoins();
+		this.groupeSoins = groupesSoins;
 	}
 	
 	public Parcours(){
-		this(new Groupe_Soins[0]);
+		this(new GroupeSoins[0]);
 	}
 
-	public int getNombreDeSoins() {
-		return nombreDeSoins;
+	public int getNombreDeGroupes() {
+		return nombreDeGroupes;
 	}
 
-	public Groupe_Soins[] getGroupeSoins() {
+	public GroupeSoins[] getGroupeSoins() {
 		return groupeSoins;
 	}
 	
-	
+	public int getNombreDeSoins(){
+		return this.nombreDeSoins;
+	}
 }

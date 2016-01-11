@@ -1,11 +1,11 @@
 
 public class Patient {
 
-	private Parcours parcours;
+	private ParcoursAffecte parcours;
 	private Date dateRDV;
 	
 	public Patient(Parcours parcours, Date dateRDV){
-		this.parcours = parcours;
+		this.parcours = new ParcoursAffecte(parcours);
 		this.dateRDV = dateRDV;
 	}
 	
@@ -17,7 +17,7 @@ public class Patient {
 		return this.parcours;
 	}
 	
-	public void setParcours(Parcours parcours){
+	public void setParcours(ParcoursAffecte parcours){
 		this.parcours = parcours;
 	}
 	
