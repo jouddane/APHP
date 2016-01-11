@@ -63,12 +63,17 @@ public class Resolution {
         // 4. Definition de la strategie de resolution
         //solver.set(IntStrategyFactory.lexico_LB(x, y));
         
-        // 5. Definition de la fonction objective
-        ResolutionPolicy objectif ;
+        // 5. Definition de la fonction objectif	
+        IntVar objective = FonctionObjectif.minimiserTemps(X, aResoudre, solver);
         
         // 6. Lancement de la resolution
-        //solver.findOptimalSolution(policy);
+        solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+        //System.out.println("Solution ? "+solver.findSolution());
         // 7.  Affichage des statistiques de la resolution
         Chatterbox.printStatistics(solver);
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 }
