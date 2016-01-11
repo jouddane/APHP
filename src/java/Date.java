@@ -1,6 +1,3 @@
-package src;
-
-
 package java;
 
 public class Date {
