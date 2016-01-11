@@ -1,6 +1,6 @@
 package choco;
 
-import java.Probleme;
+import dev.Probleme;
 
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.variables.IntVar;
