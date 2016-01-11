@@ -1,3 +1,4 @@
+package java;
 
 public class SoinAffecte extends Soin{
 
