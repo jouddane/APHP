@@ -17,7 +17,6 @@ public class Probleme {
 	private int[][][][] q_ijkr;
 	private int[] p_i;
 	
-	private int[][][] X_ijk;
 	
 	public Probleme(int nParcours, int nPatients, int nRessources, int nPeriodes, int hOuverture, int hFermeture,
 			int a_MAX, int a_MIN, int[] nG_i, int[][] nS_ij, int[][] cp_ij, int[][][] l_ijk, int[][][][] q_ijkr,
@@ -36,16 +35,73 @@ public class Probleme {
 		this.l_ijk = l_ijk;
 		this.q_ijkr = q_ijkr;
 		this.p_i = p_i;
-		this.X_ijk = X_ijk;
+	}
+	
+	public Probleme(Donnees donnees){
+		this.nParcours = donnees.getParcours().length;
+		this.nPatients = donnees.getPatients().length;
+		this.nRessources = donnees.getRessources().length;
+		this.nPeriodes = donnees.getnPeriodes();
+		this.HOuverture = donnees.getHOuverture();
+		this.HFermeture = donnees.getHFermeture();
+		this.A_MAX = donnees.getA_MAX();
+		this.A_MIN = donnees.getA_MIN();
+		this.nG_i = new int[nParcours];
+		for (int i = 0; i < nParcours; i++) {
+			this.nG_i[i]=donnees.getParcours()[i].getNombreDeGroupes();
+		}
+		
+		//A modifier sur le modele, indices inverses
+		this.nS_ij = new int[nParcours][];
+		for (int i = 0; i < nParcours; i++) {
+			this.nS_ij[i] = new int[this.nG_i[i]];
+			for (int j = 0; j < nG_i[i]; j++) {
+				this.nS_ij[i][j]=donnees.getParcours()[i].getGroupeSoins()[j].nombreDeSoins;
+			}
+		}
+		
+		//A modifier sur le modele, indices inverses
+		this.cp_ij = new int[nRessources][nPeriodes];
+		for (int i = 0; i < nRessources; i++) {
+			this.cp_ij[i]=donnees.getRessources()[i].getCapaciteMaxPeriodeP();
+		}
+		
+		//A modifier sur le modele, indices inverses
+		this.l_ijk = new int[nParcours][][];
+		for (int i = 0; i < nParcours; i++) {
+			this.l_ijk[i] = new int[this.nG_i[i]][];
+			for (int j = 0; j < nG_i[i]; j++) {
+				this.l_ijk[i][j] = new int[this.nS_ij[i][j]];
+				for (int k = 0; k <this.nS_ij[i][j]; k++) {
+					this.l_ijk[i][j][k]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].getDuree();
+				}	
+			}
+		}
+		
+		
+		
+		this.q_ijkr = new int[nParcours][][][];
+		for (int i = 0; i < nParcours; i++) {
+			this.q_ijkr[i] = new int[this.nG_i[i]][][];
+			for (int j = 0; j < nG_i[i]; j++) {
+				this.q_ijkr[i][j] = new int[this.nS_ij[i][j]][];
+				for (int k = 0; k <this.nS_ij[i][j]; k++) {
+					this.q_ijkr[i][j][k]=new int[nRessources];
+					for (int r = 0; r < nRessources; r++) {
+						this.q_ijkr[i][j][k][r]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].ressourcesNecessaires[r];
+					}
+				}	
+			}
+		}
+		
+		this.p_i = new int[nPatients];
+		for (int i = 0; i < nPatients; i++) {
+			this.p_i[i]=donnees.getPatients()[i].getParcours().getIndiceParcours();
+		}
+		
 	}
 
-	public int[][][] getX_ijk() {
-		return X_ijk;
-	}
 
-	public void setX_ijk(int[][][] x_ijk) {
-		X_ijk = x_ijk;
-	}
 
 	public int getnParcours() {
 		return nParcours;
@@ -158,6 +214,5 @@ public class Probleme {
 	public void setP_i(int[] p_i) {
 		this.p_i = p_i;
 	}
-	
-	
+		
 }

@@ -29,4 +29,8 @@ public class GroupeSoins {
 	public int getNombreDeSoins(){
 		return this.nombreDeSoins;
 	}
+	
+	public void ajoutSoin(Soin soin){
+		
+	}
 }

@@ -2,16 +2,16 @@ package java;
 
 public class Ressource {
 
-	private int quantiteMax;
+	private int[] capaciteMaxPeriodeP;
 	private int quantiteUtilisee;
 	
-	public Ressource(int quantiteMax){
-		this.quantiteMax = quantiteMax;
+	public Ressource(int[] capaciteMaxPeriodeP){
+		this.capaciteMaxPeriodeP = capaciteMaxPeriodeP;
 		this.quantiteUtilisee = 0;
 	}
 	
-	public Ressource(){
-		this(0);
+	public Ressource(int nPeriodes){
+		this(new int[nPeriodes]);
 	}
 	
 	public void diminuerDisponibilite(int quantite){
@@ -22,11 +22,11 @@ public class Ressource {
 		this.quantiteUtilisee -= quantite;
 	}
 	
-	public int quantiteDisponible(){
-		return quantiteMax - quantiteUtilisee;
+	public void setCapaciteMaxPeriodeP(int[] capaciteMaxPeriodeP) {
+		this.capaciteMaxPeriodeP = capaciteMaxPeriodeP;
 	}
 	
-	public int getQuantiteMax(){
-		return quantiteMax;
+	public int[] getCapaciteMaxPeriodeP() {
+		return capaciteMaxPeriodeP;
 	}
 }

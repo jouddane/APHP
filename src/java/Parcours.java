@@ -5,6 +5,7 @@ public class Parcours {
 	protected int nombreDeSoins;
 	protected int nombreDeGroupes;
 	protected GroupeSoins[] groupeSoins;
+	protected int indiceParcours;
 	
 	public Parcours(GroupeSoins[] groupesSoins){
 		this.nombreDeGroupes = groupesSoins.length;
@@ -28,5 +29,17 @@ public class Parcours {
 	
 	public int getNombreDeSoins(){
 		return this.nombreDeSoins;
+	}
+	
+	public void setIndiceParcours(int indiceParcours) {
+		this.indiceParcours = indiceParcours;
+	}
+	
+	public int getIndiceParcours() {
+		return indiceParcours;
+	}
+	
+	public void ajoutGroupeSoins(GroupeSoins groupeSoins){
+		
 	}
 }
