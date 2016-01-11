@@ -39,7 +39,13 @@ public class Parcours {
 		return indiceParcours;
 	}
 	
-	public void ajoutGroupeSoins(GroupeSoins groupeSoins){
-		
+	public void ajoutGroupeSoins(GroupeSoins groupeSoins2){
+		int n= this.groupeSoins.length;
+		GroupeSoins[] groupeSoinsNew = new GroupeSoins[n+1];
+		for (int i = 0; i < n; i++) {
+			groupeSoinsNew[i]=this.groupeSoins[i];
+		}
+		groupeSoinsNew[n]=groupeSoins2;
+		this.groupeSoins = groupeSoinsNew;
 	}
 }

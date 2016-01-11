@@ -31,6 +31,12 @@ public class GroupeSoins {
 	}
 	
 	public void ajoutSoin(Soin soin){
-		
+		int n= this.soins.length;
+		Soin[] soinsNew = new Soin[n+1];
+		for (int i = 0; i < n; i++) {
+			soinsNew[i]=this.soins[i];
+		}
+		soinsNew[n]=soin;
+		this.soins = soinsNew;
 	}
 }
