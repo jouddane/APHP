@@ -11,15 +11,14 @@ public class Resolution {
 	private Probleme aResoudre;
 
 	public Resolution(Probleme aResoudre) {
-		super();
 		this.aResoudre = aResoudre;
 	}
 
-	public Probleme getaResoudre() {
+	public Probleme getAResoudre() {
 		return aResoudre;
 	}
 
-	public void setaResoudre(Probleme aResoudre) {
+	public void setAResoudre(Probleme aResoudre) {
 		this.aResoudre = aResoudre;
 	}
 
