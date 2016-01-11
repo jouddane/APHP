@@ -1,4 +1,4 @@
-package java;
+package dev;
 
 //Propre a un jour ?
 public class Donnees {
