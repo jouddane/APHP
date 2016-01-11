@@ -2,8 +2,11 @@ package choco;
 
 import java.Probleme;
 
+import org.chocosolver.solver.ResolutionPolicy;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.constraints.Constraint;
+import org.chocosolver.solver.search.strategy.IntStrategyFactory;
+import org.chocosolver.solver.trace.Chatterbox;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VF;
 
@@ -15,6 +18,7 @@ public class Resolution {
 		this.aResoudre = aResoudre;
 	}
 
+
 	public Probleme getAResoudre() {
 		return aResoudre;
 	}
@@ -23,17 +27,13 @@ public class Resolution {
 		this.aResoudre = aResoudre;
 	}
 
+
 	public void resout(){
 		
-		//Initialisation du solver
+		//1. Initialisation du solver
 		Solver solver = new Solver();
-		
-		
-		
-		
-		
 				
-		//Initialisation des variables
+		//2. Initialisation des variables
 		//Xi,j,k : modele a modifier pour coherence avec le code
 		IntVar[][][]  X= new IntVar[this.aResoudre.getnPatients()][][];
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
@@ -46,10 +46,10 @@ public class Resolution {
 			}
 		}
 		
-		// 3. Create and post constraints by using constraint factories
-		Contraintes contraintes = new Contraintes(this.aResoudre);
-		Constraint[][][] contrainteHeureFermeture = contraintes.contrainteHeureFermeture(solver, X);
-		Constraint[][][] contrainteHeureOuverture = contraintes.contrainteHeureOuverture(solver, X);
+		// 3. Creation et post des contraintes 
+		Contraintes contraintes = new Contraintes(this.aResoudre,solver, X);
+		Constraint[][][] contrainteHeureFermeture = contraintes.contrainteHeureFermeture();
+		Constraint[][][] contrainteHeureOuverture = contraintes.contrainteHeureOuverture();
 		
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[i]; j++) {
@@ -59,11 +59,16 @@ public class Resolution {
 				}
 			}
 		}
-        // 4. Define the search strategy
-        solver.set(IntStrategyFactory.lexico_LB(x, y));
-        // 5. Launch the resolution process
-        solver.findSolution();
-        //6. Print search statistics
+		
+        // 4. Definition de la strategie de resolution
+        //solver.set(IntStrategyFactory.lexico_LB(x, y));
+        
+        // 5. Definition de la fonction objective
+        ResolutionPolicy objectif ;
+        
+        // 6. Lancement de la resolution
+        //solver.findOptimalSolution(policy);
+        // 7.  Affichage des statistiques de la resolution
         Chatterbox.printStatistics(solver);
 	}
 }
