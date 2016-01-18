@@ -1,4 +1,4 @@
-package java;
+package dev;
 
 public class ParcoursAffecte extends Parcours{
 
