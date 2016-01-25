@@ -7,7 +7,7 @@ public class SoinAffecte extends Soin{
 	private boolean enCours;
 	
 	public SoinAffecte(Soin s, int debut){
-		super(s.getDuree());
+		super(s.getDuree(), s.getRessourcesNecessaires());
 		this.debut = debut;
 		this.realise = false;
 		this.enCours = false;
