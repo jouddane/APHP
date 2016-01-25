@@ -16,7 +16,7 @@ public class Ressource {
 		this(new int[nPeriodes], nom);
 	}
 	
-	public Ressource RessourceConstante(int nPeriodes, String nom, int capaciteConstante){
+	public static Ressource RessourceConstante(int nPeriodes, String nom, int capaciteConstante){
 		int[] capaciteMaxPeriodeP= new int[nPeriodes];
 		for (int i = 0; i < capaciteMaxPeriodeP.length; i++) {
 			capaciteMaxPeriodeP[i]=capaciteConstante;
