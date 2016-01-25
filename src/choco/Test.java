@@ -70,17 +70,7 @@ public class Test {
 		donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "agent accueil", 10));
 		donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "neurologue", 10));
 		donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neuropsy", 10));
-		
-		int nRessources = donnees.getRessources().length;
-		
-		int[] ressourcesNecessaires = new int[nRessources];
-		ressourcesNecessaires[donnees.getRessourceNom("A")]=2;
-		ressourcesNecessaires[donnees.getRessourceNom("B")]=1;
-		
-		ArrayList<CoupleStringInt> list = new ArrayList<>();
-		list.add(new CoupleStringInt("A", 10));
-		list.add(new CoupleStringInt("B", 100));
-		
+	
 		ArrayList<CoupleStringInt> listRessourceCapacite1 = new ArrayList<>();
 		listRessourceCapacite1.add(new CoupleStringInt("IDE obesite", 1));
 		listRessourceCapacite1.add(new CoupleStringInt("HDJ Obesite", 1));	 
@@ -156,8 +146,7 @@ public class Test {
 		listRessourceCapacite21.add(new CoupleStringInt("HDJ obesite", 1));	 	 	 	 
 		Soin Fibroscan = Soin.creerSoin(donnees, listRessourceCapacite21, "Fibroscan", 10);
 		
-		Soin S1G1P1 = Soin.creerSoin(donnees, list , "S1G1P1", 10);
-		
+	
 		//2. Creation du probleme mathematique associee
 		Probleme aResoudre = new Probleme(donnees);
 		
