@@ -5,12 +5,16 @@ import org.chocosolver.solver.constraints.IntConstraintFactory;
 
 import dev.Donnees;
 import dev.Probleme;
+import dev.Ressource;
 
 public class Test {
 
 	public static void main(String[] args) {
+		
+		
 		//1. Initialisation des donnees a disposition des clients
-		Donnees donnees = null;
+		Donnees donnees = new Donnees();
+		donnees.ajoutRessource(new Ressource(nPeriodes));
 		
 		//2. Creation du probleme mathematique associee
 		Probleme aResoudre = new Probleme(donnees);

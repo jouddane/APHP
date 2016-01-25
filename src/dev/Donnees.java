@@ -107,4 +107,18 @@ public class Donnees {
 		this.parcours=parcoursNew;
 	}
 	
+	public Ressource getRessourceNom(String nom){
+		int i=0;
+		while((i<this.getRessources().length)&&(this.getRessources()[i].getNom()!=nom)){
+			i++;
+		}
+		if(i<this.getRessources().length){
+			return this.getRessources()[i];
+		}
+		else{
+			return null;
+		}
+			
+	}
+	
 }
