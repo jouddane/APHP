@@ -8,15 +8,16 @@ import org.chocosolver.solver.constraints.IntConstraintFactory;
 import dev.Donnees;
 import dev.GroupeSoins;
 import dev.Parcours;
+import dev.Patient;
 import dev.Probleme;
 import dev.Ressource;
 import dev.Soin;
 import dev.CoupleStringInt;
+import dev.Date;
 
 public class Test {
 
 	public static void main(String[] args) {
-		
 		
 		//1. Initialisation des donnees a disposition des clients
 		Donnees donnees = new Donnees();
@@ -121,33 +122,84 @@ public class Test {
 		listRessourceCapacite10.add(new CoupleStringInt("HDJ obesite", 1));	 	 	 	 	 	
 		Soin RDVParamedical = Soin.creerSoin(donnees, listRessourceCapacite10, "RDV paramedical", 20);
 			
+		ArrayList<CoupleStringInt> listRessourceCapacite11 = new ArrayList<>();	 	 	 	 	 	 	 	
+		Soin TOGD = Soin.creerSoin(donnees, listRessourceCapacite11, "TOGD", 20);
+	
 		ArrayList<CoupleStringInt> listRessourceCapacite12 = new ArrayList<>();	 	 	 	 	 	 	 	
-		Soin TOGD = Soin.creerSoin(donnees, listRessourceCapacite12, "TOGD", 20);
-	
-		ArrayList<CoupleStringInt> listRessourceCapacite14 = new ArrayList<>();	 	 	 	 	 	 	 	
-		Soin collation = Soin.creerSoin(donnees, listRessourceCapacite14, "collation", 0);
+		Soin collation = Soin.creerSoin(donnees, listRessourceCapacite12, "collation", 0);
 		
-		ArrayList<CoupleStringInt> listRessourceCapacite15 = new ArrayList<>();	
-		listRessourceCapacite15.add(new CoupleStringInt("Interne obesite", 1));	
-		listRessourceCapacite15.add(new CoupleStringInt("HDJ obesite", 1));	 	 	 	
-		Soin BilanAntropometrique = Soin.creerSoin(donnees, listRessourceCapacite15, "Bilan antropometrique", 60);
+		ArrayList<CoupleStringInt> listRessourceCapacite13 = new ArrayList<>();	
+		listRessourceCapacite13.add(new CoupleStringInt("nutritioniste", 1));	
+		listRessourceCapacite13.add(new CoupleStringInt("HDJ obesite", 1));	 	 	 	
+		Soin synthese = Soin.creerSoin(donnees, listRessourceCapacite13, "synthese", 30);
 		
-		ArrayList<CoupleStringInt> listRessourceCapacite19 = new ArrayList<>();	
-		listRessourceCapacite19.add(new CoupleStringInt("nutritioniste", 1));	
-		listRessourceCapacite19.add(new CoupleStringInt("HDJ obesite", 1));	 	 	 	
-		Soin synthese = Soin.creerSoin(donnees, listRessourceCapacite19, "synthese", 30);
+		ArrayList<CoupleStringInt> listRessourceCapacite14 = new ArrayList<>();
+		listRessourceCapacite14.add(new CoupleStringInt("Interne Obesite", 1));
+		listRessourceCapacite14.add(new CoupleStringInt("HDJ obesite", 1));	 	 	 	
+		Soin BilanAnthropometrique = Soin.creerSoin(donnees, listRessourceCapacite14, "Bilan anthropometrique", 60);
 		
-		ArrayList<CoupleStringInt> listRessourceCapacite20 = new ArrayList<>();
-		listRessourceCapacite20.add(new CoupleStringInt("Interne Obesite", 1));
-		listRessourceCapacite20.add(new CoupleStringInt("HDJ obesite", 1));	 	 	 	
-		Soin BilanAnthropometrique = Soin.creerSoin(donnees, listRessourceCapacite20, "Bilan anthropometrique", 60);
+		ArrayList<CoupleStringInt> listRessourceCapacite15 = new ArrayList<>();
+		listRessourceCapacite15.add(new CoupleStringInt("Medecin Hepato", 1));	
+		listRessourceCapacite15.add(new CoupleStringInt("HDJ obesite", 1));	 	 	 	 
+		Soin Fibroscan = Soin.creerSoin(donnees, listRessourceCapacite15, "Fibroscan", 10);
 		
-		ArrayList<CoupleStringInt> listRessourceCapacite21 = new ArrayList<>();
-		listRessourceCapacite21.add(new CoupleStringInt("Medecin Hepato", 1));	
-		listRessourceCapacite21.add(new CoupleStringInt("HDJ obesite", 1));	 	 	 	 
-		Soin Fibroscan = Soin.creerSoin(donnees, listRessourceCapacite21, "Fibroscan", 10);
 		
-	
+		// On crée le Parcours 1
+		Soin[] G1P1S = {RDVParamedical};
+		GroupeSoins G1P1 = new GroupeSoins(G1P1S);
+		Soin[] G2P1S = {ECG, BilanBiologique, EchoHepathique, Calorimetrie};
+		GroupeSoins G2P1 = new GroupeSoins(G2P1S);
+		Soin[] G3P1S = {collation};
+		GroupeSoins G3P1 = new GroupeSoins(G3P1S);
+		Soin[] G4P1S = {EntretienPsy, EntretienInfirmier, EntretienDiet};
+		GroupeSoins G4P1 = new GroupeSoins(G4P1S);
+		Soin[] G5P1S = {Synthese};
+		GroupeSoins G5P1 = new GroupeSoins(G5P1S);
+		GroupeSoins[] P1G = {G1P1, G2P1, G3P1, G4P1, G5P1};
+		Parcours P1  = new Parcours(P1G);
+		
+		// On crée le Parcours 2
+		Soin[] G1P2S = {RDVParamedical};
+		GroupeSoins G1P2 = new GroupeSoins(G1P2S);
+		Soin[] G2P2S = {BilanBiologique, TOGD, Calorimetrie};
+		GroupeSoins G2P2 = new GroupeSoins(G2P2S);
+		Soin[] G3P2S = {collation};
+		GroupeSoins G3P2 = new GroupeSoins(G3P2S);
+		Soin[] G4P2S = {BilanAnthropometrique};
+		GroupeSoins G4P2 = new GroupeSoins(G4P2S);
+		Soin[] G5P2S = {EntretienPsy, EntretienInfirmier, EntretienDiet};
+		GroupeSoins G5P2 = new GroupeSoins(G5P2S);
+		Soin[] G6P2S = {Synthese};
+		GroupeSoins G6P2 = new GroupeSoins(G6P2S);
+		GroupeSoins[] P2G = {G1P2, G2P2, G3P2, G4P2, G5P2, G6P2};
+		Parcours P2  = new Parcours(P2G);
+		
+		// On crée le Parcours 3
+		Soin[] G1P3S = {RDVParamedical};
+		GroupeSoins G1P3 = new GroupeSoins(G1P3S);
+		Soin[] G2P3S = {BilanBiologique, EchoHepathique, Calorimetrie};
+		GroupeSoins G2P3 = new GroupeSoins(G2P3S);
+		Soin[] G3P3S = {collation};
+		GroupeSoins G3P3 = new GroupeSoins(G3P3S);
+		Soin[] G4P3S = {BilanAnthropometrique, Fibroscan};
+		GroupeSoins G4P3 = new GroupeSoins(G4P3S);
+		Soin[] G5P3S = {EntretienPsy, EntretienInfirmier, EntretienDiet};
+		GroupeSoins G5P3 = new GroupeSoins(G5P3S);
+		Soin[] G6P3S = {Synthese};
+		GroupeSoins G6P3 = new GroupeSoins(G6P3S);
+		GroupeSoins[] P3G = {G1P3, G2P3, G3P3, G4P3, G5P3, G6P3};
+		Parcours P3  = new Parcours(P3G);
+		
+		donnees.ajoutParcours(P1);
+		donnees.ajoutParcours(P2);
+		donnees.ajoutParcours(P3);
+		
+		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
+		
 		//2. Creation du probleme mathematique associee
 		Probleme aResoudre = new Probleme(donnees);
 		
