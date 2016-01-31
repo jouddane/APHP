@@ -2,9 +2,6 @@ package choco;
 
 import java.util.ArrayList;
 
-import org.chocosolver.solver.constraints.Constraint;
-import org.chocosolver.solver.constraints.IntConstraintFactory;
-
 import dev.Donnees;
 import dev.GroupeSoins;
 import dev.Parcours;
@@ -18,7 +15,7 @@ import dev.Date;
 public class Test {
 
 	public static void main(String[] args) {
-		
+
 		//1. Initialisation des donnees a disposition des clients
 		Donnees donnees = new Donnees();
 		int nPeriodes =60*24;
@@ -73,11 +70,6 @@ public class Test {
 		donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Agent accueil", 10));
 		donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neurologue", 10));
 		donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neuropsy", 10));
-	
-		ArrayList<CoupleStringInt> listRessourceCapacite1 = new ArrayList<>();
-		listRessourceCapacite1.add(new CoupleStringInt("IDE obesite", 1));
-		listRessourceCapacite1.add(new CoupleStringInt("HDJ Obesite", 1));	 
-		Soin Consultation = Soin.creerSoin(donnees, listRessourceCapacite1, "Consultation", 20);
 		
 		ArrayList<CoupleStringInt> listRessourceCapacite2 = new ArrayList<>();	
 		listRessourceCapacite2.add(new CoupleStringInt("IDE", 1));	
@@ -111,11 +103,6 @@ public class Test {
 		listRessourceCapacite8.add(new CoupleStringInt("Dieteticien", 1));	
 		listRessourceCapacite8.add(new CoupleStringInt("HDJ Obesite", 1));	 	 	 	 	 	
 		Soin EntretienDiet = Soin.creerSoin(donnees, listRessourceCapacite8, "Entretien diet", 60);
-		
-		ArrayList<CoupleStringInt> listRessourceCapacite9 = new ArrayList<>();	
-		listRessourceCapacite9.add(new CoupleStringInt("Nutritionniste", 1));	
-		listRessourceCapacite9.add(new CoupleStringInt("HDJ Obesite", 1));	 	 	 	 	 	
-		Soin Synthese = Soin.creerSoin(donnees, listRessourceCapacite9, "Synthese", 30);
 		
 		ArrayList<CoupleStringInt> listRessourceCapacite10 = new ArrayList<>();	
 		listRessourceCapacite10.add(new CoupleStringInt("IDE obesite", 1));	
@@ -153,7 +140,7 @@ public class Test {
 		GroupeSoins G3P1 = new GroupeSoins(G3P1S);
 		Soin[] G4P1S = {EntretienPsy, EntretienInfirmier, EntretienDiet};
 		GroupeSoins G4P1 = new GroupeSoins(G4P1S);
-		Soin[] G5P1S = {Synthese};
+		Soin[] G5P1S = {synthese};
 		GroupeSoins G5P1 = new GroupeSoins(G5P1S);
 		GroupeSoins[] P1G = {G1P1, G2P1, G3P1, G4P1, G5P1};
 		Parcours P1  = new Parcours(P1G);
@@ -169,7 +156,7 @@ public class Test {
 		GroupeSoins G4P2 = new GroupeSoins(G4P2S);
 		Soin[] G5P2S = {EntretienPsy, EntretienInfirmier, EntretienDiet};
 		GroupeSoins G5P2 = new GroupeSoins(G5P2S);
-		Soin[] G6P2S = {Synthese};
+		Soin[] G6P2S = {synthese};
 		GroupeSoins G6P2 = new GroupeSoins(G6P2S);
 		GroupeSoins[] P2G = {G1P2, G2P2, G3P2, G4P2, G5P2, G6P2};
 		Parcours P2  = new Parcours(P2G);
@@ -185,7 +172,7 @@ public class Test {
 		GroupeSoins G4P3 = new GroupeSoins(G4P3S);
 		Soin[] G5P3S = {EntretienPsy, EntretienInfirmier, EntretienDiet};
 		GroupeSoins G5P3 = new GroupeSoins(G5P3S);
-		Soin[] G6P3S = {Synthese};
+		Soin[] G6P3S = {synthese};
 		GroupeSoins G6P3 = new GroupeSoins(G6P3S);
 		GroupeSoins[] P3G = {G1P3, G2P3, G3P3, G4P3, G5P3, G6P3};
 		Parcours P3  = new Parcours(P3G);

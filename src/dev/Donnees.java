@@ -13,6 +13,17 @@ public class Donnees {
 	private int A_MIN;
 	
 	
+	public Donnees() {
+		this.patients = new Patient[0];
+		this.parcours = new Parcours[0];
+		this.ressources = new Ressource[0];
+		this.nPeriodes = 0;
+		HOuverture = 0;
+		HFermeture = 0;
+		A_MAX = 0;
+		A_MIN = 0;
+	}
+
 	public Patient[] getPatients() {
 		return patients;
 	}

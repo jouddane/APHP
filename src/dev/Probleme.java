@@ -88,7 +88,7 @@ public class Probleme {
 				for (int k = 0; k <this.nS_ij[i][j]; k++) {
 					this.q_ijkr[i][j][k]=new int[nRessources];
 					for (int r = 0; r < nRessources; r++) {
-						this.q_ijkr[i][j][k][r]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].ressourcesNecessaires[r];
+						this.q_ijkr[i][j][k][r]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].getRessourcesNecessaires()[r];
 					}
 				}	
 			}
