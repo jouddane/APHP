@@ -48,7 +48,7 @@ public class Resolution {
 				X[i][j] = new IntVar[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]];
 				solInt[i][j] = new Integer[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]];
 				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
-					X[i][j][k]= VF.enumerated("Xi,j,k", 0, this.aResoudre.getnPeriodes(),solver);
+					X[i][j][k]= VF.enumerated("X"+i+","+j+","+k, 0, this.aResoudre.getnPeriodes(),solver);
 				}
 			}
 		}
