@@ -7,16 +7,17 @@ public class Parcours {
 	protected GroupeSoins[] groupeSoins;
 	protected int indiceParcours;
 	
-	public Parcours(GroupeSoins[] groupesSoins){
+	public Parcours(GroupeSoins[] groupesSoins, int indice){
 		this.nombreDeGroupes = groupesSoins.length;
 		this.nombreDeSoins=0;
 		for(GroupeSoins g : groupesSoins)
 			this.nombreDeSoins+=g.getNombreDeSoins();
 		this.groupeSoins = groupesSoins;
+		this.indiceParcours = indice;
 	}
 	
 	public Parcours(){
-		this(new GroupeSoins[0]);
+		this(new GroupeSoins[0], -1);
 	}
 
 	public int getNombreDeGroupes() {
