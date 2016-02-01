@@ -89,4 +89,18 @@ public class Contraintes {
 		}
 		return C4;
 	}
+	
+	/*
+	
+	 //Garantit la contrainte C4 de precedence, C5, et C6 voir meme C2 et C3
+	 
+	public Constraint contrainteAutomate(){
+		
+	}
+	
+	// A implementer
+	public Contraint C1(){
+		
+	}
+	*/
 }
