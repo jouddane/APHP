@@ -6,7 +6,6 @@ import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.constraints.Constraint;
 import org.chocosolver.solver.constraints.IntConstraintFactory;
 import org.chocosolver.solver.variables.IntVar;
-import org.chocosolver.solver.variables.VF;
 
 public class Contraintes {
 
@@ -76,13 +75,18 @@ public class Contraintes {
 
 	public Constraint[][][] contraintePrecedenceGroupe(){
 		Constraint[][][] C4 = new Constraint[this.aResoudre.getnPatients()][][];
+
 		for(int i=0; i<this.aResoudre.getnPatients(); i++){
-			C4[i] = new Constraint[this.aResoudre.getnG_i()[i]-1][];
+			C4[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1][];
+		
 			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1; j++){
 				C4[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]];
+			
 				for (int k=0; k<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
+				
 					for(int u=0; u<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]; u++){
 						C4[i][j][k] = IntConstraintFactory.arithm(X[i][j][k], "<=", X[i][j+1][u], "-", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]);
+						//C4[i][j][k] = IntConstraintFactory.arithm(X[i][j+1][u], ">=", X[i][j][k], "+", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]);
 					}
 				}
 			}

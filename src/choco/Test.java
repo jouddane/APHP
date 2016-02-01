@@ -2,7 +2,8 @@ package choco;
 
 import java.util.ArrayList;
 
-import org.chocosolver.solver.variables.Variable;
+import org.chocosolver.solver.variables.IntVar;
+import org.chocosolver.solver.variables.VF;
 
 import dev.Donnees;
 import dev.GroupeSoins;
@@ -11,6 +12,7 @@ import dev.Patient;
 import dev.Probleme;
 import dev.Ressource;
 import dev.Soin;
+import maths.Solution;
 import dev.CoupleStringInt;
 import dev.Date;
 
@@ -196,8 +198,18 @@ public class Test {
 		Resolution resolution = new Resolution(aResoudre);
 		
 		//4. Lancement de la resolution d probleme
-		Variable[] vars = resolution.resout();
-		System.out.println("valeurlol : " + vars[0].toString());
+		Integer[][][] solution = resolution.resout();
+		for(int i=0; i< aResoudre.getnPatients(); i++){
+			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
+				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
+					System.out.println("X["+i+"]["+j+"]["+k+"] = "+solution[i][j][k]);
+				}
+			}
+		}
+		Solution verifierSol = new Solution(solution, aResoudre);
+		System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
+		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
+		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
 		
 		//5. Affichage de la solution (a implementer)
 	}
