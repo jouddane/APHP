@@ -2,31 +2,49 @@ package dev;
 
 public class Ressource {
 
-	private int quantiteMax;
-	private int quantiteUtilisee;
+	private int[] capaciteMaxPeriodeP;
+	private int[] quantiteUtilisee;
+	private String nom;
 	
-	public Ressource(int quantiteMax){
-		this.quantiteMax = quantiteMax;
-		this.quantiteUtilisee = 0;
+	public Ressource(int[] capaciteMaxPeriodeP, String nom){
+		this.capaciteMaxPeriodeP = capaciteMaxPeriodeP;
+		this.quantiteUtilisee = new int[capaciteMaxPeriodeP.length];
+		this.nom=nom;
 	}
 	
-	public Ressource(){
-		this(0);
+	public Ressource(int nPeriodes, String nom){
+		this(new int[nPeriodes], nom);
 	}
 	
-	public void diminuerDisponibilite(int quantite){
-		this.quantiteUtilisee += quantite;
+	public static Ressource RessourceConstante(int nPeriodes, String nom, int capaciteConstante){
+		int[] capaciteMaxPeriodeP= new int[nPeriodes];
+		for (int i = 0; i < capaciteMaxPeriodeP.length; i++) {
+			capaciteMaxPeriodeP[i]=capaciteConstante;
+		}
+		return new Ressource(capaciteConstante,nom);
 	}
 	
-	public void augmenterDisponibilite(int quantite){
-		this.quantiteUtilisee -= quantite;
+	public void diminuerDisponibilite(int periode, int quantite){
+		this.quantiteUtilisee[periode] += quantite;
 	}
 	
-	public int quantiteDisponible(){
-		return quantiteMax - quantiteUtilisee;
+	public void augmenterDisponibilite(int periode, int quantite){
+		this.quantiteUtilisee[periode] -= quantite;
 	}
 	
-	public int getQuantiteMax(){
-		return quantiteMax;
+	public void setCapaciteMaxPeriodeP(int[] capaciteMaxPeriodeP) {
+		this.capaciteMaxPeriodeP = capaciteMaxPeriodeP;
+	}
+	
+	public int[] getCapaciteMaxPeriodeP() {
+		return capaciteMaxPeriodeP;
+	}
+	
+	public String getNom() {
+		return nom;
+	}
+	
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 }

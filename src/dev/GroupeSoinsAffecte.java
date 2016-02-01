@@ -8,8 +8,12 @@ public class GroupeSoinsAffecte extends GroupeSoins{
 	
 	public GroupeSoinsAffecte(GroupeSoins groupeSoins) {
 		super(groupeSoins.soins);
-		this.soins = (SoinAffecte[])(groupeSoins.soins);
+		Soin[] temp = groupeSoins.soins;
+		this.soins = new SoinAffecte[temp.length];
 		this.debut = Integer.MAX_VALUE;
+		for(int i=0; i<temp.length; i++) {
+			this.soins[i] = new SoinAffecte(temp[i], this.debut);
+		}
 		this.realise = false;
 		this.enCours = false;
 	}	

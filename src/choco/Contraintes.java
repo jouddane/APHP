@@ -78,11 +78,11 @@ public class Contraintes {
 		Constraint[][][] C4 = new Constraint[this.aResoudre.getnPatients()][][];
 		for(int i=0; i<this.aResoudre.getnPatients(); i++){
 			C4[i] = new Constraint[this.aResoudre.getnG_i()[i]-1][];
-			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++){
+			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1; j++){
 				C4[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]];
 				for (int k=0; k<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
 					for(int u=0; u<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]; u++){
-						C4[i][j][k] = IntConstraintFactory.arithm(X[i][j][k], "<=", X[i][j+1][u], "-", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][i]);
+						C4[i][j][k] = IntConstraintFactory.arithm(X[i][j][k], "<=", X[i][j+1][u], "-", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]);
 					}
 				}
 			}

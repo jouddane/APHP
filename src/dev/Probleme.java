@@ -46,17 +46,17 @@ public class Probleme {
 		this.HFermeture = donnees.getHFermeture();
 		this.A_MAX = donnees.getA_MAX();
 		this.A_MIN = donnees.getA_MIN();
-		this.nG_i = new int[nParcours];
-		for (int i = 0; i < nParcours; i++) {
-			this.nG_i[i]=donnees.getParcours()[i].getNombreDeGroupes();
+		this.nG_i = new int[nPatients];
+		for (int i = 0; i < nPatients; i++) {
+			this.nG_i[i]=donnees.getPatients()[i].getParcours().getNombreDeGroupes();
 		}
 		
 		//A modifier sur le modele, indices inverses
-		this.nS_ij = new int[nParcours][];
-		for (int i = 0; i < nParcours; i++) {
+		this.nS_ij = new int[nPatients][];
+		for (int i = 0; i < nPatients; i++) {
 			this.nS_ij[i] = new int[this.nG_i[i]];
 			for (int j = 0; j < nG_i[i]; j++) {
-				this.nS_ij[i][j]=donnees.getParcours()[i].getGroupeSoins()[j].nombreDeSoins;
+				this.nS_ij[i][j]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].nombreDeSoins;
 			}
 		}
 		
@@ -67,28 +67,28 @@ public class Probleme {
 		}
 		
 		//A modifier sur le modele, indices inverses
-		this.l_ijk = new int[nParcours][][];
-		for (int i = 0; i < nParcours; i++) {
+		this.l_ijk = new int[nPatients][][];
+		for (int i = 0; i < nPatients; i++) {
 			this.l_ijk[i] = new int[this.nG_i[i]][];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.l_ijk[i][j] = new int[this.nS_ij[i][j]];
 				for (int k = 0; k <this.nS_ij[i][j]; k++) {
-					this.l_ijk[i][j][k]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].getDuree();
+					this.l_ijk[i][j][k]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].getSoins()[k].getDuree();
 				}	
 			}
 		}
 		
 		
 		
-		this.q_ijkr = new int[nParcours][][][];
-		for (int i = 0; i < nParcours; i++) {
+		this.q_ijkr = new int[nPatients][][][];
+		for (int i = 0; i < nPatients; i++) {
 			this.q_ijkr[i] = new int[this.nG_i[i]][][];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.q_ijkr[i][j] = new int[this.nS_ij[i][j]][];
 				for (int k = 0; k <this.nS_ij[i][j]; k++) {
 					this.q_ijkr[i][j][k]=new int[nRessources];
 					for (int r = 0; r < nRessources; r++) {
-						this.q_ijkr[i][j][k][r]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].ressourcesNecessaires[r];
+						this.q_ijkr[i][j][k][r]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].getSoins()[k].getRessourcesNecessaires()[r];
 					}
 				}	
 			}
