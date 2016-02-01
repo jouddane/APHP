@@ -37,9 +37,9 @@ import org.jfree.util.PaintList;
 
 import com.orsoncharts.marker.MarkerLine;
 
-public class TestVisu extends ApplicationFrame{
+public class VisuSolution extends ApplicationFrame{
 
-	public TestVisu(String title){
+	public VisuSolution(String title){
 		super(title);
 		
 		GanttCategoryDataset dataset = createDataset( new Donnees());
@@ -54,55 +54,32 @@ public class TestVisu extends ApplicationFrame{
 	}
 	
 	public GanttCategoryDataset createDataset(Donnees donnees) {
+		int Annee = Calendar.getInstance().get(Calendar.YEAR);
+		int Mois =  Calendar.getInstance().get(Calendar.MONTH);
+		int Jour = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 		TaskSeriesCollection collection = new TaskSeriesCollection();
 		TaskSeries P = new TaskSeries("Tous les parcours");
 		for(int i=0; i<donnees.nbPatients();i++){
 			String s ="Parcours";
-			Task S = new Task("Parcours"+i, new Date(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), donnees.getDebutH(i,0),donnees.getDebutM(i, 0)), new Date(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH),donnees.getDebutH(i, donnees.nbSoins()),donnees.getDebutM(i, donnees.nbSoins())));
-			for (int j=0; j<donnees.nbSoins()-1;j++){
+			Task S = new Task("Parcours"+i, new Date(Annee, Mois, Jour, donnees.getDebutH(i,0),donnees.getDebutM(i, 0)), new Date(Annee, Mois, Jour,donnees.getDebutH(i, donnees.nbSoins()-1),donnees.getDebutM(i, donnees.nbSoins()-1)));
+			for (int j=0; j<donnees.nbSoins();j++){
 				if(donnees.getSoin(i, j).getDuree()==15){
 					
 				}
-				else{
-					S.addSubtask(new Task("Soin "+j, new Date(2016, Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), donnees.getDebutH(i, j), donnees.getDebutM(i, j)), new Date(2016,Calendar.getInstance().get(Calendar.MONTH),Calendar.getInstance().get(Calendar.DAY_OF_MONTH),donnees.getDebutH(i, j+1),donnees.getDebutM(i, j+1))));
+				else 
+				if (j<donnees.nbSoins()-1){
+					S.addSubtask(new Task("Soin "+j, new Date(Annee, Mois, Jour, donnees.getDebutH(i, j), donnees.getDebutM(i, j)), new Date(Annee, Mois, Jour,donnees.getDebutH(i, j+1),donnees.getDebutM(i, j+1))));
+				}
+				else {
+					S.addSubtask(new Task("Soin "+j, new Date(Annee, Mois, Jour, donnees.getDebutH(i, j), donnees.getDebutM(i, j)), new Date(Annee, Mois, Jour,donnees.getDebutH(i, j)+donnees.getSoin(i, j).getDuree()/60,donnees.getDebutM(i, j)+donnees.getSoin(i, j).getDuree()%60)));
 				}
 			}
+			
+			
 			P.add(S);
 		}
 		
-		 /* Task S00= new Task("Parcours 1", new Date(2016, 1, 9, 8, 0), new Date(2016,1,9,10,5));
-		Task S0 = new Task("Soin1", new Date(2016, 1, 9, 8, 0), new Date(2016,1,9,8,45));
-        Task S1 = new Task("Soin2", new Date(2016, 1, 9, 8, 30), new Date(2016,1,9,10,5));
-      	Task S1 = new Task("Consultation", new SimpleTimePeriod(480, 495));
-        Task S2 = new Task("IDE-Prise de sang", new SimpleTimePeriod(510, 525));
-        S1.setPercentComplete(1.0);
-        Task S3 = new Task("IDE-Exemple1", new SimpleTimePeriod(535, 560));*/
-        
-        //S00.addSubtask(S0);
-        //S00.addSubtask(S1);
-        /*S0.addSubtask(S3);
-
-        TaskSeries P2 = new TaskSeries("Parcours2");
-        
-        Task S4 = new Task("Total2", new SimpleTimePeriod(480, 1075));
-        Task S5 = new Task("Consultation", new SimpleTimePeriod(480, 510));
-        Task S6 = new Task("Chimio", new SimpleTimePeriod(800, 845));
-
-        Task S7 = new Task("IDE-Exemple2", new SimpleTimePeriod(1000, 1010));
-
-        Task S8 = new Task("IDE-Exemple3", new SimpleTimePeriod(1050, 1075));
-
-        S4.addSubtask(S5);
-        S4.addSubtask(S6);
-        S4.addSubtask(S7);
-        S4.addSubtask(S8);*/
-        
-        //P1.add(S0);
-        //P1.add(S1);
-        //P2.add(S4);
-
-        
-        //collection.add(P1);
+		
         collection.add(P);
 
         return collection;
@@ -121,22 +98,14 @@ public class TestVisu extends ApplicationFrame{
 	       
 	        CategoryPlot plot = (CategoryPlot) chart.getPlot();
 	        GanttRenderer gr = (GanttRenderer) plot.getRenderer();
-	       /* gr.setItemLabelGenerator();
-	        gr.setItemLabelsVisible(true);
-	       Marker marker = new Marker() {
-		};
-			marker.setAlpha(0);
-			marker.setLabel("Heure actuelle");
-	       plot.addRangeMarker(marker);*/
-	       
-	       
+	      	       
 	        return chart;
 	    }
 	 
 	 
 	  public static void main(final String[] args) {
 
-	        TestVisu demo = new TestVisu("Parcours");
+	        VisuSolution demo = new VisuSolution("Parcours");
 	        demo.pack();
 	        RefineryUtilities.centerFrameOnScreen(demo);
 	        demo.setVisible(true);
