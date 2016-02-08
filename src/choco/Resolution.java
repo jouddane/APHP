@@ -66,7 +66,7 @@ public class Resolution {
 		Constraint[][][] contrainteHeureOuverture = contraintes.contrainteHeureOuverture();
 		Constraint[][][] contrainteHeureFermeture = contraintes.contrainteHeureFermeture();
 		Constraint[][][] contraintePrecedenceGroupe = contraintes.contraintePrecedenceGroupe();
-		//Constraint[] contrainteCapaciteRessources = contraintes.contrainteCapaciteRessources();
+		Constraint[] contrainteCapaciteRessources = contraintes.contrainteCapaciteRessources();
 		
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
@@ -82,9 +82,11 @@ public class Resolution {
 			}
 		}
 		
-		/*for (int i=0; i<this.aResoudre.getnRessources(); i++){
-			solver.post(contrainteCapaciteRessources[i]);
-		}*/
+		for (int i=0; i<this.aResoudre.getnRessources(); i++){
+			if(!(contrainteCapaciteRessources[i] == null)) {
+				solver.post(contrainteCapaciteRessources[i]);
+			}
+		}
 		
         // 4. Definition de la strategie de resolution
         //solver.set(IntStrategyFactory.lexico_LB(x, y));

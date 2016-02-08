@@ -241,6 +241,10 @@ public class Probleme {
 		this.p_i = p_i;
 	}
 	
+	public int[] getCpij_max() {
+		return this.Cp_ijMax;
+	}
+	
 	public int[] getRessourcesUtilisees(int i, int j, int k) {
 		int[] tableauRessources = new int[this.getnRessources()];
 		for(int r = 0; r<this.getnRessources(); r++) {
@@ -255,7 +259,11 @@ public class Probleme {
 		} else {
 			for(int r=0; r<this.getnRessources(); r++) {
 				ressourcesUtilisees[r] += this.getQ_ijkr()[i][j][k][r];
+				if(this.getQ_ijkr()[i][j][k][r] != 0) {
+					System.out.print(r + " ");
+				}
 			}
+			System.out.println("");
 		}
 		return ressourcesUtilisees;
 	}

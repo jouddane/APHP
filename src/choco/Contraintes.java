@@ -105,17 +105,27 @@ public class Contraintes {
 
 		//Premiere boucle pour trouver la taille de Soins[] et leur Hauteur[] 
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
+			System.out.println("Parcours "+(this.aResoudre.getP_i()[i]-1));
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
-				System.out.println(this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]);
+				System.out.println("Nombre de soins du groupe : "+ this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]);
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
+					System.out.println("k = "+k);
 					//compteurtemp possede toutes les infos sur le nb de soins par ressource
-					compteurtemp= this.aResoudre.updateRessourcesAvecSoin(i, j, k, compteurtemp);
+					compteurtemp= this.aResoudre.updateRessourcesAvecSoin(this.aResoudre.getP_i()[i]-1, j, k, compteurtemp);
+					/*System.out.print("[ ");
+					for(int p=0; p<compteurtemp.length; p++) {
+						System.out.print(compteurtemp[p]+" ");
+					}
+					System.out.println("]");*/
 				}
+				System.out.println("");
 			}
+			System.out.println("\n");
 		}
 		
 		// Il faut que je rajoute les contraintes 
 		for (int a=0; a<this.aResoudre.getnRessources(); a++){
+			System.out.println("a = "+a);
 			Task[] Soins = new Task[compteurtemp[a]];
 			IntVar[] Hauteur = new  IntVar[compteurtemp[a]];
 			int compteur1=0;
@@ -124,18 +134,21 @@ public class Contraintes {
 				for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
 					for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
 						// getRessourceUtilisee me renvoie un tableau il faut donc une m�thode qui me dise si la case de a est nulle ou non
-						if(this.aResoudre.getQ_ijkr()[i][j][k][a]!=0){
+						if(this.aResoudre.getQ_ijkr()[aResoudre.getP_i()[i]-1][j][k][a]!=0){
 							//task(Start,Duration,End)
 							Soins[compteur1]=VariableFactory.task(this.X[i][j][k],VariableFactory.fixed(this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k],this.solver),VariableFactory.offset(X[i][j][k],this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k]));
-							Hauteur[compteur1]= VariableFactory.fixed(this.aResoudre.getQ_ijkr()[i][j][k][a], solver);
+							Hauteur[compteur1]= VariableFactory.fixed(this.aResoudre.getQ_ijkr()[aResoudre.getP_i()[i]-1][j][k][a], solver);
 							compteur1++;
 						}
 					}
 				}
 			}
-			IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCp_ij()[0][a],solver)	;
+			IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCpij_max()[a],solver)	;
 			C5[compteur2]=IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
 			compteur2++;
+		}
+		for(int l=0; l<C5.length; l++) {
+			System.out.println("C5["+l+"] = "+C5[l]);
 		}
 		return C5;	
 	}
