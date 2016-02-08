@@ -1033,8 +1033,8 @@ public class Test {
 		//4. Lancement de la resolution d probleme
 		Integer[][][] solution = resolution.resout();
 		for(int i=0; i< aResoudre.getnPatients(); i++){
-			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
-				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
+			for (int j = 0; j < aResoudre.getnG_i()[i]; j++) {
+				for (int k = 0; k < aResoudre.getnS_ij()[i][j]; k++) {
 					System.out.println("X["+i+"]["+j+"]["+k+"] = "+solution[i][j][k]);
 				}
 			}

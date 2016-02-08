@@ -66,10 +66,10 @@ public class Resolution {
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					solver.post(contrainteHeureFermeture[this.aResoudre.getP_i()[i]][j][k]);
-					solver.post(contrainteHeureOuverture[this.aResoudre.getP_i()[i]][j][k]);
+					solver.post(contrainteHeureFermeture[i][j][k]);
+					solver.post(contrainteHeureOuverture[i][j][k]);
 					if(j != this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1)
-					solver.post(contraintePrecedenceGroupe[this.aResoudre.getP_i()[i]][j][k]);
+					solver.post(contraintePrecedenceGroupe[i][j][k]);
 				}
 			}
 		}
@@ -77,6 +77,7 @@ public class Resolution {
 		for (int i=0; i<this.aResoudre.getnRessources(); i++){
 			solver.post(contrainteCapaciteRessources[i]);
 		}
+		
 		
         // 4. Definition de la strategie de resolution
         //solver.set(IntStrategyFactory.lexico_LB(x, y));
