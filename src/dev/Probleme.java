@@ -226,5 +226,23 @@ public class Probleme {
 	public void setP_i(int[] p_i) {
 		this.p_i = p_i;
 	}
-		
+	
+	public int[] getRessourcesUtilisees(int i, int j, int k) {
+		int[] tableauRessources = new int[this.getnRessources()];
+		for(int r = 0; r<this.getnRessources(); r++) {
+			tableauRessources[r] = this.getQ_ijkr()[i][j][k][r];
+		}
+		return tableauRessources;
+	}
+	
+	public int[] updateRessourcesAvecSoin(int i, int j, int k, int[] ressourcesUtilisees) {
+		if(ressourcesUtilisees.length != this.getnRessources()) {
+			System.out.println("Pas la bonne taille de tableau !");
+		} else {
+			for(int r=0; r<this.getnRessources(); r++) {
+				ressourcesUtilisees[r] += this.getQ_ijkr()[i][j][k][r];
+			}
+		}
+		return ressourcesUtilisees;
+	}
 }
