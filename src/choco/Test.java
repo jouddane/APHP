@@ -120,9 +120,6 @@ public class Test {
 		listRessourceCapacite10.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
 		Soin RDVParamedical20 = Soin.creerSoin(donnees, listRessourceCapacite10, "RDV Paramedical20", 20);
 
-
-		//System.out.println("done");
-
 		ArrayList<CoupleStringInt> listRessourceCapacite11 = new ArrayList<>();	 
 		listRessourceCapacite11.add(new CoupleStringInt("Hors HDJ",1));	 	 	
 		Soin TOGD = Soin.creerSoin(donnees, listRessourceCapacite11, "TOGD", 20);
@@ -144,8 +141,6 @@ public class Test {
 		listRessourceCapacite15.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite15.add(new CoupleStringInt("Bureau CS", 1));	 	 
 		Soin RDVParamedical15 = Soin.creerSoin(donnees, listRessourceCapacite15, "RDV Paramedical15", 15);
-
-
 
 		ArrayList<CoupleStringInt> listRessourceCapacite16 = new ArrayList<>();	 
 		listRessourceCapacite16.add(new CoupleStringInt("Hors HDJ",1));	 	 	
@@ -296,6 +291,7 @@ public class Test {
 		listRessourceCapacite45.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite45.add(new CoupleStringInt("Box Prelevement", 1));	 	 
 		Soin BilanBiologique20 = Soin.creerSoin(donnees, listRessourceCapacite45, "Bilan Biologique20", 20);
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite46 = new ArrayList<>();
 		listRessourceCapacite46.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite46.add(new CoupleStringInt("Box", 1));	 	 	
@@ -418,6 +414,13 @@ public class Test {
 		listRessourceCapacite72.add(new CoupleStringInt("Psychologue", 1));
 		listRessourceCapacite72.add(new CoupleStringInt("Bureau CS", 1));	 	 
 		Soin ConsultationPsy30 = Soin.creerSoin(donnees, listRessourceCapacite72, "Consultation Psy30", 30);	 	 
+
+		ArrayList<CoupleStringInt> listRessourceCapacite73 = new ArrayList<>();
+		listRessourceCapacite72.add(new CoupleStringInt("Diabetologue", 1));
+		listRessourceCapacite72.add(new CoupleStringInt("Dieteticien", 1));
+		listRessourceCapacite72.add(new CoupleStringInt("IDE Insulonitherapie", 1));
+		listRessourceCapacite72.add(new CoupleStringInt("Bureau CS", 1));	 	 
+		Soin RDVMedicalDiet = Soin.creerSoin(donnees, listRessourceCapacite73, "RDV Medical Diet", 30);	 	 
 
 
 
@@ -563,262 +566,181 @@ public class Test {
 		GroupeSoins[] P10G = {G1P10, G2P10, G3P10, G4P10};
 		Parcours P10  = new Parcours(P10G, 10);
 
-		// On crée le Parcours 7
-		/*		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+		// On crée le Parcours 11
+		Soin[] G1P11S = {Prelevement25};
+		GroupeSoins G1P11 = new GroupeSoins(G1P11S);
+		Soin[] G2P11S = {Collation};
+		GroupeSoins G2P11 = new GroupeSoins(G2P11S);
+		Soin[] G3P11S = {ScannerAbdo, Retinographie};
+		GroupeSoins G3P11 = new GroupeSoins(G3P11S);
+		Soin[] G4P11S = {EntretienDiet30, RDVMedical35};
+		GroupeSoins G4P11 = new GroupeSoins(G4P11S);
+		GroupeSoins[] P11G = {G1P11, G2P11, G3P11, G4P11};
+		Parcours P11  = new Parcours(P11G, 11);
 
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+		// On crée le Parcours 12
+		Soin[] G1P12S = {Prelevement15};
+		GroupeSoins G1P12 = new GroupeSoins(G1P12S);
+		Soin[] G2P12S = {Collation};
+		GroupeSoins G2P12 = new GroupeSoins(G2P12S);
+		Soin[] G3P12S = {ScannerTMDPiedRadios, DopplerDesArteresDesMI, SoinPansementMesuresIPS};
+		GroupeSoins G3P12 = new GroupeSoins(G3P12S);
+		Soin[] G4P12S = {RDVMedical35};
+		GroupeSoins G4P12 = new GroupeSoins(G4P12S);
+		GroupeSoins[] P12G = {G1P12, G2P12, G3P12, G4P12};
+		Parcours P12  = new Parcours(P12G, 12);
 
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+		// On crée le Parcours 13
+		Soin[] G1P13S = {Prelevement15};
+		GroupeSoins G1P13 = new GroupeSoins(G1P13S);
+		Soin[] G2P13S = {Collation};
+		GroupeSoins G2P13 = new GroupeSoins(G2P13S);
+		Soin[] G3P13S = {PosePompeEtOuHolter};
+		GroupeSoins G3P13 = new GroupeSoins(G3P13S);
+		Soin[] G4P13S = {RDVMedicalDiet};
+		GroupeSoins G4P13 = new GroupeSoins(G4P13S);
+		GroupeSoins[] P13G = {G1P13, G2P13, G3P13, G4P13};
+		Parcours P13  = new Parcours(P13G, 13);
 
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+		// On crée le Parcours 15
+		Soin[] G1P15S = {RDVMedical20BurCS};
+		GroupeSoins G1P15 = new GroupeSoins(G1P15S);
+		Soin[] G2P15S = {ConsultationPsy20};
+		GroupeSoins G2P15 = new GroupeSoins(G2P15S);
+		Soin[] G3P15S = {Examens30};
+		GroupeSoins G3P15 = new GroupeSoins(G3P15S);
+		Soin[] G4P15S = {Appareillage60};
+		GroupeSoins G4P15 = new GroupeSoins(G4P15S);
+		Soin[] G5P15S = {Bilan};
+		GroupeSoins G5P15 = new GroupeSoins(G5P15S);
+		GroupeSoins[] P15G = {G1P15, G2P15, G3P15, G4P15, G5P15};
+		Parcours P15  = new Parcours(P15G, 15);
 
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+/*		// On crée le Parcours 16
+		Soin[] G1P16S = {RDVMedical20BurSom};
+		GroupeSoins G1P16 = new GroupeSoins(G1P16S);
+		Soin[] G2P16S = {ETP};
+		GroupeSoins G2P16 = new GroupeSoins(G2P16S);
+		Soin[] G3P16S = {Collation};
+		GroupeSoins G3P16 = new GroupeSoins(G3P16S);
+		Soin[] G4P16S = {BilanAnthropometrique, Fibroscan};
+		GroupeSoins G4P16 = new GroupeSoins(G4P16S);
+		Soin[] G5P16S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
+		GroupeSoins G5P16 = new GroupeSoins(G5P16S);
+		Soin[] G6P16S = {Synthese};
+		GroupeSoins G6P16 = new GroupeSoins(G6P16S);
+		GroupeSoins[] P16G = {G1P16, G2P16, G3P16, G4P16, G5P16, G6P16};
+		Parcours P16  = new Parcours(P16G, 16);
 
+		// On crée le Parcours 17
+		Soin[] G1P17S = {RDVParamedical20};
+		GroupeSoins G1P17 = new GroupeSoins(G1P17S);
+		Soin[] G2P17S = {BilanBiologique15, EchoHepathique, Calorimetrie};
+		GroupeSoins G2P17 = new GroupeSoins(G2P17S);
+		Soin[] G3P17S = {Collation};
+		GroupeSoins G3P17 = new GroupeSoins(G3P17S);
+		Soin[] G4P17S = {BilanAnthropometrique, Fibroscan};
+		GroupeSoins G4P17 = new GroupeSoins(G4P17S);
+		Soin[] G5P17S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
+		GroupeSoins G5P17 = new GroupeSoins(G5P17S);
+		Soin[] G6P17S = {Synthese};
+		GroupeSoins G6P17 = new GroupeSoins(G6P17S);
+		GroupeSoins[] P17G = {G1P17, G2P17, G3P17, G4P17, G5P17, G6P17};
+		Parcours P17  = new Parcours(P17G, 17);
+*/
 		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+		Soin[] G1P20S = {BilanBiologique20};
+		GroupeSoins G1P20 = new GroupeSoins(G1P20S);
+		Soin[] G2P20S = {Collation};
+		GroupeSoins G2P20 = new GroupeSoins(G2P20S);
+		Soin[] G3P20S = {ECG10, TestDEfforts, Consultations, ExplorationsFonctionnellesOuMorphologiques};
+		GroupeSoins G3P20 = new GroupeSoins(G3P20S);
+		Soin[] G4P20S = {Bilan};
+		GroupeSoins G4P20 = new GroupeSoins(G4P20S);
+		GroupeSoins[] P20G = {G1P20, G2P20, G3P20, G4P20};
+		Parcours P20  = new Parcours(P20G, 20);
 
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+		// On crée le Parcours 21
+		Soin[] G1P21S = {BilanBiologique20};
+		GroupeSoins G1P21 = new GroupeSoins(G1P21S);
+		Soin[] G2P21S = {Collation};
+		GroupeSoins G2P21 = new GroupeSoins(G2P21S);
+		Soin[] G3P21S = {ECG10, TestFonctionnel, IRM40, EchoCardiaque, ExamenClinique30, ETPCard, TestDEfforts};
+		GroupeSoins G3P21 = new GroupeSoins(G3P21S);
+		GroupeSoins[] P21G = {G1P21, G2P21, G3P21};
+		Parcours P21  = new Parcours(P21G, 21);
 
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+		// On crée le Parcours 22
+		Soin[] G1P22S = {BilanBiologique20};
+		GroupeSoins G1P22 = new GroupeSoins(G1P22S);
+		Soin[] G2P22S = {Collation};
+		GroupeSoins G2P22 = new GroupeSoins(G2P22S);
+		Soin[] G3P22S = {ECG10, ExamenClinique30, MedecineNucleaire, ExplorationsFonctionnellesOuMorphologiques};
+		GroupeSoins G3P22 = new GroupeSoins(G3P22S);
+		GroupeSoins[] P22G = {G1P22, G2P22, G3P22};
+		Parcours P22  = new Parcours(P22G, 22);
 
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+		// On crée le Parcours 23
+		Soin[] G1P23S = {RDVAccueil};
+		GroupeSoins G1P23 = new GroupeSoins(G1P23S);
+		Soin[] G2P23S = {Prelevement20};
+		GroupeSoins G2P23 = new GroupeSoins(G2P23S);
+		Soin[] G3P23S = {Collation};
+		GroupeSoins G3P23 = new GroupeSoins(G3P23S);
+		Soin[] G4P23S = {IRM45, ARM, EchodopplerTSA, ETT, ECG10, Holter, BilanCardiaque};
+		GroupeSoins G4P23 = new GroupeSoins(G4P23S);
+		Soin[] G5P23S = {SyntheseNeuro};
+		GroupeSoins G5P23 = new GroupeSoins(G5P23S);
+		GroupeSoins[] P23G = {G1P23, G2P23, G3P23, G4P23, G5P23};
+		Parcours P23  = new Parcours(P23G, 23);
 
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
+/*		// On crée le Parcours 24
+		Soin[] G1P24S = {RDVAccueil};
+		GroupeSoins G1P24 = new GroupeSoins(G1P24S);
+		Soin[] G2P24S = {ExamenClinique15};
+		GroupeSoins G2P24 = new GroupeSoins(G2P24S);
+		Soin[] G3P24S = {Prelevement20};
+		GroupeSoins G3P24 = new GroupeSoins(G3P24S);
+		Soin[] G4P24S = {Collation};
+		GroupeSoins G4P24 = new GroupeSoins(G4P24S);
+		Soin[] G5P24S = {IRM45, EEG, };
+		GroupeSoins G5P24 = new GroupeSoins(G5P24S);
+		Soin[] G6P24S = {Synthese};
+		GroupeSoins G6P24 = new GroupeSoins(G6P24S);
+		GroupeSoins[] P24G = {G1P24, G2P24, G3P24, G4P24, G5P24, G6P24};
+		Parcours P24  = new Parcours(P24G, 24);
+*/
+		
+		// On crée le Parcours 25
+		Soin[] G1P25S = {RDVAccueil};
+		GroupeSoins G1P25 = new GroupeSoins(G1P25S);
+		Soin[] G2P25S = {Prelevement20};
+		GroupeSoins G2P25 = new GroupeSoins(G2P25S);
+		Soin[] G3P25S = {Collation};
+		GroupeSoins G3P25 = new GroupeSoins(G3P25S);
+		Soin[] G4P25S = {IRM45, EEG, ConsultationPsy30, ConsultationNeuropsy};
+		GroupeSoins G4P25 = new GroupeSoins(G4P25S);
+		Soin[] G5P25S = {SyntheseNeuro};
+		GroupeSoins G5P25 = new GroupeSoins(G5P25S);
+		GroupeSoins[] P25G = {G1P25, G2P25, G3P25, G4P25, G5P25};
+		Parcours P25  = new Parcours(P25G, 25);
 
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
-
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
-
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
-
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
-
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
-
-		// On crée le Parcours 7
-		Soin[] G1P7S = {RDVParamedical20};
-		GroupeSoins G1P7 = new GroupeSoins(G1P7S);
-		Soin[] G2P7S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-		GroupeSoins G2P7 = new GroupeSoins(G2P7S);
-		Soin[] G3P7S = {Collation};
-		GroupeSoins G3P7 = new GroupeSoins(G3P7S);
-		Soin[] G4P7S = {BilanAnthropometrique, Fibroscan};
-		GroupeSoins G4P7 = new GroupeSoins(G4P7S);
-		Soin[] G5P7S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-		GroupeSoins G5P7 = new GroupeSoins(G5P7S);
-		Soin[] G6P7S = {Synthese};
-		GroupeSoins G6P7 = new GroupeSoins(G6P7S);
-		GroupeSoins[] P7G = {G1P7, G2P7, G3P7, G4P7, G5P7, G6P7};
-		Parcours P7  = new Parcours(P7G, 7);
-		 */		
+		// On crée le Parcours 26
+		Soin[] G1P26S = {RDVAccueil};
+		GroupeSoins G1P26 = new GroupeSoins(G1P26S);
+		Soin[] G2P26S = {ExamenClinique15};
+		GroupeSoins G2P26 = new GroupeSoins(G2P26S);
+		Soin[] G3P26S = {Prelevement20};
+		GroupeSoins G3P26 = new GroupeSoins(G3P26S);
+		Soin[] G4P26S = {Collation};
+		GroupeSoins G4P26 = new GroupeSoins(G4P26S);
+		Soin[] G5P26S = {IRM45, EEG, EchodopplerTSA};
+		GroupeSoins G5P26 = new GroupeSoins(G5P26S);
+		Soin[] G6P26S = {SyntheseNeuro};
+		GroupeSoins G6P26 = new GroupeSoins(G6P26S);
+		GroupeSoins[] P26G = {G1P26, G2P26, G3P26, G4P26, G5P26, G6P26};
+		Parcours P26  = new Parcours(P26G, 26);
+		 		
 		donnees.ajoutParcours(P1);
 		donnees.ajoutParcours(P2);
 		donnees.ajoutParcours(P3);
@@ -848,7 +770,7 @@ public class Test {
 		System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
 		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
-		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
+		//System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
 
 		//5. Affichage de la solution (a implementer)
 	}
