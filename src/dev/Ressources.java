@@ -4,36 +4,29 @@ import java.util.Random;
 
 public class Ressources {
 	
-	Ressource [] RH;
-	Ressource [] RM;
+	Ressource [] R;
+	
 	
 	public Ressources(){
-		this.RH= new Ressource[30];
-		this.RM= new Ressource[20];
+		this.R= new Ressource[500];
 		
 		Random r = new Random();
 		
-		for (int i=0; i<this.RH.length; i++){
-			this.RH[i] = new Ressource(r.nextInt(9)+1);
+		for (int i=0; i<this.R.length; i++){
+			this.R[i] = new Ressource(r.nextInt(9)+1,"A");
 		}
-		for (int i=0; i<this.RM.length; i++){
-			this.RM[i] = new Ressource(r.nextInt(7)+1);
-		}
+		
 	}
 	
-	public Ressource [] getRH(){
-		return this.RH;
+	public Ressource [] getR(){
+		return this.R;
 	}
 	
-	public Ressource [] getRM(){
-		return this.RM;
+
+	
+	public int Rlength(){
+		return this.R.length;
 	}
 	
-	public int RHlength(){
-		return this.RH.length;
-	}
-	
-	public int RMlength(){
-		return this.RM.length;
-	}
+
 }

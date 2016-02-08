@@ -28,7 +28,7 @@ public class Donnees {
 
 				if(r.nextInt(10)<3){
 					int duree =(r.nextInt(3)+2)*15;
-					Soin s= new Soin(duree);
+					Soin s= new Soin(duree,tableauAl(),"A");
 
 					if(j==0){
 						this.donnees[i][j]= new SoinAffecte(s,8*60, R);
@@ -50,6 +50,10 @@ public class Donnees {
 				}
 			}
 		}
+	}
+	
+	public int[] tableauAl(){
+		return new int [0];
 	}
 
 	public SoinAffecte getSoin(int i, int j){

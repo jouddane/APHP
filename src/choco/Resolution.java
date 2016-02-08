@@ -38,13 +38,16 @@ public class Resolution {
 				
 		//2. Initialisation des variables
 		//Xi,j,k : modele a modifier pour coherence avec le code
+		//X[i].lenght : nombre de groupes de soins du parcours i
+		//X[i][j].length : nombre de soins du groupe de soins j du parcours i
+		//X[i][j][k] : debut du soin k du groupe de soins j du parcours i
 		IntVar[][][] X = new IntVar[this.aResoudre.getnPatients()][][];
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
-			X[i] = new IntVar[this.aResoudre.getnG_i()[i]][];
-			for (int j = 0; j < this.aResoudre.getnG_i()[i]; j++) {
-				X[i][j] = new IntVar[this.aResoudre.getnS_ij()[i][j]];
-				for (int k = 0; k < this.aResoudre.getnS_ij()[i][j]; k++) {
-					X[i][j][k]= VF.enumerated("Xi,j,k", 0, this.aResoudre.getnPeriodes(),solver);
+			X[i] = new IntVar[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]][];
+			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
+				X[i][j] = new IntVar[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]];
+				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
+					X[i][j][k]= VF.enumerated("X"+i+","+j+","+k, 0, this.aResoudre.getnPeriodes(),solver);
 				}
 			}
 		}
@@ -56,12 +59,12 @@ public class Resolution {
 		Constraint[][][] contraintePrecedenceGroupe = contraintes.contraintePrecedenceGroupe();
 		
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[i]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[i][j]; k++) {
-					solver.post(contrainteHeureFermeture[i][j][k]);
-					solver.post(contrainteHeureOuverture[i][j][k]);
-					if(j != this.aResoudre.getnG_i()[i]-1)
-					solver.post(contraintePrecedenceGroupe[i][j][k]);
+			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
+				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
+					solver.post(contrainteHeureFermeture[this.aResoudre.getP_i()[i]][j][k]);
+					solver.post(contrainteHeureOuverture[this.aResoudre.getP_i()[i]][j][k]);
+					if(j != this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1)
+					solver.post(contraintePrecedenceGroupe[this.aResoudre.getP_i()[i]][j][k]);
 				}
 			}
 		}
