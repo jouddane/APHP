@@ -1,5 +1,7 @@
 package dev;
 
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
 public class Probleme {
 
 	private int nParcours;
@@ -44,6 +46,7 @@ public class Probleme {
 			}
 			this.Cp_ijMax[i]=max;
 		}
+		
 		this.l_ijk = l_ijk;
 		this.q_ijkr = q_ijkr;
 		this.p_i = p_i;
@@ -63,22 +66,35 @@ public class Probleme {
 			this.nG_i[i]=donnees.getPatients()[i].getParcours().getNombreDeGroupes();
 		}
 		
-		//A modifier sur le modele, indices inverses
+		
 		this.nS_ij = new int[nPatients][];
 		for (int i = 0; i < nPatients; i++) {
 			this.nS_ij[i] = new int[this.nG_i[i]];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.nS_ij[i][j]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].nombreDeSoins;
+				System.out.println("i="+i+", j="+j+", n="+this.nS_ij[i][j]);
 			}
 		}
 		
-		//A modifier sur le modele, indices inverses
+	
 		this.cp_ij = new int[nRessources][nPeriodes];
 		for (int i = 0; i < nRessources; i++) {
 			this.cp_ij[i]=donnees.getRessources()[i].getCapaciteMaxPeriodeP();
 		}
 		
-		//A modifier sur le modele, indices inverses
+		
+		this.Cp_ijMax= new int[this.cp_ij.length];
+		for(int i=0; i<this.cp_ij.length;i++){
+			int max=0;
+			for(int j=0;j<this.cp_ij[i].length;j++){
+				if(this.cp_ij[i][j]>max){
+					max=this.cp_ij[i][j];
+				}
+			}
+			this.Cp_ijMax[i]=max;
+		}
+		
+		
 		this.l_ijk = new int[nPatients][][];
 		for (int i = 0; i < nPatients; i++) {
 			this.l_ijk[i] = new int[this.nG_i[i]][];

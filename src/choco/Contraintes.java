@@ -111,8 +111,9 @@ public class Contraintes {
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					//compteurtemp possï¿½de toutes les infos sur le nb de soins par ressources
-					compteurtemp[this.aResoudre.getRessourceUtilisee(i, j, k)]++;
+					System.out.println(this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]);
+					//compteurtemp possède toutes les infos sur le nb de soins par ressource
+					compteurtemp= this.aResoudre.updateRessourcesAvecSoin(i, j, k, compteurtemp);
 				}
 			}
 		}
