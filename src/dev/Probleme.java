@@ -19,8 +19,8 @@ public class Probleme {
 	private int[][][][] q_ijkr;
 	private int[] p_i;
 	private int[] Cp_ijMax;
-	
-	
+
+
 	public Probleme(int nParcours, int nPatients, int nRessources, int nPeriodes, int hOuverture, int hFermeture,
 			int a_MAX, int a_MIN, int[] nG_i, int[][] nS_ij, int[][] cp_ij, int[][][] l_ijk, int[][][][] q_ijkr,
 			int[] p_i, int[][][] X_ijk) {
@@ -35,7 +35,7 @@ public class Probleme {
 		this.nG_i = nG_i;
 		this.nS_ij = nS_ij;
 		this.cp_ij = cp_ij;
-		
+
 		this.Cp_ijMax= new int[cp_ij.length];
 		for(int i=0; i<cp_ij.length;i++){
 			int max=0;
@@ -46,12 +46,12 @@ public class Probleme {
 			}
 			this.Cp_ijMax[i]=max;
 		}
-		
+
 		this.l_ijk = l_ijk;
 		this.q_ijkr = q_ijkr;
 		this.p_i = p_i;
 	}
-	
+
 	public Probleme(Donnees donnees){
 		this.nParcours = donnees.getParcours().length;
 		this.nPatients = donnees.getPatients().length;
@@ -65,20 +65,21 @@ public class Probleme {
 		for (int i = 0; i < this.nParcours; i++) {
 			this.nG_i[i]=donnees.getParcours()[i].getNombreDeGroupes();
 		}	
-		
+
 		this.nS_ij = new int[nParcours][];
 		for (int i = 0; i < nParcours; i++) {
 			this.nS_ij[i] = new int[this.nG_i[i]];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.nS_ij[i][j]=donnees.getParcours()[i].getGroupeSoins()[j].nombreDeSoins;
 				System.out.println("i="+i+", j="+j+", n="+this.nS_ij[i][j]);
+			}
 		}
-	
+
 		this.cp_ij = new int[nRessources][nPeriodes];
 		for (int i = 0; i < nRessources; i++) {
 			this.cp_ij[i]=donnees.getRessources()[i].getCapaciteMaxPeriodeP();
 		}
-		
+
 		this.Cp_ijMax= new int[this.cp_ij.length];
 		for(int i=0; i<this.cp_ij.length;i++){
 			int max=0;
@@ -89,8 +90,8 @@ public class Probleme {
 			}
 			this.Cp_ijMax[i]=max;
 		}
-		
-		
+
+
 		this.l_ijk = new int[nParcours][][];
 		for (int i = 0; i < nParcours; i++) {
 			this.l_ijk[i] = new int[this.nG_i[i]][];
@@ -101,11 +102,11 @@ public class Probleme {
 				}	
 			}
 		}
-		
-		
-		
-		this.q_ijkr = new int[nPatients][][][];
-		for (int i = 0; i < nPatients; i++) {
+
+
+
+		this.q_ijkr = new int[nParcours][][][];
+		for (int i = 0; i < nParcours; i++) {
 			this.q_ijkr[i] = new int[this.nG_i[i]][][];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.q_ijkr[i][j] = new int[this.nS_ij[i][j]][];
@@ -117,12 +118,12 @@ public class Probleme {
 				}	
 			}
 		}
-		
+
 		this.p_i = new int[nPatients];
 		for (int i = 0; i < nPatients; i++) {
 			this.p_i[i]=donnees.getPatients()[i].getParcours().getIndiceParcours();
 		}
-		
+
 	}
 
 
@@ -238,11 +239,11 @@ public class Probleme {
 	public void setP_i(int[] p_i) {
 		this.p_i = p_i;
 	}
-	
+
 	public int[] getCpij_max() {
 		return this.Cp_ijMax;
 	}
-	
+
 	public int[] getRessourcesUtilisees(int i, int j, int k) {
 		int[] tableauRessources = new int[this.getnRessources()];
 		for(int r = 0; r<this.getnRessources(); r++) {
@@ -250,7 +251,7 @@ public class Probleme {
 		}
 		return tableauRessources;
 	}
-	
+
 	public int[] updateRessourcesAvecSoin(int i, int j, int k, int[] ressourcesUtilisees) {
 		if(ressourcesUtilisees.length != this.getnRessources()) {
 			System.out.println("Pas la bonne taille de tableau !");
