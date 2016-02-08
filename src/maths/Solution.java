@@ -9,6 +9,11 @@ public class Solution {
 	private Integer[][][] Xsol;
 	private Probleme aResoudre;
 	
+	public Solution(Integer[][][] xsol, Probleme aResoudre) {
+		Xsol = xsol;
+		this.aResoudre = aResoudre;
+	}
+
 	public boolean verifieContrainteHeureFermeture(){
 		boolean verifieContrainteHeureFermeture=true;
 		int i=0;
