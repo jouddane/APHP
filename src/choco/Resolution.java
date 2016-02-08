@@ -1,6 +1,6 @@
 package choco;
 
-import dev.Probleme;
+import src.dev.Probleme;
 
 import org.chocosolver.solver.ResolutionPolicy;
 import org.chocosolver.solver.Solver;
