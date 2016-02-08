@@ -13,6 +13,17 @@ public class Donnees {
 	private int A_MIN;
 	
 	
+	public Donnees() {
+		this.patients = new Patient[0];
+		this.parcours = new Parcours[0];
+		this.ressources = new Ressource[0];
+		this.nPeriodes = 0;
+		HOuverture = 0;
+		HFermeture = 0;
+		A_MAX = 0;
+		A_MIN = 0;
+	}
+
 	public Patient[] getPatients() {
 		return patients;
 	}
@@ -107,18 +118,17 @@ public class Donnees {
 		this.parcours=parcoursNew;
 	}
 	
-	public Ressource getRessourceNom(String nom){
+	public int getRessourceNom(String nom){
 		int i=0;
 		while((i<this.getRessources().length)&&(this.getRessources()[i].getNom()!=nom)){
 			i++;
 		}
 		if(i<this.getRessources().length){
-			return this.getRessources()[i];
+			return i;
 		}
 		else{
-			return null;
+			return -1;
 		}
-			
 	}
 	
 }
