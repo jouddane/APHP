@@ -1,6 +1,16 @@
 package choco;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.rmi.server.ExportException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.chocosolver.solver.constraints.nary.automata.FA.FiniteAutomaton;
 
@@ -152,14 +162,21 @@ public class Automate {
 
 	}
 	
-	public static Automate AutomateAvecPause(Parcours p, int Amin, int Amax){
+	/**
+	 * 
+	 * @param p le parcours pour lequel on souhaite creer la contrainte Automate
+	 * @param Amin temps d'attente minimal entre 2 soins. Doit etre strictement superieur a 1.
+	 * @param Amax temps d'attente maximal entre 2 soins. Doit etre superieur ou egal a Amin.
+	 * @return
+	 */
+	public static FiniteAutomaton AutomateAvecPause(Parcours p, int Amin, int Amax){
 
 		
-		//Initialisation tache pause et rien
+		//Initialisation des tache (transitions) pause et rien
 		int RIEN = 0;
 		int PAUSE = 1;
 		
-		//Association d'indices a chaque soins, pause et rien
+		//Association d'indices a chaque soins representant des transitions entre des etats
 		//IndiceSoins[i][j] represent l'indice utilisee dans l'automate pour representer le soin j du groupe de soin i du parcours p 
 		int[][] indiceSoins = new int[p.getGroupeSoins().length][];
 		int i=0;
@@ -177,9 +194,13 @@ public class Automate {
 		
 		//Creation de l'automate
         FiniteAutomaton auto = new FiniteAutomaton();
+        
+        //Initialisation de l'etat de debut de l'automate
         int debut = auto.addState();
         auto.setInitialState(debut);
+        //Initialisation de l'etat d'arrivee de l'automate
         int fin = auto.addState();
+   
         auto.setFinal(debut);
         auto.setFinal(fin);
 
@@ -200,32 +221,36 @@ public class Automate {
 			}
 		}
         
-      //Creation des listes de possibilites (soins realisables) dans le groupe de soin 0 
+        //Initialisation d un tableau repertoriant les derniers etats obtenus pour le groupe precedent
+        int[] etatsFinauxAncienGroupeInt = new int[1];
+        etatsFinauxAncienGroupeInt[0] = debut; 
         
-        int[] etatFinalAncienGroupeInt = new int[1];
-        etatFinalAncienGroupeInt[0] = debut; 
-        
-        //A modif
+        //On itere sur l'ensemble des groupes pour construire l'automate
         for(int indiceGroupe = 0; indiceGroupe<p.getNombreDeGroupes(); indiceGroupe++){
+        	
+            //Creation d'une liste regroupant l'ensemble de transitions possibles (indices des soins realisables) dans le groupe de soins indiceGroupe
         	ArrayList<CoupleIndiceSoinDuree> listPossibilitesGroupe = new ArrayList();
         	for (int j = 0; j < indiceSoins[indiceGroupe].length; j++) {
         		listPossibilitesGroupe.add(new CoupleIndiceSoinDuree(indiceSoins[indiceGroupe][j],p.getGroupeSoins()[indiceGroupe].getSoin(j).getDuree()));
         	}
 
+        	//Initialisation du premier etat composant l'ensemble des etats atteignables a partir des transitions associees aux soins realisable du groupe de soins indiceGroupe 
     		etatsNiveau[indiceGroupe][0][0] = new Etat(listPossibilitesGroupe,auto.addState());
 
+    		//Creation de la transition entre l'etat initial debut et le premier etat de l'ensemble des etats atteignables a partir des transitions associees aux soins realisable du groupe de soins indiceGroupe 
         	if(indiceGroupe == 0){
-            	auto.addTransition(etatFinalAncienGroupeInt[0],etatsNiveau[indiceGroupe][0][0].getEtatInt() , RIEN);
+            	auto.addTransition(etatsFinauxAncienGroupeInt[0],etatsNiveau[indiceGroupe][0][0].getEtatInt() , RIEN);
         	}
+        	
+        	//Creation transitions entre les derniers etats atteignables par les transitions associees aux soins du groupe de soins indiceGroupe-1 et le premier etat atteignable du groupe de soins indiceGroupe par une transition PAUSE
         	else{
-        		for (int j = 0; j < etatFinalAncienGroupeInt.length; j++) {
-                	auto.addTransition(etatFinalAncienGroupeInt[j],etatsNiveau[indiceGroupe][0][0].getEtatInt() , PAUSE);
-				}
+        		for (int j = 0; j < etatsFinauxAncienGroupeInt.length; j++) {
+       				auto.addTransition(etatsFinauxAncienGroupeInt[j],etatsNiveau[indiceGroupe][0][0].getEtatInt() , PAUSE);
+       			}
         	}
         
         	
-        	//Certainement a modifier par la suite (Pause voir meme pas de charactere du tout)
-        	
+        	//Creation d'un etatCourant representant l'etat que l'on souhaite etendre aux etats qui le succedent
         	Etat etatCourant;
         	for (int indiceNiveau = 0; indiceNiveau < etatsNiveau[indiceGroupe].length-1; indiceNiveau++) {
         		int indiceEtatsNiveauSuivantIndiceNiveau=0;
@@ -234,57 +259,101 @@ public class Automate {
         			ArrayList<CoupleIndiceSoinDuree> listeSoinsRealisables = etatCourant.getListPossibilite();
         			for (int j = 0; j < listeSoinsRealisables.size(); j++) {
         				etatsNiveau[indiceGroupe][indiceNiveau+1][indiceEtatsNiveauSuivantIndiceNiveau] = etatCourant.etatSuivant(listeSoinsRealisables.get(j).getIndiceSoin());
-                		int E[] = new int[listeSoinsRealisables.get(j).getDuree()];
-                		for (int k = 0; k < E.length; k++) {
-                			E[k] = auto.addState();
+                		int E[];
+                		//RAJOUT DE PAUSES ICI
+                		if(indiceNiveau>0){
+                			E = new int[listeSoinsRealisables.get(j).getDuree()+1];
+                     		for (int k = 0; k < E.length; k++) {
+                     			E[k] = auto.addState();
+                     		}
+                			int[][] EPause = new int[Amax - Amin +1][];
+                			int etatPostSoins = auto.addState();
+                			for (int k = 0; k < EPause.length; k++) {
+                				EPause[k] = new int[Amin -1 +k];
+               					EPause[k][0] = etatPostSoins;
+               					for (int j2 = 1; j2 < EPause[k].length; j2++) {
+               						EPause[k][j2]= auto.addState();
+               						auto.addTransition(EPause[k][j2-1],EPause[k][j2], PAUSE);
+               					}
+               				}
+                	
+                			int[] etatsFinauxAncienNiveauInt = new int[EPause.length];
+                			for (int k = 0; k < EPause.length; k++) {
+                				etatsFinauxAncienNiveauInt[k] = EPause[k][EPause[k].length-1];
+                			}
+                		
+               				auto.addTransition(etatCourant.getEtatInt(),etatPostSoins,PAUSE);
+                		 		
+                        
+               				for (int k = 0; k < EPause.length; k++) {
+               					auto.addTransition(etatsFinauxAncienNiveauInt[k], E[0], PAUSE);
+               				}
                 		}
-                		auto.addTransition(etatCourant.getEtatInt(), E[0], listeSoinsRealisables.get(j).getIndiceSoin());
+                		else{
+                			E = new int[listeSoinsRealisables.get(j).getDuree()];
+                     		for (int k = 0; k < E.length; k++) {
+                     			E[k] = auto.addState();
+                     		}
+                     		auto.addTransition(etatCourant.getEtatInt(), E[0], listeSoinsRealisables.get(j).getIndiceSoin());
+                		}
                         for (int k = 0; k < E.length-1; k++) {
             				auto.addTransition(E[k], E[k+1], listeSoinsRealisables.get(j).getIndiceSoin());
             			}
+                        
                         etatsNiveau[indiceGroupe][indiceNiveau+1][indiceEtatsNiveauSuivantIndiceNiveau].setEtatInt(E[E.length-1]);
                         indiceEtatsNiveauSuivantIndiceNiveau++;
 					}
         		}
 			}
-        	/*
-        	int etatPause = auto.addState();
+        	
         	int dernierNiveau = etatsNiveau[indiceGroupe].length-1;
-        	int nbNoeudsDernierNiveau = etatsNiveau[indiceGroupe][dernierNiveau].length;
-        	for (int j = 0; j < nbNoeudsDernierNiveau; j++) {
-        		auto.addTransition(etatsNiveau[indiceGroupe][dernierNiveau][j].getEtatInt(),etatPause,PAUSE);
-			}
-			*/
-        	int[] EPauseMin = new int[Amin];
-        	for (int j = 0; j < EPauseMin.length; j++) {
-				EPauseMin[j] = auto.addState();
+    		int nbNoeudsDernierNiveau = etatsNiveau[indiceGroupe][dernierNiveau].length;
+    		
+        	if(Amax==1||indiceGroupe==p.getNombreDeGroupes()-1){
+        		
+        		etatsFinauxAncienGroupeInt = new int[nbNoeudsDernierNiveau];
+        		for (int j = 0; j < nbNoeudsDernierNiveau; j++) {
+        			etatsFinauxAncienGroupeInt[j] = etatsNiveau[indiceGroupe][dernierNiveau][j].getEtatInt();
+				}
+        		
         	}
-        	int dernierNiveau = etatsNiveau[indiceGroupe].length-1;
-        	int nbNoeudsDernierNiveau = etatsNiveau[indiceGroupe][dernierNiveau].length;
-        	for (int j = 0; j < nbNoeudsDernierNiveau; j++) {
-        		auto.addTransition(etatsNiveau[indiceGroupe][dernierNiveau][j].getEtatInt(),EPauseMin[0],PAUSE);
-			}
-        	for (int j = 0; j < Amin-2; j++) {
-				auto.addTransition(EPauseMin[j], EPauseMin[j+1], PAUSE);
-			}
-        	int[] EPauseMax = new int[Amax - Amin];
-        	for (int j = 0; j < etatsNiveau.length; j++) {
-				EPauseMax[j] = auto.addState();
-			}
-        	auto.addTransition(EPauseMin[Amin-1], EPauseMax[0], PAUSE);
-        	auto(EPauseMin[Amin-1], EPauseMax[0], PAUSE);
-        	etatFinalAncienGroupeInt = etatPause;
+        	else{
+        		int[][] EPause = new int[Amax - Amin +1][];
+        		int etatPostSoins = auto.addState();
+        		for (int j = 0; j < EPause.length; j++) {
+        			EPause[j] = new int[Amin -1 +j];
+        			EPause[j][0] = etatPostSoins;
+        			for (int j2 = 1; j2 < EPause[j].length; j2++) {
+        				EPause[j][j2]= auto.addState();
+        				auto.addTransition(EPause[j][j2-1],EPause[j][j2], PAUSE);
+        			}
+        		}
         	
-        	
+        		for (int j = 0; j < nbNoeudsDernierNiveau; j++) {
+        			auto.addTransition(etatsNiveau[indiceGroupe][dernierNiveau][j].getEtatInt(),etatPostSoins,PAUSE);
+        		}
+        		
+        		etatsFinauxAncienGroupeInt = new int[EPause.length];
+        		for (int j = 0; j < EPause.length; j++) {
+        			etatsFinauxAncienGroupeInt[j] = EPause[j][EPause[j].length-1];
+        		}
+        	}
 		}
        
         
         /*Penser a l'ajout de pause*/
+        for (int j = 0; j < etatsFinauxAncienGroupeInt.length; j++) {
+			auto.addTransition(etatsFinauxAncienGroupeInt[j],fin,RIEN);
+		}
+       
         
-      
-        auto.addTransition(etatFinalAncienGroupeInt, fin, RIEN);
-        System.out.printf("%s\n", auto.toDot());
-        
+        try {
+			exportFichierDot(auto.toDot());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return auto;
 
 	
 	}
@@ -438,8 +507,31 @@ public class Automate {
 				Parcours P1  = new Parcours(P1G, 0);
 				
 		
-		new Automate(P1);
-		
+		//new Automate(P1);
+		AutomateAvecPause(P1, 3, 8);
 	}
+	
+	static void exportFichierDot(String aExporter) throws IOException {
+		BufferedWriter writer = null;
+        try {
+            //create a temporary file
+            String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            File logFile = new File(timeLog+".dot");
+
+            // This will output the full path where the file will be written to...
+            System.out.println(logFile.getCanonicalPath());
+
+            writer = new BufferedWriter(new FileWriter(logFile));
+            writer.write(aExporter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Close the writer regardless of what happens...
+                writer.close();
+            } catch (Exception e) {
+            }
+        }
+	  }
 	
 }
