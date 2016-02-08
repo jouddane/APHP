@@ -1,5 +1,7 @@
 package dev;
 
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
 public class Probleme {
 
 	private int nParcours;
@@ -70,6 +72,7 @@ public class Probleme {
 			this.nS_ij[i] = new int[this.nG_i[i]];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.nS_ij[i][j]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].nombreDeSoins;
+				System.out.println("i="+i+", j="+j+", n="+this.nS_ij[i][j]);
 			}
 		}
 		

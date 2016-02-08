@@ -119,11 +119,14 @@ public class Test {
 		listRessourceCapacite10.add(new CoupleStringInt("IDE Obesite", 1));
 		listRessourceCapacite10.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
 		Soin RDVParamedical20 = Soin.creerSoin(donnees, listRessourceCapacite10, "RDV Paramedical20", 20);
-
+		
+		
+		//System.out.println("done");
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite11 = new ArrayList<>();	 
 		listRessourceCapacite11.add(new CoupleStringInt("Hors HDJ",1));	 	 	
 		Soin TOGD = Soin.creerSoin(donnees, listRessourceCapacite11, "TOGD", 20);
-
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite12 = new ArrayList<>();	 	 	 
 		Soin Collation = Soin.creerSoin(donnees, listRessourceCapacite12, "Collation", 0);
 
@@ -131,7 +134,7 @@ public class Test {
 		listRessourceCapacite13.add(new CoupleStringInt("Interne Obesite", 1));
 		listRessourceCapacite13.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
 		Soin BilanAnthropometrique = Soin.creerSoin(donnees, listRessourceCapacite13, "Bilan Anthropometrique", 60);
-
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite14 = new ArrayList<>();
 		listRessourceCapacite14.add(new CoupleStringInt("Medecin Hepato", 1));
 		listRessourceCapacite14.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
@@ -141,7 +144,9 @@ public class Test {
 		listRessourceCapacite15.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite15.add(new CoupleStringInt("Bureau CS", 1));	 	 
 		Soin RDVParamedical15 = Soin.creerSoin(donnees, listRessourceCapacite15, "RDV Paramedical15", 15);
-
+		
+		
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite16 = new ArrayList<>();	 
 		listRessourceCapacite16.add(new CoupleStringInt("Hors HDJ",1));	 	 	
 		Soin ScannerAbdo = Soin.creerSoin(donnees, listRessourceCapacite16, "Scanner Abdo", 20);
@@ -150,7 +155,7 @@ public class Test {
 		listRessourceCapacite17.add(new CoupleStringInt("Medecin Hepato", 1));
 		listRessourceCapacite17.add(new CoupleStringInt("Bureau CS", 1));	 	 
 		Soin EntretienHepato = Soin.creerSoin(donnees, listRessourceCapacite17, "Entretien Hepato", 45);
-
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite18 = new ArrayList<>();
 		listRessourceCapacite18.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite18.add(new CoupleStringInt("Box Soin", 1));	 	 
@@ -165,7 +170,7 @@ public class Test {
 		listRessourceCapacite20.add(new CoupleStringInt("Externe", 1));
 		listRessourceCapacite20.add(new CoupleStringInt("Box Soin", 1));	 	 
 		Soin PonctionAscite = Soin.creerSoin(donnees, listRessourceCapacite20, "Ponction Ascite", 180);
-
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite21 = new ArrayList<>();
 		listRessourceCapacite21.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite21.add(new CoupleStringInt("Box Soin", 1));	 	 
@@ -186,7 +191,7 @@ public class Test {
 		listRessourceCapacite24.add(new CoupleStringInt("Box Soin", 1));
 		listRessourceCapacite24.add(new CoupleStringInt("Cardiologue", 1));	 	
 		Soin PoseHolter = Soin.creerSoin(donnees, listRessourceCapacite24, "Pose Holter", 15);
-
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite25 = new ArrayList<>();
 		listRessourceCapacite25.add(new CoupleStringInt("Orthoptiste", 1));
 		listRessourceCapacite25.add(new CoupleStringInt("Bureau CS", 1));	 	 
@@ -203,7 +208,7 @@ public class Test {
 		ArrayList<CoupleStringInt> listRessourceCapacite28 = new ArrayList<>();	 
 		listRessourceCapacite28.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
 		Soin ScintigraphieMyocardique = Soin.creerSoin(donnees, listRessourceCapacite28, "Scintigraphie Myocardique", 30);
-
+		//System.out.println("done");
 		ArrayList<CoupleStringInt> listRessourceCapacite29 = new ArrayList<>();	 
 		listRessourceCapacite29.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
 		Soin Injection = Soin.creerSoin(donnees, listRessourceCapacite29, "Injection", 40);
@@ -242,7 +247,7 @@ public class Test {
 		listRessourceCapacite36.add(new CoupleStringInt("Medecin", 1));
 		listRessourceCapacite36.add(new CoupleStringInt("Salle Pansement", 1));	
 		Soin SoinPansementMesuresIPS = Soin.creerSoin(donnees, listRessourceCapacite36, "Soin, Pansement, Mesures IPS", 40);
-
+		//System.out.println("done");
 		ArrayList<CoupleStringInt> listRessourceCapacite37 = new ArrayList<>();
 		listRessourceCapacite37.add(new CoupleStringInt("IDE Pompe Insuline", 1));
 		listRessourceCapacite37.add(new CoupleStringInt("Diabetologue", 1));
@@ -263,35 +268,34 @@ public class Test {
 		listRessourceCapacite40.add(new CoupleStringInt("IDE Sommeil", 1));
 		listRessourceCapacite40.add(new CoupleStringInt("Explorations Fonctionnelles", 1));	 
 		Soin Examens30 = Soin.creerSoin(donnees, listRessourceCapacite40, "Examens30", 30);
-
+		//System.out.println("done");
 		ArrayList<CoupleStringInt> listRessourceCapacite41 = new ArrayList<>();
 		listRessourceCapacite41.add(new CoupleStringInt("IDE Sommeil", 1));
 		listRessourceCapacite41.add(new CoupleStringInt("Piece Isolee Avec Fauteuil", 1));	 
 		Soin Appareillage60 = Soin.creerSoin(donnees, listRessourceCapacite41, "Appareillage60", 60);
-
+		//System.out.println("done");
 		ArrayList<CoupleStringInt> listRessourceCapacite42 = new ArrayList<>();
 		listRessourceCapacite42.add(new CoupleStringInt("Medecin Sommeil", 1));
 		listRessourceCapacite42.add(new CoupleStringInt("Bureau Sommeil", 1));	 	 
 		Soin RDVMedical20BurSom = Soin.creerSoin(donnees, listRessourceCapacite42, "RDV Medical20BurSom", 20);
-
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite43 = new ArrayList<>();
 		listRessourceCapacite43.add(new CoupleStringInt("Medecin Sommeil", 1));
 		listRessourceCapacite43.add(new CoupleStringInt("Psychologue", 1));
 		listRessourceCapacite43.add(new CoupleStringInt("Prestataire", 1));
-		listRessourceCapacite43.add(new CoupleStringInt("Salle ETP groupe", 1));	
+		listRessourceCapacite43.add(new CoupleStringInt("Salle ETP Groupe", 1));	
 		Soin ETPSom = Soin.creerSoin(donnees, listRessourceCapacite43, "ETPSom", 90);
-
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite44 = new ArrayList<>();
 		listRessourceCapacite44.add(new CoupleStringInt("IDE Sommeil", 1));
 		listRessourceCapacite44.add(new CoupleStringInt("Prestataire", 1));
 		listRessourceCapacite44.add(new CoupleStringInt("Salle Avec Lit", 1));	 	
 		Soin Appareillage45 = Soin.creerSoin(donnees, listRessourceCapacite44, "Appareillage45", 45);
-
+		
 		ArrayList<CoupleStringInt> listRessourceCapacite45 = new ArrayList<>();
 		listRessourceCapacite45.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite45.add(new CoupleStringInt("Box Prelevement", 1));	 	 
 		Soin BilanBiologique20 = Soin.creerSoin(donnees, listRessourceCapacite45, "Bilan Biologique20", 20);
-
 		ArrayList<CoupleStringInt> listRessourceCapacite46 = new ArrayList<>();
 		listRessourceCapacite46.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite46.add(new CoupleStringInt("Box", 1));	 	 	
@@ -393,7 +397,7 @@ public class Test {
 
 		ArrayList<CoupleStringInt> listRessourceCapacite68 = new ArrayList<>();	 
 		listRessourceCapacite68.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin ScintigraphieCérébrale = Soin.creerSoin(donnees, listRessourceCapacite68, "Scintigraphie Cérébrale", 40);
+		Soin ScintigraphieCerebrale = Soin.creerSoin(donnees, listRessourceCapacite68, "Scintigraphie Cérébrale", 40);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite69 = new ArrayList<>();
 		listRessourceCapacite69.add(new CoupleStringInt("Generaliste", 1));
@@ -414,12 +418,13 @@ public class Test {
 		listRessourceCapacite72.add(new CoupleStringInt("Psychologue", 1));
 		listRessourceCapacite72.add(new CoupleStringInt("Bureau CS", 1));	 	 
 		Soin ConsultationPsy30 = Soin.creerSoin(donnees, listRessourceCapacite72, "Consultation Psy30", 30);	 	 
-
+		
+		
 		
 		// On crée le Parcours 1
 		Soin[] G1P1S = {RDVParamedical20};
 		GroupeSoins G1P1 = new GroupeSoins(G1P1S);
-		Soin[] G2P1S = {ECG15, BilanBiologique15, EchoHepathique, Calorimetrie};
+		Soin[] G2P1S = {ECG15, BilanBiologique15, Calorimetrie,EchoHepathique };
 		GroupeSoins G2P1 = new GroupeSoins(G2P1S);
 		Soin[] G3P1S = {Collation};
 		GroupeSoins G3P1 = new GroupeSoins(G3P1S);
@@ -461,9 +466,10 @@ public class Test {
 		GroupeSoins G6P3 = new GroupeSoins(G6P3S);
 		GroupeSoins[] P3G = {G1P3, G2P3, G3P3, G4P3, G5P3, G6P3};
 		Parcours P3  = new Parcours(P3G, 3);
-
+		
+		System.out.println("done");
 		// On crée le Parcours 4
-		Soin[] G1P4S = {RDVParamedical15};
+		/*Soin[] G1P4S = {RDVParamedical15};
 		GroupeSoins G1P4 = new GroupeSoins(G1P4S);
 		Soin[] G2P4S = {ECG15, Calorimetrie};
 		GroupeSoins G2P4 = new GroupeSoins(G2P4S);
@@ -1006,7 +1012,7 @@ public class Test {
 		Soin[] G6P3S = {Synthese};
 		GroupeSoins G6P3 = new GroupeSoins(G6P3S);
 		GroupeSoins[] P3G = {G1P3, G2P3, G3P3, G4P3, G5P3, G6P3};
-		Parcours P3  = new Parcours(P3G, 3);
+		Parcours P3  = new Parcours(P3G, 3);*/
 		
 		donnees.ajoutParcours(P1);
 		donnees.ajoutParcours(P2);
@@ -1037,6 +1043,7 @@ public class Test {
 		System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
 		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
+		System.out.println("Capacit� max? "+verifierSol.verifieContrainteRessources());
 
 		//5. Affichage de la solution (a implementer)
 	}
