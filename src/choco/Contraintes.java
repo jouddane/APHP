@@ -122,7 +122,7 @@ public class Contraintes {
 			}
 			System.out.println("\n");
 		}
-		
+
 		// Il faut que je rajoute les contraintes 
 		int compteur2=0;
 		for (int a=0; a<this.aResoudre.getnRessources(); a++){
@@ -143,13 +143,21 @@ public class Contraintes {
 					}
 				}
 			}
-			IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCpij_max()[a],solver)	;
-			C5[compteur2]=IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
-			compteur2++;
+			//System.out.println("Capacit� max ressource "+a+" = "+this.aResoudre.getCpij_max()[a]);
+			//IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCpij_max()[a],solver)	;
+			IntVar Capacite = VariableFactory.fixed(10,solver)	;
+			if(Soins.length>0){
+				C5[compteur2]=IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
+				compteur2++;
+			}
+			else{
+				compteur2++;
+			}
+			for(int l=0; l<C5.length; l++) {
+				System.out.println("C5["+l+"] = "+C5[l]);
+			}
 		}
-		/*for(int l=0; l<C5.length; l++) {
-			System.out.println("C5["+l+"] = "+C5[l]);
-		}*/
 		return C5;	
 	}
+
 }
