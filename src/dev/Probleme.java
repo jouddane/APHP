@@ -64,12 +64,7 @@ public class Probleme {
 		this.nG_i = new int[this.nParcours];
 		for (int i = 0; i < this.nParcours; i++) {
 			this.nG_i[i]=donnees.getParcours()[i].getNombreDeGroupes();
-		}
-		
-		this.nG_i = new int[nParcours];
-		for (int i = 0; i < nParcours; i++) {
-			this.nG_i[i]=donnees.getParcours()[i].getNombreDeGroupes();
-		}		
+		}	
 		
 		this.nS_ij = new int[nParcours][];
 		for (int i = 0; i < nParcours; i++) {
@@ -79,7 +74,6 @@ public class Probleme {
 				System.out.println("i="+i+", j="+j+", n="+this.nS_ij[i][j]);
 			}
 		}
-		
 	
 		this.cp_ij = new int[nRessources][nPeriodes];
 		for (int i = 0; i < nRessources; i++) {

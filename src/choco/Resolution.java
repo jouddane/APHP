@@ -69,12 +69,6 @@ public class Resolution {
 		Constraint[] contrainteCapaciteRessources = contraintes.contrainteCapaciteRessources();
 		
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					solver.post(contrainteHeureFermeture[i][j][k]);
-					solver.post(contrainteHeureOuverture[i][j][k]);
-					if(j != this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1)
-					solver.post(contraintePrecedenceGroupe[i][j][k]);
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
 					solver.post(contrainteHeureFermeture[i][j][k]);
