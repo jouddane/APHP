@@ -39,15 +39,23 @@ public class Resolution {
 				
 		//2. Initialisation des variables
 		//Xi,j,k : modele a modifier pour coherence avec le code
+		//X[i].lenght : nombre de groupes de soins du parcours i
+		//X[i][j].length : nombre de soins du groupe de soins j du parcours i
+		//X[i][j][k] : debut du soin k du groupe de soins j du parcours i
 		IntVar[][][] X = new IntVar[this.aResoudre.getnPatients()][][];
 		Integer[][][] solInt = new Integer[this.aResoudre.getnPatients()][][];
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
-			X[i] = new IntVar[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];
-			solInt[i] = new Integer[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];
-			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
-				X[i][j] = new IntVar[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]];
-				solInt[i][j] = new Integer[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]];
-				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
+			
+			X[i] = new IntVar[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]][];
+			solInt[i] = new Integer[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]][];
+			
+			
+			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]; j++) {
+				X[i][j] = new IntVar[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]];
+				solInt[i][j] = new Integer[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]];
+				
+				
+				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]; k++) {
 					X[i][j][k]= VF.enumerated("X"+i+","+j+","+k, 0, this.aResoudre.getnPeriodes(),solver);
 				}
 			}
@@ -58,18 +66,28 @@ public class Resolution {
 		Constraint[][][] contrainteHeureOuverture = contraintes.contrainteHeureOuverture();
 		Constraint[][][] contrainteHeureFermeture = contraintes.contrainteHeureFermeture();
 		Constraint[][][] contraintePrecedenceGroupe = contraintes.contraintePrecedenceGroupe();
+		Constraint[] contrainteCapaciteRessources = contraintes.contrainteCapaciteRessources();
 		
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
+			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
+				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
 					solver.post(contrainteHeureFermeture[i][j][k]);
 					solver.post(contrainteHeureOuverture[i][j][k]);
-					if(j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]-1){
+					if(j != this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1) {
+						//System.out.println("valeur : "+(this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1));
+						//System.out.println("i = "+i+", j = "+j+", k = "+k);
 						solver.post(contraintePrecedenceGroupe[i][j][k]);
 					}
 				}
 			}
 		}
+		
+		for (int i=0; i<this.aResoudre.getnRessources(); i++){
+			if(!(contrainteCapaciteRessources[i] == null)) {
+				solver.post(contrainteCapaciteRessources[i]);
+			}
+		}
+		
 		
         // 4. Definition de la strategie de resolution
         //solver.set(IntStrategyFactory.lexico_LB(x, y));
@@ -82,8 +100,8 @@ public class Resolution {
 		System.out.println("Solution ? "+solver.findSolution());
 		Solution solution = solver.getSolutionRecorder().getLastSolution();
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
+			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]; j++) {
+				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]; k++) {
 					solInt[i][j][k] = solution.getIntVal(X[i][j][k]);
 				}
 			}
@@ -92,9 +110,5 @@ public class Resolution {
         Chatterbox.printStatistics(solver);
         
         return solInt;
-	}
-	
-	public static void main(String[] args) {
-		
 	}
 }
