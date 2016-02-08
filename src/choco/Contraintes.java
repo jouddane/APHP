@@ -112,11 +112,11 @@ public class Contraintes {
 					System.out.println("k = "+k);
 					//compteurtemp possede toutes les infos sur le nb de soins par ressource
 					compteurtemp= this.aResoudre.updateRessourcesAvecSoin(this.aResoudre.getP_i()[i]-1, j, k, compteurtemp);
-					/*System.out.print("[ ");
+					System.out.print("[ ");
 					for(int p=0; p<compteurtemp.length; p++) {
 						System.out.print(compteurtemp[p]+" ");
 					}
-					System.out.println("]");*/
+					System.out.println("]");
 				}
 				System.out.println("");
 			}
@@ -124,12 +124,12 @@ public class Contraintes {
 		}
 		
 		// Il faut que je rajoute les contraintes 
+		int compteur2=0;
 		for (int a=0; a<this.aResoudre.getnRessources(); a++){
-			System.out.println("a = "+a);
+			//System.out.println("a = "+a);
 			Task[] Soins = new Task[compteurtemp[a]];
 			IntVar[] Hauteur = new  IntVar[compteurtemp[a]];
 			int compteur1=0;
-			int compteur2=0;
 			for(int i=0;i<this.aResoudre.getnPatients();i++){
 				for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
 					for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
@@ -147,9 +147,9 @@ public class Contraintes {
 			C5[compteur2]=IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
 			compteur2++;
 		}
-		for(int l=0; l<C5.length; l++) {
+		/*for(int l=0; l<C5.length; l++) {
 			System.out.println("C5["+l+"] = "+C5[l]);
-		}
+		}*/
 		return C5;	
 	}
 }
