@@ -61,6 +61,11 @@ public class Probleme {
 		this.HFermeture = donnees.getHFermeture();
 		this.A_MAX = donnees.getA_MAX();
 		this.A_MIN = donnees.getA_MIN();
+		this.nG_i = new int[this.nParcours];
+		for (int i = 0; i < this.nParcours; i++) {
+			this.nG_i[i]=donnees.getParcours()[i].getNombreDeGroupes();
+		}
+		
 		this.nG_i = new int[nParcours];
 		for (int i = 0; i < nParcours; i++) {
 			this.nG_i[i]=donnees.getParcours()[i].getNombreDeGroupes();
@@ -71,6 +76,7 @@ public class Probleme {
 			this.nS_ij[i] = new int[this.nG_i[i]];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.nS_ij[i][j]=donnees.getParcours()[i].getGroupeSoins()[j].nombreDeSoins;
+				System.out.println("i="+i+", j="+j+", n="+this.nS_ij[i][j]);
 			}
 		}
 		
