@@ -78,6 +78,7 @@ public class Contraintes {
 
 	public Constraint[][][] contraintePrecedenceGroupe(){
 		Constraint[][][] C4 = new Constraint[this.aResoudre.getnPatients()][][];
+
 		for(int i=0; i<this.aResoudre.getnPatients(); i++){
 			C4[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1][];
 			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1; j++){
@@ -159,5 +160,4 @@ public class Contraintes {
 		}
 		return C5;	
 	}
-
 }

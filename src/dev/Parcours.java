@@ -8,7 +8,7 @@ public class Parcours {
 	protected int indiceParcours;
 	
 	/***
-	 * Constructeur d'un parcours identifié par un indice donné,et constitué à partir d'un tableau de groupe de soins. 
+	 * Constructeur d'un parcours identifiï¿½ par un indice donnï¿½,et constituï¿½ ï¿½ partir d'un tableau de groupe de soins. 
 	 * @param groupesSoins
 	 * @param indice
 	 */
@@ -22,7 +22,7 @@ public class Parcours {
 	}
 	
 	/**
-	 * Initialise le parcours avec un tableau vide et un indice négatif à -1
+	 * Initialise le parcours avec un tableau vide et un indice nï¿½gatif ï¿½ -1
 	 */
 	public Parcours(){
 		this(new GroupeSoins[0], -1);
@@ -53,7 +53,7 @@ public class Parcours {
 	}
 	
 	/**
-	 * Mets à jour l'indice du parcours 
+	 * Mets ï¿½ jour l'indice du parcours 
 	 * @param indiceParcours
 	 */
 	public void setIndiceParcours(int indiceParcours) {
@@ -69,7 +69,7 @@ public class Parcours {
 	}
 	
 	/**
-	 * Ajoute à la fin du parcours un groupe de soins
+	 * Ajoute ï¿½ la fin du parcours un groupe de soins
 	 * @param groupeSoins2
 	 */
 	public void ajoutGroupeSoins(GroupeSoins groupeSoins2){
