@@ -1,16 +1,21 @@
 package dev;
 
+
+
 public class SoinAffecte extends Soin{
 
 	private int debut;
 	private boolean realise;
 	private boolean enCours;
 	
+	
 	public SoinAffecte(Soin s, int debut){
 		super(s.getDuree(), s.getRessourcesNecessaires(), s.nom);
 		this.debut = debut;
 		this.realise = false;
 		this.enCours = false;
+		
+		
 	}
 	
 	public int getDebut(){

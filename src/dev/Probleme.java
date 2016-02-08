@@ -16,6 +16,7 @@ public class Probleme {
 	private int[][][] l_ijk;
 	private int[][][][] q_ijkr;
 	private int[] p_i;
+	private int[] Cp_ijMax;
 	
 	
 	public Probleme(int nParcours, int nPatients, int nRessources, int nPeriodes, int hOuverture, int hFermeture,
@@ -32,6 +33,17 @@ public class Probleme {
 		this.nG_i = nG_i;
 		this.nS_ij = nS_ij;
 		this.cp_ij = cp_ij;
+		
+		this.Cp_ijMax= new int[cp_ij.length];
+		for(int i=0; i<cp_ij.length;i++){
+			int max=0;
+			for(int j=0;j<cp_ij[i].length;j++){
+				if(cp_ij[i][j]>max){
+					max=cp_ij[i][j];
+				}
+			}
+			this.Cp_ijMax[i]=max;
+		}
 		this.l_ijk = l_ijk;
 		this.q_ijkr = q_ijkr;
 		this.p_i = p_i;

@@ -39,6 +39,9 @@ public class Resolution {
 				
 		//2. Initialisation des variables
 		//Xi,j,k : modele a modifier pour coherence avec le code
+		//X[i].lenght : nombre de groupes de soins du parcours i
+		//X[i][j].length : nombre de soins du groupe de soins j du parcours i
+		//X[i][j][k] : debut du soin k du groupe de soins j du parcours i
 		IntVar[][][] X = new IntVar[this.aResoudre.getnPatients()][][];
 		Integer[][][] solInt = new Integer[this.aResoudre.getnPatients()][][];
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
@@ -60,13 +63,12 @@ public class Resolution {
 		Constraint[][][] contraintePrecedenceGroupe = contraintes.contraintePrecedenceGroupe();
 		
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
-					solver.post(contrainteHeureFermeture[i][j][k]);
-					solver.post(contrainteHeureOuverture[i][j][k]);
-					if(j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]-1){
-						solver.post(contraintePrecedenceGroupe[i][j][k]);
-					}
+			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
+				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
+					solver.post(contrainteHeureFermeture[this.aResoudre.getP_i()[i]][j][k]);
+					solver.post(contrainteHeureOuverture[this.aResoudre.getP_i()[i]][j][k]);
+					if(j != this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1)
+					solver.post(contraintePrecedenceGroupe[this.aResoudre.getP_i()[i]][j][k]);
 				}
 			}
 		}
