@@ -1,5 +1,7 @@
 package dev;
 
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
 public class Probleme {
 
 	private int nParcours;
@@ -44,6 +46,7 @@ public class Probleme {
 			}
 			this.Cp_ijMax[i]=max;
 		}
+		
 		this.l_ijk = l_ijk;
 		this.q_ijkr = q_ijkr;
 		this.p_i = p_i;
@@ -58,49 +61,60 @@ public class Probleme {
 		this.HFermeture = donnees.getHFermeture();
 		this.A_MAX = donnees.getA_MAX();
 		this.A_MIN = donnees.getA_MIN();
-		this.nG_i = new int[nPatients];
-		for (int i = 0; i < nPatients; i++) {
-			this.nG_i[i]=donnees.getPatients()[i].getParcours().getNombreDeGroupes();
-		}
+		this.nG_i = new int[this.nParcours];
+		for (int i = 0; i < this.nParcours; i++) {
+			this.nG_i[i]=donnees.getParcours()[i].getNombreDeGroupes();
+		}	
 		
-		//A modifier sur le modele, indices inverses
-		this.nS_ij = new int[nPatients][];
-		for (int i = 0; i < nPatients; i++) {
+		this.nS_ij = new int[nParcours][];
+		for (int i = 0; i < nParcours; i++) {
 			this.nS_ij[i] = new int[this.nG_i[i]];
 			for (int j = 0; j < nG_i[i]; j++) {
-				this.nS_ij[i][j]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].nombreDeSoins;
+				this.nS_ij[i][j]=donnees.getParcours()[i].getGroupeSoins()[j].nombreDeSoins;
+				System.out.println("i="+i+", j="+j+", n="+this.nS_ij[i][j]);
 			}
 		}
-		
-		//A modifier sur le modele, indices inverses
+	
 		this.cp_ij = new int[nRessources][nPeriodes];
 		for (int i = 0; i < nRessources; i++) {
 			this.cp_ij[i]=donnees.getRessources()[i].getCapaciteMaxPeriodeP();
 		}
 		
-		//A modifier sur le modele, indices inverses
-		this.l_ijk = new int[nPatients][][];
-		for (int i = 0; i < nPatients; i++) {
+		
+		this.Cp_ijMax= new int[this.cp_ij.length];
+		for(int i=0; i<this.cp_ij.length;i++){
+			int max=0;
+			for(int j=0;j<this.cp_ij[i].length;j++){
+				if(this.cp_ij[i][j]>max){
+					max=this.cp_ij[i][j];
+				}
+			}
+			this.Cp_ijMax[i]=max;
+		}
+		
+		
+		this.l_ijk = new int[nParcours][][];
+		for (int i = 0; i < nParcours; i++) {
 			this.l_ijk[i] = new int[this.nG_i[i]][];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.l_ijk[i][j] = new int[this.nS_ij[i][j]];
 				for (int k = 0; k <this.nS_ij[i][j]; k++) {
-					this.l_ijk[i][j][k]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].getSoins()[k].getDuree();
+					this.l_ijk[i][j][k]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].getDuree();
 				}	
 			}
 		}
 		
 		
 		
-		this.q_ijkr = new int[nPatients][][][];
-		for (int i = 0; i < nPatients; i++) {
+		this.q_ijkr = new int[nParcours][][][];
+		for (int i = 0; i < nParcours; i++) {
 			this.q_ijkr[i] = new int[this.nG_i[i]][][];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.q_ijkr[i][j] = new int[this.nS_ij[i][j]][];
 				for (int k = 0; k <this.nS_ij[i][j]; k++) {
 					this.q_ijkr[i][j][k]=new int[nRessources];
 					for (int r = 0; r < nRessources; r++) {
-						this.q_ijkr[i][j][k][r]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].getSoins()[k].getRessourcesNecessaires()[r];
+						this.q_ijkr[i][j][k][r]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].getRessourcesNecessaires()[r];
 					}
 				}	
 			}
@@ -227,6 +241,10 @@ public class Probleme {
 		this.p_i = p_i;
 	}
 	
+	public int[] getCpij_max() {
+		return this.Cp_ijMax;
+	}
+	
 	public int[] getRessourcesUtilisees(int i, int j, int k) {
 		int[] tableauRessources = new int[this.getnRessources()];
 		for(int r = 0; r<this.getnRessources(); r++) {
@@ -241,7 +259,11 @@ public class Probleme {
 		} else {
 			for(int r=0; r<this.getnRessources(); r++) {
 				ressourcesUtilisees[r] += this.getQ_ijkr()[i][j][k][r];
+				if(this.getQ_ijkr()[i][j][k][r] != 0) {
+					System.out.print(r + " ");
+				}
 			}
+			System.out.println("");
 		}
 		return ressourcesUtilisees;
 	}

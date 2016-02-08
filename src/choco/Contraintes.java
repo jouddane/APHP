@@ -51,11 +51,11 @@ public class Contraintes {
 	public Constraint[][][] contrainteHeureFermeture(){
 		Constraint[][][] C2 = new Constraint[this.aResoudre.getnPatients()][][];
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
-			C2[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]][];
-			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-				C2[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]];
-				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					C2[i][j][k]= IntConstraintFactory.arithm(this.X[i][j][k], "<=", this.aResoudre.getHFermeture()-this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]);
+			C2[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]][];
+			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
+				C2[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]];
+				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
+					C2[i][j][k]= IntConstraintFactory.arithm(this.X[i][j][k], "<=", this.aResoudre.getHFermeture()-this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k]);
 				}
 			}
 		}
@@ -65,10 +65,10 @@ public class Contraintes {
 	public Constraint[][][] contrainteHeureOuverture(){
 		Constraint[][][] C3 = new Constraint[this.aResoudre.getnPatients()][][];
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
-			C3[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]][];
-			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-				C3[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]];
-				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
+			C3[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]][];
+			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
+				C3[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]];
+				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
 					C3[i][j][k]= IntConstraintFactory.arithm(this.X[i][j][k], ">=", this.aResoudre.getHOuverture());
 				}
 			}
@@ -78,17 +78,13 @@ public class Contraintes {
 
 	public Constraint[][][] contraintePrecedenceGroupe(){
 		Constraint[][][] C4 = new Constraint[this.aResoudre.getnPatients()][][];
-
 		for(int i=0; i<this.aResoudre.getnPatients(); i++){
-			C4[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1][];
-		
-			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1; j++){
-				C4[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]];
-			
-				for (int k=0; k<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-				
-					for(int u=0; u<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]; u++){
-						C4[i][j][k] = IntConstraintFactory.arithm(this.X[i][j][k], "<=", X[i][j+1][u], "-", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]);
+			C4[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1][];
+			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1; j++){
+				C4[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]];
+				for (int k=0; k<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
+					for(int u=0; u<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j+1]; u++){
+						C4[i][j][k] = IntConstraintFactory.arithm(this.X[i][j][k], "<=", X[i][j+1][u], "-", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k]);
 					}
 				}
 			}
@@ -107,39 +103,61 @@ public class Contraintes {
 		Constraint[] C5 = new Constraint[this.aResoudre.getnRessources()];
 		int[] compteurtemp=new int[this.aResoudre.getnRessources()];
 
-		//Premi�re boucle pour trouver la taille de Soins[] et leur Hauteur[] 
+		//Premiere boucle pour trouver la taille de Soins[] et leur Hauteur[] 
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					//compteurtemp poss�de toutes les infos sur le nb de soins par ressources
-					compteurtemp[this.aResoudre.getRessourceUtilisee(i, j, k)]++;
+			System.out.println("Parcours "+(this.aResoudre.getP_i()[i]-1));
+			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
+				System.out.println("Nombre de soins du groupe : "+ this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]);
+				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
+					System.out.println("k = "+k);
+					//compteurtemp possede toutes les infos sur le nb de soins par ressource
+					compteurtemp= this.aResoudre.updateRessourcesAvecSoin(this.aResoudre.getP_i()[i]-1, j, k, compteurtemp);
+					System.out.print("[ ");
+					for(int p=0; p<compteurtemp.length; p++) {
+						System.out.print(compteurtemp[p]+" ");
+					}
+					System.out.println("]");
 				}
+				System.out.println("");
 			}
+			System.out.println("\n");
 		}
-		
+
 		// Il faut que je rajoute les contraintes 
+		int compteur2=0;
 		for (int a=0; a<this.aResoudre.getnRessources(); a++){
+			//System.out.println("a = "+a);
 			Task[] Soins = new Task[compteurtemp[a]];
 			IntVar[] Hauteur = new  IntVar[compteurtemp[a]];
 			int compteur1=0;
-			int compteur2=0;
 			for(int i=0;i<this.aResoudre.getnPatients();i++){
-				for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-					for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
+				for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
+					for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
 						// getRessourceUtilisee me renvoie un tableau il faut donc une m�thode qui me dise si la case de a est nulle ou non
-						if(this.aResoudre.getQ_ijkr()[i][j][k][a]!=0){
+						if(this.aResoudre.getQ_ijkr()[aResoudre.getP_i()[i]-1][j][k][a]!=0){
 							//task(Start,Duration,End)
-							Soins[compteur1]=VariableFactory.task(this.X[i][j][k],VariableFactory.fixed(this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k],this.solver),VariableFactory.offset(X[i][j][k],this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]));
-							Hauteur[compteur1]= VariableFactory.fixed(this.aResoudre.getQ_ijkr()[i][j][k][a], solver);
+							Soins[compteur1]=VariableFactory.task(this.X[i][j][k],VariableFactory.fixed(this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k],this.solver),VariableFactory.offset(X[i][j][k],this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k]));
+							Hauteur[compteur1]= VariableFactory.fixed(this.aResoudre.getQ_ijkr()[aResoudre.getP_i()[i]-1][j][k][a], solver);
 							compteur1++;
 						}
 					}
 				}
 			}
-			IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCp_ij()[0][a],solver)	;
-			C5[compteur2]=IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
-			compteur2++;
+			//System.out.println("Capacit� max ressource "+a+" = "+this.aResoudre.getCpij_max()[a]);
+			//IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCpij_max()[a],solver)	;
+			IntVar Capacite = VariableFactory.fixed(10,solver)	;
+			if(Soins.length>0){
+				C5[compteur2]=IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
+				compteur2++;
+			}
+			else{
+				compteur2++;
+			}
+			for(int l=0; l<C5.length; l++) {
+				System.out.println("C5["+l+"] = "+C5[l]);
+			}
 		}
 		return C5;	
 	}
+
 }
