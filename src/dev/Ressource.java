@@ -3,6 +3,8 @@ package dev;
 public class Ressource {
 
 	private int[] capaciteMaxPeriodeP;
+	
+	//Certainement a supprimer
 	private int[] quantiteUtilisee;
 	private String nom;
 	
@@ -21,7 +23,7 @@ public class Ressource {
 		for (int i = 0; i < capaciteMaxPeriodeP.length; i++) {
 			capaciteMaxPeriodeP[i]=capaciteConstante;
 		}
-		return new Ressource(capaciteConstante,nom);
+		return new Ressource(capaciteMaxPeriodeP,nom);
 	}
 	
 	public void diminuerDisponibilite(int periode, int quantite){

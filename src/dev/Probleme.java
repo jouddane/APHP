@@ -98,7 +98,7 @@ public class Probleme {
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.l_ijk[i][j] = new int[this.nS_ij[i][j]];
 				for (int k = 0; k <this.nS_ij[i][j]; k++) {
-					this.l_ijk[i][j][k]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].getSoins()[k].getDuree();
+					this.l_ijk[i][j][k]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].getDuree();
 				}	
 			}
 		}
@@ -113,7 +113,7 @@ public class Probleme {
 				for (int k = 0; k <this.nS_ij[i][j]; k++) {
 					this.q_ijkr[i][j][k]=new int[nRessources];
 					for (int r = 0; r < nRessources; r++) {
-						this.q_ijkr[i][j][k][r]=donnees.getPatients()[i].getParcours().getGroupeSoins()[j].getSoins()[k].getRessourcesNecessaires()[r];
+						this.q_ijkr[i][j][k][r]=donnees.getParcours()[i].getGroupeSoins()[j].getSoins()[k].getRessourcesNecessaires()[r];
 					}
 				}	
 			}
@@ -121,7 +121,7 @@ public class Probleme {
 
 		this.p_i = new int[nPatients];
 		for (int i = 0; i < nPatients; i++) {
-			this.p_i[i]=donnees.getPatients()[i].getParcours().getIndiceParcours();
+			this.p_i[i]=donnees.getParcours(donnees.getPatients()[i].getParcours().getNumeroParcours());
 		}
 
 	}

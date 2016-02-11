@@ -504,7 +504,7 @@ public class Automate {
 				Soin[] G5P1S = {synthese};
 				GroupeSoins G5P1 = new GroupeSoins(G5P1S);
 				GroupeSoins[] P1G = {G1P1, G2P1, G3P1, G4P1, G5P1};
-				Parcours P1  = new Parcours(P1G, 0);
+				Parcours P1  = new Parcours(P1G, "1");
 				
 		
 		//new Automate(P1);

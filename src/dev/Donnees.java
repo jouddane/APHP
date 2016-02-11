@@ -1,6 +1,6 @@
 package dev;
 
-//Création de données pour un jour donné
+//Crï¿½ation de donnï¿½es pour un jour donnï¿½
 public class Donnees {
 
 	private Patient[] patients;
@@ -13,7 +13,7 @@ public class Donnees {
 	private int A_MIN;
 	
 	/**
-	 * Constructeur initialisant toutes les données à 0
+	 * Constructeur initialisant toutes les donnï¿½es ï¿½ 0
 	 */
 	public Donnees() {
 		this.patients = new Patient[0];
@@ -34,7 +34,7 @@ public class Donnees {
 		return patients;
 	}
 	/**
-	 * Mets à jour le tableau des patients de la journée
+	 * Mets ï¿½ jour le tableau des patients de la journï¿½e
 	 * @param patients
 	 */
 	public void setPatients(Patient[] patients) {
@@ -42,7 +42,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Retourne le tableau des parcours de la journée 
+	 * Retourne le tableau des parcours de la journï¿½e 
 	 * @return
 	 */
 	public Parcours[] getParcours() {
@@ -50,7 +50,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Mets à jour le tableau des parcours de la journée
+	 * Mets ï¿½ jour le tableau des parcours de la journï¿½e
 	 * @param parcours
 	 */
 	public void setParcours(Parcours[] parcours) {
@@ -58,7 +58,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Retourne les ressources disponibles tout au long de la journée
+	 * Retourne les ressources disponibles tout au long de la journï¿½e
 	 * @return
 	 */
 	public Ressource[] getRessources() {
@@ -66,7 +66,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Mets à jour les ressources disponibles tout au long de la journée
+	 * Mets ï¿½ jour les ressources disponibles tout au long de la journï¿½e
 	 * @param ressources
 	 */
 	public void setRessources(Ressource[] ressources) {
@@ -82,7 +82,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * retourne le nombre de periodes de la journée en minutes
+	 * retourne le nombre de periodes de la journï¿½e en minutes
 	 * @return
 	 */
 	public int getnPeriodes() {
@@ -90,7 +90,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Mets à jour l'heure de fermeture de la journée en minutes ex 20h : 20*60
+	 * Mets ï¿½ jour l'heure de fermeture de la journï¿½e en minutes ex 20h : 20*60
 	 * @param hFermeture
 	 */
 	public void setHFermeture(int hFermeture) {
@@ -98,7 +98,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Retourne l'heure de fermeture de la journée en minutes
+	 * Retourne l'heure de fermeture de la journï¿½e en minutes
 	 * @return
 	 */
 	public int getHFermeture() {
@@ -106,7 +106,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Mets à jour l'heure d'ouverture de la journée en minutes : ex 8h = 8*60
+	 * Mets ï¿½ jour l'heure d'ouverture de la journï¿½e en minutes : ex 8h = 8*60
 	 * @param hOuverture
 	 */
 	public void setHOuverture(int hOuverture) {
@@ -114,7 +114,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Retourne l'heure d'ouverture de la journée en minutes
+	 * Retourne l'heure d'ouverture de la journï¿½e en minutes
 	 * @return
 	 */
 	public int getHOuverture() {
@@ -122,7 +122,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Mets à jour le temps d'attente maximum entre deux soins : en min
+	 * Mets ï¿½ jour le temps d'attente maximum entre deux soins : en min
 	 * @param a_MAX
 	 */
 	public void setA_MAX(int a_MAX) {
@@ -138,7 +138,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Mets à jour le temps d'attente minimum entre deux soins : en min
+	 * Mets ï¿½ jour le temps d'attente minimum entre deux soins : en min
 	 * @param a_MIN
 	 */
 	public void setA_MIN(int a_MIN) {
@@ -154,7 +154,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Ajoute un patient à la fin de la liste de patients de la journee
+	 * Ajoute un patient ï¿½ la fin de la liste de patients de la journee
 	 * @param patient
 	 */
 	public void ajoutPatient(Patient patient){
@@ -168,7 +168,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Ajoute une ressource à la fin de la liste des ressources de la journee
+	 * Ajoute une ressource ï¿½ la fin de la liste des ressources de la journee
 	 * @param ressource
 	 */
 	public void ajoutRessource(Ressource ressource){
@@ -182,7 +182,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Ajoute un parcours à la fin de la liste de parcours de la journée
+	 * Ajoute un parcours ï¿½ la fin de la liste de parcours de la journï¿½e
 	 * @param parcours2
 	 */
 	public void ajoutParcours(Parcours parcours2){
@@ -196,7 +196,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * Retourne l'indice de la ressource dont le nom correspont à nom si elle existe -1 sinon
+	 * Retourne l'indice de la ressource dont le nom correspont ï¿½ nom si elle existe -1 sinon
 	 * @param nom
 	 * @return
 	 */
@@ -213,4 +213,21 @@ public class Donnees {
 		}
 	}
 	
+	/**
+	 * Retourne l'indice du parcours dont le numero correspont Ã  numero si il existe -1 sinon
+	 * @param nom
+	 * @return
+	 */
+	public int getParcours(String numero){
+		int i=0;
+		while((i<this.getParcours().length)&&(!this.getParcours()[i].getNumeroParcours().equals(numero))){
+			i++;
+		}
+		if(i<this.getRessources().length){
+			return i;
+		}
+		else{
+			return -1;
+		}
+	}
 }

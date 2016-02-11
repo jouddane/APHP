@@ -433,7 +433,7 @@ public class Test {
 		Soin[] G5P1S = {SyntheseNutriHDJOb};
 		GroupeSoins G5P1 = new GroupeSoins(G5P1S);
 		GroupeSoins[] P1G = {G1P1, G2P1, G3P1, G4P1, G5P1};
-		Parcours P1  = new Parcours(P1G, 1);
+		Parcours P1  = new Parcours(P1G, "1");
 
 		// On crée le Parcours 2
 		Soin[] G1P2S = {RDVParamedical20};
@@ -449,7 +449,7 @@ public class Test {
 		Soin[] G6P2S = {SyntheseNutriHDJOb};
 		GroupeSoins G6P2 = new GroupeSoins(G6P2S);
 		GroupeSoins[] P2G = {G1P2, G2P2, G3P2, G4P2, G5P2, G6P2};
-		Parcours P2  = new Parcours(P2G, 2);
+		Parcours P2  = new Parcours(P2G, "2");
 
 		// On crée le Parcours 3
 		Soin[] G1P3S = {RDVParamedical20};
@@ -465,7 +465,7 @@ public class Test {
 		Soin[] G6P3S = {SyntheseNutriHDJOb};
 		GroupeSoins G6P3 = new GroupeSoins(G6P3S);
 		GroupeSoins[] P3G = {G1P3, G2P3, G3P3, G4P3, G5P3, G6P3};
-		Parcours P3  = new Parcours(P3G, 3);
+		Parcours P3  = new Parcours(P3G, "3");
 
 		// On crée le Parcours 4
 		Soin[] G1P4S = {RDVParamedical15};
@@ -481,7 +481,7 @@ public class Test {
 		Soin[] G6P4S = {SyntheseNutriHDJOb};
 		GroupeSoins G6P4 = new GroupeSoins(G6P4S);
 		GroupeSoins[] P4G = {G1P4, G2P4, G3P4, G4P4, G5P4, G6P4};
-		Parcours P4  = new Parcours(P4G, 4);
+		Parcours P4  = new Parcours(P4G, "4");
 
 		// On crée le Parcours 5
 		Soin[] G1P5S = {RDVParamedical15};
@@ -495,7 +495,7 @@ public class Test {
 		Soin[] G5P5S = {EntretienHepato};
 		GroupeSoins G5P5 = new GroupeSoins(G5P5S);
 		GroupeSoins[] P5G = {G1P5, G2P5, G3P5, G4P5, G5P5};
-		Parcours P5  = new Parcours(P5G, 5);
+		Parcours P5  = new Parcours(P5G, "5");
 
 		// On crée le Parcours 6
 		Soin[] G1P6S = {RDVParamedical15};
@@ -511,7 +511,7 @@ public class Test {
 		Soin[] G6P6S = {SyntheseNutriCS};
 		GroupeSoins G6P6 = new GroupeSoins(G6P6S);
 		GroupeSoins[] P6G = {G1P6, G2P6, G3P6, G4P6, G5P6, G6P6};
-		Parcours P6  = new Parcours(P6G, 6);
+		Parcours P6  = new Parcours(P6G, "6");
 
 
 		//Pas de parcours 7 fourni
@@ -533,7 +533,7 @@ public class Test {
 		Soin[] G7P8S = {SyntheseNutriCS};
 		GroupeSoins G7P8 = new GroupeSoins(G7P8S);
 		GroupeSoins[] P8G = {G1P8, G2P8, G3P8, G4P8, G5P8, G6P8, G7P8};
-		Parcours P8  = new Parcours(P8G, 8);
+		Parcours P8  = new Parcours(P8G, "8");
 
 		// On crée le Parcours 9
 		Soin[] G1P9S = {RDVParamedical15};
@@ -549,7 +549,7 @@ public class Test {
 		Soin[] G6P9S = {SyntheseNutriCS};
 		GroupeSoins G6P9 = new GroupeSoins(G6P9S);
 		GroupeSoins[] P9G = {G1P9, G2P9, G3P9, G4P9, G5P9, G6P9};
-		Parcours P9  = new Parcours(P9G, 9);
+		Parcours P9  = new Parcours(P9G, "9");
 
 		// On crée le Parcours 10
 		Soin[] G1P10S = {Prelevement25};
@@ -561,7 +561,7 @@ public class Test {
 		Soin[] G4P10S = {RDVMedical40};
 		GroupeSoins G4P10 = new GroupeSoins(G4P10S);
 		GroupeSoins[] P10G = {G1P10, G2P10, G3P10, G4P10};
-		Parcours P10  = new Parcours(P10G, 10);
+		Parcours P10  = new Parcours(P10G, "10");
 
 		// On crée le Parcours 7
 		/*		Soin[] G1P7S = {RDVParamedical20};
@@ -838,8 +838,8 @@ public class Test {
 		//4. Lancement de la resolution d probleme
 		Integer[][][] solution = resolution.resout();
 		for(int i=0; i< aResoudre.getnPatients(); i++){
-			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]; j++) {
-				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]; k++) {
+			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
+				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
 					System.out.println("X["+i+"]["+j+"]["+k+"] = "+solution[i][j][k]);
 				}
 			}
