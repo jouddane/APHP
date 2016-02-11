@@ -21,7 +21,7 @@ public class Ressource {
 		for (int i = 0; i < capaciteMaxPeriodeP.length; i++) {
 			capaciteMaxPeriodeP[i]=capaciteConstante;
 		}
-		return new Ressource(capaciteConstante,nom);
+		return new Ressource(capaciteMaxPeriodeP,nom);
 	}
 	
 	public void diminuerDisponibilite(int periode, int quantite){

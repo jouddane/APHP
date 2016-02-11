@@ -37,84 +37,88 @@ import org.jfree.util.PaintList;
 
 import com.orsoncharts.marker.MarkerLine;
 
+import dev.Probleme;
+
 public class VisuSolution extends ApplicationFrame{
 
-	public VisuSolution(String title){
-		super(title);
-		
-		GanttCategoryDataset dataset = createDataset( new Donnees());
-        JFreeChart chart = createChart(dataset);
 
-        // add the chart to a panel...
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(1200, 800));
-        setContentPane(chartPanel);
+	public VisuSolution(String title, Integer[][][] donnees, Probleme aResoudre){
+		super(title);
+
+		GanttCategoryDataset dataset = createDataset( donnees, aResoudre);
+		JFreeChart chart = createChart(dataset);
+
+		// Ajoute le graph à un Panel
+		ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel.setPreferredSize(new java.awt.Dimension(1200, 800));
+		setContentPane(chartPanel);
 
 
 	}
-	
-	public GanttCategoryDataset createDataset(Donnees donnees) {
+/**
+ * Crée les donnéees pour le gantt
+ * @param donnees
+ * @param aResoudre
+ * @return
+ */
+	public GanttCategoryDataset createDataset(Integer[][][] donnees, Probleme aResoudre) {
+		
 		int Annee = Calendar.getInstance().get(Calendar.YEAR);
 		int Mois =  Calendar.getInstance().get(Calendar.MONTH);
 		int Jour = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 		TaskSeriesCollection collection = new TaskSeriesCollection();
 		TaskSeries P = new TaskSeries("Tous les parcours");
-		for(int i=0; i<donnees.nbPatients();i++){
-			String s ="Parcours";
-			Task S = new Task("Parcours"+i, new Date(Annee, Mois, Jour, donnees.getDebutH(i,0),donnees.getDebutM(i, 0)), new Date(Annee, Mois, Jour,donnees.getDebutH(i, donnees.nbSoins()-1),donnees.getDebutM(i, donnees.nbSoins()-1)));
-			for (int j=0; j<donnees.nbSoins();j++){
-				if(donnees.getSoin(i, j).getDuree()==15){
-					
-				}
-				else 
-				if (j<donnees.nbSoins()-1){
-					S.addSubtask(new Task("Soin "+j, new Date(Annee, Mois, Jour, donnees.getDebutH(i, j), donnees.getDebutM(i, j)), new Date(Annee, Mois, Jour,donnees.getDebutH(i, j+1),donnees.getDebutM(i, j+1))));
-				}
-				else {
-					S.addSubtask(new Task("Soin "+j, new Date(Annee, Mois, Jour, donnees.getDebutH(i, j), donnees.getDebutM(i, j)), new Date(Annee, Mois, Jour,donnees.getDebutH(i, j)+donnees.getSoin(i, j).getDuree()/60,donnees.getDebutM(i, j)+donnees.getSoin(i, j).getDuree()%60)));
+		for(int i=0; i<aResoudre.getnPatients();i++){
+			String s ="Patient"+i;
+			Task S = new Task(s, new Date(Annee, Mois, Jour, 0,0), new Date(Annee, Mois, Jour, 24,0));
+			for(int j=0; j<aResoudre.getnG_i()[i];j++){
+				for( int k=0; k< aResoudre.getnS_ij()[i][j]; k++){
+					int HeureD=donnees[i][j][k]/60;
+					int MinD=donnees[i][j][k]%60;
+					int Duree=aResoudre.getL_ijk()[i][j][k];
+					S.addSubtask(new Task(" Groupe "+j+" Soin "+k, new Date(Annee,Mois,Jour,HeureD,MinD), new Date(Annee,Mois,Jour,(HeureD+Duree)/60,(HeureD+Duree)%60)));
 				}
 			}
-			
-			
 			P.add(S);
 		}
-		
-		
-        collection.add(P);
-
-        return collection;
-    }
-	
-	 public JFreeChart createChart(GanttCategoryDataset dataset) {
-	        JFreeChart chart = ChartFactory.createGanttChart(
-	                "Test ", // chart title
-	                "Parcours", // domain axis label
-	                "Heure", // range axis label
-	                dataset, // data
-	                true, // include legend
-	                true, // tooltips
-	                false // urls
-	        );
-	       
-	        CategoryPlot plot = (CategoryPlot) chart.getPlot();
-	        GanttRenderer gr = (GanttRenderer) plot.getRenderer();
-	      	       
-	        return chart;
-	    }
-	 
-	 
-	  public static void main(final String[] args) {
-
-	        VisuSolution demo = new VisuSolution("Parcours");
-	        demo.pack();
-	        RefineryUtilities.centerFrameOnScreen(demo);
-	        demo.setVisible(true);
-
-	    }
 
 
+		collection.add(P);
+
+		return collection;
+	}
 
 	
-	
-	
+	public JFreeChart createChart(GanttCategoryDataset dataset) {
+		JFreeChart chart = ChartFactory.createGanttChart(
+				"Journee ", // Titre du graphe
+				"Patients", // Domaine des y
+				"Heure", // DOmaine des x
+				dataset, // donnees
+				true, // ajoute une légende
+				true, // "tootltips"
+				false // urls
+				);
+
+		CategoryPlot plot = (CategoryPlot) chart.getPlot();
+		GanttRenderer gr = (GanttRenderer) plot.getRenderer();
+
+		return chart;
+	}
+
+
+	public static void main(final String[] args) {
+
+//		VisuSolution demo = new VisuSolution("Parcours");
+//		demo.pack();
+//		RefineryUtilities.centerFrameOnScreen(demo);
+//		demo.setVisible(true);
+
+	}
+
+
+
+
+
+
 }

@@ -144,9 +144,7 @@ public class Contraintes {
 					}
 				}
 			}
-			//System.out.println("Capacit� max ressource "+a+" = "+this.aResoudre.getCpij_max()[a]);
-			//IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCpij_max()[a],solver)	;
-			IntVar Capacite = VariableFactory.fixed(10,solver)	;
+			IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCpij_max()[a],solver)	;
 			if(Soins.length>0){
 				C5[compteur2]=IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
 				compteur2++;
