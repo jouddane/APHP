@@ -1,9 +1,11 @@
 package choco;
 
+
 import java.util.ArrayList;
 
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VF;
+import org.jfree.ui.RefineryUtilities;
 
 import dev.Donnees;
 import dev.GroupeSoins;
@@ -13,6 +15,8 @@ import dev.Probleme;
 import dev.Ressource;
 import dev.Soin;
 import maths.Solution;
+import visu.VisuCheckeur;
+import visu.VisuSolution;
 import dev.CoupleStringInt;
 import dev.Date;
 
@@ -745,9 +749,9 @@ public class Test {
 		donnees.ajoutParcours(P2);
 		donnees.ajoutParcours(P3);
 
-		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
 		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
 		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
 		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
 		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
 
@@ -770,8 +774,18 @@ public class Test {
 		System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
 		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
-		//System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
-
+		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
+		//for (int i=0; i<aResoudre.getnRessources();i++){
+		final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, 0);
+		Checkeur.pack();
+		RefineryUtilities.centerFrameOnScreen(Checkeur);
+        Checkeur.setVisible(true);
+        
+    	VisuSolution Gantt = new VisuSolution("Journee", solution, aResoudre);
+		Gantt.pack();
+		RefineryUtilities.centerFrameOnScreen(Gantt);
+		Gantt.setVisible(true);
+		//}
 		//5. Affichage de la solution (a implementer)
 	}
 
