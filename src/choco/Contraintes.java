@@ -106,22 +106,22 @@ public class Contraintes {
 
 		//Premiere boucle pour trouver la taille de Soins[] et leur Hauteur[] 
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
-			System.out.println("Parcours "+(this.aResoudre.getP_i()[i]-1));
+			//System.out.println("Parcours "+(this.aResoudre.getP_i()[i]-1));
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
-				System.out.println("Nombre de soins du groupe : "+ this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]);
+				//System.out.println("Nombre de soins du groupe : "+ this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]);
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
-					System.out.println("k = "+k);
+					//System.out.println("k = "+k);
 					//compteurtemp possede toutes les infos sur le nb de soins par ressource
 					compteurtemp= this.aResoudre.updateRessourcesAvecSoin(this.aResoudre.getP_i()[i]-1, j, k, compteurtemp);
-					System.out.print("[ ");
+					//System.out.print("[ ");
 					for(int p=0; p<compteurtemp.length; p++) {
-						System.out.print(compteurtemp[p]+" ");
+						//System.out.print(compteurtemp[p]+" ");
 					}
-					System.out.println("]");
+					//System.out.println("]");
 				}
-				System.out.println("");
+				//System.out.println("");
 			}
-			System.out.println("\n");
+			//System.out.println("\n");
 		}
 
 		// Il faut que je rajoute les contraintes 
@@ -152,9 +152,9 @@ public class Contraintes {
 			else{
 				compteur2++;
 			}
-			for(int l=0; l<C5.length; l++) {
-				System.out.println("C5["+l+"] = "+C5[l]);
-			}
+//			for(int l=0; l<C5.length; l++) {
+//				System.out.println("C5["+l+"] = "+C5[l]);
+//			}
 		}
 		return C5;	
 	}

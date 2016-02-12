@@ -295,7 +295,7 @@ public class Test {
 		listRessourceCapacite45.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite45.add(new CoupleStringInt("Box Prelevement", 1));	 	 
 		Soin BilanBiologique20 = Soin.creerSoin(donnees, listRessourceCapacite45, "Bilan Biologique20", 20);
-		
+
 		ArrayList<CoupleStringInt> listRessourceCapacite46 = new ArrayList<>();
 		listRessourceCapacite46.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite46.add(new CoupleStringInt("Box", 1));	 	 	
@@ -620,7 +620,7 @@ public class Test {
 		GroupeSoins[] P15G = {G1P15, G2P15, G3P15, G4P15, G5P15};
 		Parcours P15  = new Parcours(P15G, 15);
 
-/*		// On crée le Parcours 16
+		/*		// On crée le Parcours 16
 		Soin[] G1P16S = {RDVMedical20BurSom};
 		GroupeSoins G1P16 = new GroupeSoins(G1P16S);
 		Soin[] G2P16S = {ETP};
@@ -651,7 +651,7 @@ public class Test {
 		GroupeSoins G6P17 = new GroupeSoins(G6P17S);
 		GroupeSoins[] P17G = {G1P17, G2P17, G3P17, G4P17, G5P17, G6P17};
 		Parcours P17  = new Parcours(P17G, 17);
-*/
+		 */
 		// On crée le Parcours 7
 		Soin[] G1P20S = {BilanBiologique20};
 		GroupeSoins G1P20 = new GroupeSoins(G1P20S);
@@ -698,7 +698,7 @@ public class Test {
 		GroupeSoins[] P23G = {G1P23, G2P23, G3P23, G4P23, G5P23};
 		Parcours P23  = new Parcours(P23G, 23);
 
-/*		// On crée le Parcours 24
+		/*		// On crée le Parcours 24
 		Soin[] G1P24S = {RDVAccueil};
 		GroupeSoins G1P24 = new GroupeSoins(G1P24S);
 		Soin[] G2P24S = {ExamenClinique15};
@@ -713,8 +713,8 @@ public class Test {
 		GroupeSoins G6P24 = new GroupeSoins(G6P24S);
 		GroupeSoins[] P24G = {G1P24, G2P24, G3P24, G4P24, G5P24, G6P24};
 		Parcours P24  = new Parcours(P24G, 24);
-*/
-		
+		 */
+
 		// On crée le Parcours 25
 		Soin[] G1P25S = {RDVAccueil};
 		GroupeSoins G1P25 = new GroupeSoins(G1P25S);
@@ -744,16 +744,16 @@ public class Test {
 		GroupeSoins G6P26 = new GroupeSoins(G6P26S);
 		GroupeSoins[] P26G = {G1P26, G2P26, G3P26, G4P26, G5P26, G6P26};
 		Parcours P26  = new Parcours(P26G, 26);
-		 		
+
 		donnees.ajoutParcours(P1);
 		donnees.ajoutParcours(P2);
 		donnees.ajoutParcours(P3);
 
+		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
 		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
 		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
+		//donnees.ajoutPatient(new Patient(P4, new Date(25,1,2016)));
+		//donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
 
 		//2. Creation du probleme mathematique associee
 		Probleme aResoudre = new Probleme(donnees);
@@ -763,25 +763,27 @@ public class Test {
 
 		//4. Lancement de la resolution d probleme
 		Integer[][][] solution = resolution.resout();
-		for(int i=0; i< aResoudre.getnPatients(); i++){
-			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]; j++) {
-				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]; k++) {
-					System.out.println("X["+i+"]["+j+"]["+k+"] = "+solution[i][j][k]);
-				}
-			}
-		}
+//		for(int i=0; i< aResoudre.getnPatients(); i++){
+//			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]; j++) {
+//				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]; k++) {
+//					System.out.println("X["+i+"]["+j+"]["+k+"] = "+solution[i][j][k]);
+//				}
+//			}
+//		}
 		Solution verifierSol = new Solution(solution, aResoudre);
 		System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
 		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
 		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
-		//for (int i=0; i<aResoudre.getnRessources();i++){
-		final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, 0);
-		Checkeur.pack();
-		RefineryUtilities.centerFrameOnScreen(Checkeur);
-        Checkeur.setVisible(true);
-        
-    	VisuSolution Gantt = new VisuSolution("Journee", solution, aResoudre);
+		
+		
+		for (int i=0; i<aResoudre.getnRessources();i++){
+			final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, i);
+			Checkeur.pack();
+			RefineryUtilities.centerFrameOnScreen(Checkeur);
+			Checkeur.setVisible(true);
+		}
+		VisuSolution Gantt = new VisuSolution("Journee", solution, aResoudre);
 		Gantt.pack();
 		RefineryUtilities.centerFrameOnScreen(Gantt);
 		Gantt.setVisible(true);

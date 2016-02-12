@@ -39,6 +39,7 @@ public class VisuCheckeur extends ApplicationFrame{
 		this.donnees=donnees;
 		this.aResoudre=aResoudre;
 		final JFreeChart chart = createCombinedChart(i);
+		chart.setTitle("Occupation Ressource "+i);
 		final ChartPanel panel = new ChartPanel(chart, true, true, true, true, true);
 		panel.setPreferredSize(new java.awt.Dimension(900, 600));
 		setContentPane(panel);
@@ -48,12 +49,11 @@ public class VisuCheckeur extends ApplicationFrame{
 	}
 
 	/**
-	 * Creates a combined chart.
+	 * Crée un graph
 	 *
 	 * @return The combined chart.
 	 */
 	private JFreeChart createCombinedChart(int i) {
-		// parent plot...
 		DateAxis x = new DateAxis("Domaine");
 		x.setTickUnit(new DateTickUnit(DateTickUnitType.MINUTE,1));
 		final CombinedDomainXYPlot plot = new CombinedDomainXYPlot(new DateAxis("Domain"));
@@ -62,7 +62,6 @@ public class VisuCheckeur extends ApplicationFrame{
 
 		final DateAxis domainAxis = new DateAxis("Date");
 		domainAxis.setVerticalTickLabels(true);
-		// domainAxis.setTickUnit(new DateTickUnit(DateTickUnit.MINUTE, 1));
 		domainAxis.setDateFormatOverride(new SimpleDateFormat("hh:mm"));
 		domainAxis.setLowerMargin(0.01);
 		domainAxis.setUpperMargin(0.01);
