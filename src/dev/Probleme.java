@@ -19,6 +19,7 @@ public class Probleme {
 	private int[][][][] q_ijkr;
 	private int[] p_i;
 	private int[] Cp_ijMax;
+	private int[] nS_i;
 
 
 	public Probleme(int nParcours, int nPatients, int nRessources, int nPeriodes, int hOuverture, int hFermeture,

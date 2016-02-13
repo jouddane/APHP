@@ -750,8 +750,8 @@ public class Test {
 		donnees.ajoutParcours(P3);
 
 		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
+		//donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
+		//donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
 		//donnees.ajoutPatient(new Patient(P4, new Date(25,1,2016)));
 		//donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
 
