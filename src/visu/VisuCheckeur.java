@@ -29,7 +29,7 @@ public class VisuCheckeur extends ApplicationFrame{
 	public Probleme aResoudre;
 
 	/**
-	 * Construit le graph pour visualiser si la contrainte de ressource est respectée
+	 * Construit le graph pour visualiser si la contrainte de ressource est respectï¿½e
 	 *
 	 * @param title  the frame title.
 	 */
@@ -49,7 +49,7 @@ public class VisuCheckeur extends ApplicationFrame{
 	}
 
 	/**
-	 * Crée un graph
+	 * Crï¿½e un graph
 	 *
 	 * @return The combined chart.
 	 */
@@ -93,7 +93,7 @@ public class VisuCheckeur extends ApplicationFrame{
 	}
 
 	/**
-	 * Crée les données nécessaires pour la ressource a.
+	 * Crï¿½e les donnï¿½es nï¿½cessaires pour la ressource a.
 	 *
 	 * @return Series 1.
 	 */
@@ -101,11 +101,11 @@ public class VisuCheckeur extends ApplicationFrame{
 		TimeSeriesCollection dataset = new TimeSeriesCollection();
 		dataset.setDomainIsPointsInTime(true);
 		// Ici il faut que je choppe les soins de la ressource a
-		final TimeSeries s1 = new TimeSeries("Capacité "+a, Minute.class);
+		final TimeSeries s1 = new TimeSeries("Capacitï¿½ "+a, Minute.class);
 
 
 
-		//Création du tableau ou on stocke toutes les ressources utilisees au cours de la journee
+		//Crï¿½ation du tableau ou on stocke toutes les ressources utilisees au cours de la journee
 		int[] tableau= new int[24*60];
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
@@ -132,7 +132,7 @@ public class VisuCheckeur extends ApplicationFrame{
 			}
 			
 			
-			final TimeSeries s2 = new TimeSeries("Capacité max RM "+a, Minute.class);
+			final TimeSeries s2 = new TimeSeries("Capacitï¿½ max RM "+a, Minute.class);
 			s2.add(new Minute(0, 0, Calendar.getInstance().get(Calendar.DAY_OF_MONTH),Calendar.getInstance().get(Calendar.MONTH)+1,Calendar.getInstance().get(Calendar.YEAR)), this.aResoudre.getCpij_max()[a]);
 	        s2.add(new Minute(0, 24, Calendar.getInstance().get(Calendar.DAY_OF_MONTH),Calendar.getInstance().get(Calendar.MONTH)+1,Calendar.getInstance().get(Calendar.YEAR)), this.aResoudre.getCpij_max()[a]);
 

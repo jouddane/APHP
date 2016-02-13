@@ -48,7 +48,7 @@ public class VisuSolution extends ApplicationFrame{
 		GanttCategoryDataset dataset = createDataset( donnees, aResoudre);
 		JFreeChart chart = createChart(dataset);
 
-		// Ajoute le graph à un Panel
+		// Ajoute le graph ï¿½ un Panel
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(1200, 800));
 		setContentPane(chartPanel);
@@ -56,7 +56,7 @@ public class VisuSolution extends ApplicationFrame{
 
 	}
 /**
- * Crée les donnéees pour le gantt
+ * Crï¿½e les donnï¿½ees pour le gantt
  * @param donnees
  * @param aResoudre
  * @return
@@ -97,7 +97,7 @@ public class VisuSolution extends ApplicationFrame{
 				"Patients", // Domaine des y
 				"Heure", // DOmaine des x
 				dataset, // donnees
-				true, // ajoute une légende
+				true, // ajoute une lï¿½gende
 				true, // "tootltips"
 				false // urls
 				);
