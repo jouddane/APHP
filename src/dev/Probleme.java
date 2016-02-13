@@ -252,7 +252,7 @@ public class Probleme {
 		}
 		return tableauRessources;
 	}
-
+	
 	public int[] updateRessourcesAvecSoin(int i, int j, int k, int[] ressourcesUtilisees) {
 		if(ressourcesUtilisees.length != this.getnRessources()) {
 			System.out.println("Pas la bonne taille de tableau !");
