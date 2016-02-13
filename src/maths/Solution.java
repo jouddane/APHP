@@ -97,7 +97,6 @@ public class Solution {
 					}
 				}
 				verifieContrainteRessources=verifieContrainteRessources&&(ressourceUtilisee_r[r]<=this.aResoudre.getCp_ij()[r][p]);
-				//if(p<600 && ressourceUtilisee_r[r]!=0)System.out.println("p = "+p+", r = "+r+" : "+ressourceUtilisee_r[r]);
 				r++;
 			}
 			p++;
