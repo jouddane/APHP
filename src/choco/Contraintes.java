@@ -48,7 +48,11 @@ public class Contraintes {
 	public IntVar[][][] getX() {
 		return X;
 	}
-
+	
+	/**
+	 * Contrainte assurant que tous les soins se font avant l'heure de fermeture
+	 * @return
+	 */
 	public Constraint[][][] contrainteHeureFermeture(){
 		Constraint[][][] C2 = new Constraint[this.aResoudre.getnPatients()][][];
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
@@ -63,6 +67,10 @@ public class Contraintes {
 		return C2;
 	}
 
+	/**
+	 * COntrainte assurant que tous les soins se font après l'heure d'ouverture
+	 * @return
+	 */
 	public Constraint[][][] contrainteHeureOuverture(){
 		Constraint[][][] C3 = new Constraint[this.aResoudre.getnPatients()][][];
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
@@ -76,7 +84,12 @@ public class Contraintes {
 		}
 		return C3;
 	}
-
+	
+	
+	/**
+	 * Contrainte s'assurant que la précédence des groupes est respectée
+	 * @return
+	 */
 	public Constraint[][][] contraintePrecedenceGroupe(){
 		Constraint[][][] C4 = new Constraint[this.aResoudre.getnPatients()][][];
 
@@ -97,7 +110,10 @@ public class Contraintes {
 
 
 
-
+	/**
+	 * COntrainte assurant que le patient n'est pas à plusieurs endroits en même temps
+	 * @return
+	 */
 	public Constraint [] contrainteEmpilement(){
 		//pour chaque patient je crée une contrainte all different avec tous les soins dans des tableaux IntVar
 		Constraint[] C41= new Constraint[aResoudre.getnPatients()];
@@ -117,6 +133,11 @@ public class Contraintes {
 	 * ï¿½a fait NbRessources Contraintes.
 	 * Il faut lire tous les soins et voir quelles ressources ils utilisent. Si ils utilisent R[0] l'ajouter au Soin[0], Hauteur[0] et capacite_0
 	 * 
+	 */
+	
+	/**
+	 * Contrainte assurant que la capacité des ressources n'est jamais dépassée
+	 * @return
 	 */
 	public Constraint[] contrainteCapaciteRessources(){
 		Constraint[] C5 = new Constraint[this.aResoudre.getnRessources()];

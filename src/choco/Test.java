@@ -2,6 +2,7 @@ package choco;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VF;
@@ -28,12 +29,15 @@ public class Test {
 		//1. Initialisation des donnees a disposition des clients
 		Donnees donnees = new Donnees();
 		int nPeriodes =60*24;
+		int jour = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		int mois = Calendar.getInstance().get(Calendar.MONTH)+1;
+		int annee = Calendar.getInstance().get(Calendar.YEAR); 
 
 		donnees.setNPeriodes(nPeriodes);
 		donnees.setA_MAX(60);
 		donnees.setA_MIN(5);
 		donnees.setHFermeture(20*60);
-		donnees.setHOuverture(6*60);
+		donnees.setHOuverture(8*60);
 
 		//Ajout ressources humaines
 		donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Obesite", 10));
@@ -766,11 +770,14 @@ public class Test {
 		donnees.ajoutParcours(P25);
 		donnees.ajoutParcours(P26);
 
-		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P4, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
-		//donnees.ajoutPatient(new Patient(P4, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+		donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+		donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
+		donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+		donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
+		donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
+		donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
+		donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
 
 		//2. Creation du probleme mathematique associee
 		Probleme aResoudre = new Probleme(donnees);
