@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VF;
-import org.jfree.ui.RefineryUtilities;
+//import org.jfree.ui.RefineryUtilities;
 
 import dev.Donnees;
 import dev.GroupeSoins;
@@ -776,7 +776,7 @@ public class Test {
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
 		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
 		//for (int i=0; i<aResoudre.getnRessources();i++){
-		final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, 0);
+/*		final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, 0);
 		Checkeur.pack();
 		RefineryUtilities.centerFrameOnScreen(Checkeur);
         Checkeur.setVisible(true);
@@ -785,7 +785,7 @@ public class Test {
 		Gantt.pack();
 		RefineryUtilities.centerFrameOnScreen(Gantt);
 		Gantt.setVisible(true);
-		//}
+*/		//}
 		//5. Affichage de la solution (a implementer)
 	}
 
