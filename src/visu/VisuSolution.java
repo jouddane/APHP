@@ -56,7 +56,7 @@ public class VisuSolution extends ApplicationFrame{
 
 	}
 /**
- * Crï¿½e les donnï¿½ees pour le gantt
+ * Crée les données pour le gantt
  * @param donnees
  * @param aResoudre
  * @return
@@ -70,7 +70,7 @@ public class VisuSolution extends ApplicationFrame{
 		TaskSeries P = new TaskSeries("Tous les parcours");
 		for(int i=0; i<aResoudre.getnPatients();i++){
 			String s ="Patient"+i;
-			Task S = new Task(s, new Date(Annee, Mois, Jour, 6,0), new Date(Annee, Mois, Jour, 21,0));
+			Task S = new Task(s, new Date(Annee, Mois, Jour, aResoudre.getHOuverture()/60,aResoudre.getHOuverture()%60), new Date(Annee, Mois, Jour, aResoudre.getHFermeture()/60,aResoudre.getHFermeture()%60));
 			for(int j=0; j<aResoudre.getnG_i()[aResoudre.getP_i()[i]];j++){
 				for( int k=0; k< aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++){
 					int HeureD=donnees[i][j][k]/60;

@@ -88,15 +88,14 @@ public class Contraintes {
 					for(int u=0; u<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]; u++){
 						int duree = this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k];
 						C4[i][j][k*this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]+u] = ICF.arithm(this.X[i][j][k], "<=", X[i][j+1][u], "-", duree);
-						System.out.println("X["+i+"]["+j+"]["+k+"]"+duree+"<="+"X["+i+"]["+(j+1)+"]["+u+"]");
 					}
 				}
 			}
 		}
 		return C4;
 	}
-	
-	
+
+
 
 
 	public Constraint [] contrainteEmpilement(){
@@ -125,28 +124,19 @@ public class Contraintes {
 
 		//Premiere boucle pour trouver la taille de Soins[] et leur Hauteur[] 
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
-			//System.out.println("Parcours "+(this.aResoudre.getP_i()[i]));
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-				//System.out.println("Nombre de soins du groupe : "+ this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]);
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					//System.out.println("k = "+k);
 					//compteurtemp possede toutes les infos sur le nb de soins par ressource
 					compteurtemp= this.aResoudre.updateRessourcesAvecSoin(this.aResoudre.getP_i()[i], j, k, compteurtemp);
-					//System.out.print("[ ");
 					for(int p=0; p<compteurtemp.length; p++) {
-						//System.out.print(compteurtemp[p]+" ");
 					}
-					//System.out.println("]");
 				}
-				//System.out.println("");
 			}
-			//System.out.println("\n");
 		}
 
 		// Il faut que je rajoute les contraintes 
 		int compteur2=0;
 		for (int a=0; a<this.aResoudre.getnRessources(); a++){
-			//System.out.println("a = "+a);
 			Task[] Soins = new Task[compteurtemp[a]];
 			IntVar[] Hauteur = new  IntVar[compteurtemp[a]];
 			int compteur1=0;
@@ -163,9 +153,7 @@ public class Contraintes {
 					}
 				}
 			}
-			//System.out.println("Capacit� max ressource "+a+" = "+this.aResoudre.getCpij_max()[a]);
 			IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCpij_max()[a],solver)	;
-			//IntVar Capacite = VariableFactory.fixed(10,solver)	;
 			if(Soins.length>0){
 				C5[compteur2]=IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
 				compteur2++;
@@ -173,11 +161,9 @@ public class Contraintes {
 			else{
 				compteur2++;
 			}
-			//			for(int l=0; l<C5.length; l++) {
-			//				System.out.println("C5["+l+"] = "+C5[l]);
-			//			}
+
 		}
 		return C5;	
 	}
-	
+
 }
