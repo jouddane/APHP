@@ -99,11 +99,11 @@ public class Contraintes {
 	
 
 
-/*	public Constraint [] contrainteEmpilement(){
-		//pour chaque patient je crï¿½e une contrainte all different avec tous les soins dans des tableaux IntVar
+	public Constraint [] contrainteEmpilement(){
+		//pour chaque patient je crée une contrainte all different avec tous les soins dans des tableaux IntVar
 		Constraint[] C41= new Constraint[aResoudre.getnPatients()];
 		for(int i=0; i<this.aResoudre.getnPatients(); i++){
-			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1; j++){
+			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++){
 				IntVar [] Soins = new IntVar[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]];
 				for (int k=0; k<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
 				}
@@ -111,7 +111,7 @@ public class Contraintes {
 		}
 		return C41;
 	}
-*/
+
 	/* 
 	 * Il faut que je fasse un Soin[], Hauteur[], Capacite pour chaque ressource
 	 * puis rï¿½soudre solver.post(ICF.cumulative(Soin[], Hauteur[], Capacite, true)) pour chaque ressource;
@@ -125,14 +125,14 @@ public class Contraintes {
 
 		//Premiere boucle pour trouver la taille de Soins[] et leur Hauteur[] 
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
-			System.out.println("Parcours "+(this.aResoudre.getP_i()[i]));
+			//System.out.println("Parcours "+(this.aResoudre.getP_i()[i]));
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-				System.out.println("Nombre de soins du groupe : "+ this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]);
+				//System.out.println("Nombre de soins du groupe : "+ this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]);
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					System.out.println("k = "+k);
+					//System.out.println("k = "+k);
 					//compteurtemp possede toutes les infos sur le nb de soins par ressource
 					compteurtemp= this.aResoudre.updateRessourcesAvecSoin(this.aResoudre.getP_i()[i], j, k, compteurtemp);
-					System.out.print("[ ");
+					//System.out.print("[ ");
 					for(int p=0; p<compteurtemp.length; p++) {
 						//System.out.print(compteurtemp[p]+" ");
 					}
@@ -180,9 +180,4 @@ public class Contraintes {
 		return C5;	
 	}
 	
-	/*
-	public Constraint[] contrainteAutomate(Automate automate){
-		Intvar
-	}
-	*/
 }

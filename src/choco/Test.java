@@ -769,8 +769,8 @@ public class Test {
 		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
 		donnees.ajoutPatient(new Patient(P4, new Date(25,1,2016)));
 		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
+		//donnees.ajoutPatient(new Patient(P4, new Date(25,1,2016)));
 		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
-		//donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
 
 		//2. Creation du probleme mathematique associee
 		Probleme aResoudre = new Probleme(donnees);
@@ -781,20 +781,20 @@ public class Test {
 		//4. Lancement de la resolution d probleme
 		Integer[][][] solution = resolution.resout();
 
-		for(int i=0; i< aResoudre.getnPatients(); i++){
-			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
-				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
-					System.out.println("X["+i+"]["+j+"]["+k+"] = "+solution[i][j][k]);
-				}
-			}
-		}
+//		for(int i=0; i< aResoudre.getnPatients(); i++){
+//			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
+//				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
+//					System.out.println("X["+i+"]["+j+"]["+k+"] = "+solution[i][j][k]);
+//				}
+//			}
+//		}
 		Solution verifierSol = new Solution(solution, aResoudre);
 		System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
 		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
 		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
 		
-		/*for (int i=0; i<aResoudre.getnRessources();i++){
+		for (int i=0; i<aResoudre.getnRessources();i++){
 			final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, i);
 			Checkeur.pack();
 			RefineryUtilities.centerFrameOnScreen(Checkeur);
@@ -803,7 +803,7 @@ public class Test {
 		VisuSolution Gantt = new VisuSolution("Journee", solution, aResoudre);
 		Gantt.pack();
 		RefineryUtilities.centerFrameOnScreen(Gantt);
-		Gantt.setVisible(true);*/
+		Gantt.setVisible(true);
 		//}
 		//5. Affichage de la solution (a implementer)
 	}
