@@ -82,7 +82,7 @@ public class Solution {
 				S_i[i] = new ArrayList<Integer[]>(); 
 				for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
 					for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-						if((Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]>=p)&&(Xsol[i][j][k]<=p)){
+						if((Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]>p)&&(Xsol[i][j][k]<=p)){
 							S_i[i].add(new Integer[]{j,k});
 						}
 					} 
