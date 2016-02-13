@@ -83,11 +83,11 @@ public class Contraintes {
 		for(int i=0; i<this.aResoudre.getnPatients(); i++){
 			C4[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1][];
 			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1; j++){
-				C4[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]];
+				C4[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]*this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]];
 				for (int k=0; k<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
 					for(int u=0; u<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]; u++){
 						int duree = this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k];
-						C4[i][j][k] = ICF.arithm(this.X[i][j][k], "<=", X[i][j+1][u], "-", duree);
+						C4[i][j][k*this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]+u] = ICF.arithm(this.X[i][j][k], "<=", X[i][j+1][u], "-", duree);
 						System.out.println("X["+i+"]["+j+"]["+k+"]"+duree+"<="+"X["+i+"]["+(j+1)+"]["+u+"]");
 					}
 				}
@@ -166,7 +166,9 @@ public class Contraintes {
 		return C5;	
 	}
 	
+	/*
 	public Constraint[] contrainteAutomate(Automate automate){
 		Intvar
 	}
+	*/
 }

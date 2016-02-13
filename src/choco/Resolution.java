@@ -73,14 +73,18 @@ public class Resolution {
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
 					solver.post(contrainteHeureFermeture[i][j][k]);
 					solver.post(contrainteHeureOuverture[i][j][k]);
-					if(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1) {
-						//System.out.println("valeur : "+(this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1));
-						//System.out.println("i = "+i+", j = "+j+", k = "+k);
-						solver.post(contraintePrecedenceGroupe[i][j][k]);
-					}
 				}
 			}
 		}
+		
+		for (int i = 0; i < contraintePrecedenceGroupe.length; i++) {
+			for (int j = 0; j < contraintePrecedenceGroupe[i].length; j++) {
+				for (int k = 0; k < contraintePrecedenceGroupe[i][j].length; k++) {
+					solver.post(contraintePrecedenceGroupe[i][j][k]);
+				}
+			}
+		}
+		
 		
 		/*
 		for (int i=0; i<this.aResoudre.getnRessources(); i++){

@@ -576,7 +576,7 @@ public class Test {
 		Soin[] G4P11S = {EntretienDiet30, RDVMedical35};
 		GroupeSoins G4P11 = new GroupeSoins(G4P11S);
 		GroupeSoins[] P11G = {G1P11, G2P11, G3P11, G4P11};
-		Parcours P11  = new Parcours(P11G, 11);
+		Parcours P11  = new Parcours(P11G, "11");
 
 		// On crée le Parcours 12
 		Soin[] G1P12S = {Prelevement15};
@@ -588,7 +588,7 @@ public class Test {
 		Soin[] G4P12S = {RDVMedical35};
 		GroupeSoins G4P12 = new GroupeSoins(G4P12S);
 		GroupeSoins[] P12G = {G1P12, G2P12, G3P12, G4P12};
-		Parcours P12  = new Parcours(P12G, 12);
+		Parcours P12  = new Parcours(P12G, "12");
 
 		// On crée le Parcours 13
 		Soin[] G1P13S = {Prelevement15};
@@ -600,7 +600,7 @@ public class Test {
 		Soin[] G4P13S = {RDVMedicalDiet};
 		GroupeSoins G4P13 = new GroupeSoins(G4P13S);
 		GroupeSoins[] P13G = {G1P13, G2P13, G3P13, G4P13};
-		Parcours P13  = new Parcours(P13G, 13);
+		Parcours P13  = new Parcours(P13G, "13");
 
 		// On crée le Parcours 15
 		Soin[] G1P15S = {RDVMedical20BurCS};
@@ -614,7 +614,7 @@ public class Test {
 		Soin[] G5P15S = {Bilan};
 		GroupeSoins G5P15 = new GroupeSoins(G5P15S);
 		GroupeSoins[] P15G = {G1P15, G2P15, G3P15, G4P15, G5P15};
-		Parcours P15  = new Parcours(P15G, 15);
+		Parcours P15  = new Parcours(P15G, "15");
 
 /*		// On crée le Parcours 16
 		Soin[] G1P16S = {RDVMedical20BurSom};
@@ -658,7 +658,7 @@ public class Test {
 		Soin[] G4P20S = {Bilan};
 		GroupeSoins G4P20 = new GroupeSoins(G4P20S);
 		GroupeSoins[] P20G = {G1P20, G2P20, G3P20, G4P20};
-		Parcours P20  = new Parcours(P20G, 20);
+		Parcours P20  = new Parcours(P20G, "20");
 
 		// On crée le Parcours 21
 		Soin[] G1P21S = {BilanBiologique20};
@@ -668,7 +668,7 @@ public class Test {
 		Soin[] G3P21S = {ECG10, TestFonctionnel, IRM40, EchoCardiaque, ExamenClinique30, ETPCard, TestDEfforts};
 		GroupeSoins G3P21 = new GroupeSoins(G3P21S);
 		GroupeSoins[] P21G = {G1P21, G2P21, G3P21};
-		Parcours P21  = new Parcours(P21G, 21);
+		Parcours P21  = new Parcours(P21G, "21");
 
 		// On crée le Parcours 22
 		Soin[] G1P22S = {BilanBiologique20};
@@ -678,7 +678,7 @@ public class Test {
 		Soin[] G3P22S = {ECG10, ExamenClinique30, MedecineNucleaire, ExplorationsFonctionnellesOuMorphologiques};
 		GroupeSoins G3P22 = new GroupeSoins(G3P22S);
 		GroupeSoins[] P22G = {G1P22, G2P22, G3P22};
-		Parcours P22  = new Parcours(P22G, 22);
+		Parcours P22  = new Parcours(P22G, "22");
 
 		// On crée le Parcours 23
 		Soin[] G1P23S = {RDVAccueil};
@@ -692,7 +692,7 @@ public class Test {
 		Soin[] G5P23S = {SyntheseNeuro};
 		GroupeSoins G5P23 = new GroupeSoins(G5P23S);
 		GroupeSoins[] P23G = {G1P23, G2P23, G3P23, G4P23, G5P23};
-		Parcours P23  = new Parcours(P23G, 23);
+		Parcours P23  = new Parcours(P23G, "23");
 
 /*		// On crée le Parcours 24
 		Soin[] G1P24S = {RDVAccueil};
@@ -723,7 +723,7 @@ public class Test {
 		Soin[] G5P25S = {SyntheseNeuro};
 		GroupeSoins G5P25 = new GroupeSoins(G5P25S);
 		GroupeSoins[] P25G = {G1P25, G2P25, G3P25, G4P25, G5P25};
-		Parcours P25  = new Parcours(P25G, 25);
+		Parcours P25  = new Parcours(P25G, "25");
 
 		// On crée le Parcours 26
 		Soin[] G1P26S = {RDVAccueil};
@@ -739,7 +739,7 @@ public class Test {
 		Soin[] G6P26S = {SyntheseNeuro};
 		GroupeSoins G6P26 = new GroupeSoins(G6P26S);
 		GroupeSoins[] P26G = {G1P26, G2P26, G3P26, G4P26, G5P26, G6P26};
-		Parcours P26  = new Parcours(P26G, 26);
+		Parcours P26  = new Parcours(P26G, "26");
 		 		
 		donnees.ajoutParcours(P1);
 		donnees.ajoutParcours(P2);
