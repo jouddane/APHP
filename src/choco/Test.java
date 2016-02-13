@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VF;
 //import org.jfree.ui.RefineryUtilities;
+import org.jfree.ui.RefineryUtilities;
 
 import dev.Donnees;
 import dev.GroupeSoins;
@@ -748,12 +749,28 @@ public class Test {
 		donnees.ajoutParcours(P1);
 		donnees.ajoutParcours(P2);
 		donnees.ajoutParcours(P3);
+		donnees.ajoutParcours(P4);
+		donnees.ajoutParcours(P5);
+		donnees.ajoutParcours(P6);
+		donnees.ajoutParcours(P8);
+		donnees.ajoutParcours(P9);
+		donnees.ajoutParcours(P10);
+		donnees.ajoutParcours(P11);
+		donnees.ajoutParcours(P12);
+		donnees.ajoutParcours(P13);
+		donnees.ajoutParcours(P15);
+		donnees.ajoutParcours(P20);
+		donnees.ajoutParcours(P21);
+		donnees.ajoutParcours(P22);
+		donnees.ajoutParcours(P23);
+		donnees.ajoutParcours(P25);
+		donnees.ajoutParcours(P26);
 
-		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P4, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
+		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
 		//donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
-		//donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
-		//donnees.ajoutPatient(new Patient(P4, new Date(25,1,2016)));
-		//donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
 
 		//2. Creation du probleme mathematique associee
 		Probleme aResoudre = new Probleme(donnees);
@@ -776,27 +793,18 @@ public class Test {
 		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
 		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
-		//for (int i=0; i<aResoudre.getnRessources();i++){
-/*		final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, 0);
-		Checkeur.pack();
-		RefineryUtilities.centerFrameOnScreen(Checkeur);
-        Checkeur.setVisible(true);
-        
-    	VisuSolution Gantt = new VisuSolution("Journee", solution, aResoudre);
 		
-		
-		for (int i=0; i<aResoudre.getnRessources();i++){
+		/*for (int i=0; i<aResoudre.getnRessources();i++){
 			final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, i);
 			Checkeur.pack();
 			RefineryUtilities.centerFrameOnScreen(Checkeur);
 			Checkeur.setVisible(true);
 		}
 		VisuSolution Gantt = new VisuSolution("Journee", solution, aResoudre);
->>>>>>> 47b3273c287e6dc8f0e54a6d5299a6b3eb7b17c7
 		Gantt.pack();
 		RefineryUtilities.centerFrameOnScreen(Gantt);
-		Gantt.setVisible(true);
-*/		//}
+		Gantt.setVisible(true);*/
+		//}
 		//5. Affichage de la solution (a implementer)
 	}
 

@@ -46,6 +46,7 @@ public class Resolution {
 		Integer[][][] solInt = new Integer[this.aResoudre.getnPatients()][][];
 		System.out.println("Nombre de patients: "+aResoudre.getnPatients());
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
+			System.out.println("i = "+i+" : "+this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]);
 			X[i] = new IntVar[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];
 			solInt[i] = new Integer[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];			
 			

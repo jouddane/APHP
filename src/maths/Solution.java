@@ -75,14 +75,14 @@ public class Solution {
 	
 	public boolean verifieContrainteRessources(){
 		boolean verifieContrainteRessources = true;
-		int p=0;
+		int p=360;
 		while(verifieContrainteRessources&&(p<this.aResoudre.getnPeriodes())){
 			ArrayList<Integer[]>[] S_i = new ArrayList[this.aResoudre.getnPatients()];
 			for (int i = 0; i < this.aResoudre.getnPatients(); i++) {
 				S_i[i] = new ArrayList<Integer[]>(); 
 				for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
 					for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-						if((Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]>=p)&&(Xsol[i][j][k]<=p)){
+						if((Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]>p)&&(Xsol[i][j][k]<=p)){
 							S_i[i].add(new Integer[]{j,k});
 						}
 					} 
@@ -97,6 +97,7 @@ public class Solution {
 					}
 				}
 				verifieContrainteRessources=verifieContrainteRessources&&(ressourceUtilisee_r[r]<=this.aResoudre.getCp_ij()[r][p]);
+				//if(p<600 && ressourceUtilisee_r[r]!=0)System.out.println("p = "+p+", r = "+r+" : "+ressourceUtilisee_r[r]);
 				r++;
 			}
 			p++;
