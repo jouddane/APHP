@@ -5,27 +5,27 @@ public class Parcours {
 	protected int nombreDeSoins;
 	protected int nombreDeGroupes;
 	protected GroupeSoins[] groupeSoins;
-	protected int indiceParcours;
+	protected String numeroParcours;
 	
 	/***
 	 * Constructeur d'un parcours identifi� par un indice donn�,et constitu� � partir d'un tableau de groupe de soins. 
 	 * @param groupesSoins
 	 * @param indice
 	 */
-	public Parcours(GroupeSoins[] groupesSoins, int indice){
+	public Parcours(GroupeSoins[] groupesSoins, String numero){
 		this.nombreDeGroupes = groupesSoins.length;
 		this.nombreDeSoins=0;
 		for(GroupeSoins g : groupesSoins)
 			this.nombreDeSoins+=g.getNombreDeSoins();
 		this.groupeSoins = groupesSoins;
-		this.indiceParcours = indice;
+		this.numeroParcours = numero;
 	}
 	
 	/**
 	 * Initialise le parcours avec un tableau vide et un indice n�gatif � -1
 	 */
 	public Parcours(){
-		this(new GroupeSoins[0], -1);
+		this(new GroupeSoins[0], "-1");
 	}
 
 	/**
@@ -53,19 +53,18 @@ public class Parcours {
 	}
 	
 	/**
-	 * Mets � jour l'indice du parcours 
+	 * Mets � jour le numero du parcours 
 	 * @param indiceParcours
 	 */
-	public void setIndiceParcours(int indiceParcours) {
-		this.indiceParcours = indiceParcours;
+	public void setNumeroParcours(String numeroParcours) {
+		this.numeroParcours = numeroParcours;
 	}
-	
 	/**
-	 * Retourne l'indice du paarcours
+	 * Retourne le numero du paarcours
 	 * @return
 	 */
-	public int getIndiceParcours() {
-		return indiceParcours;
+	public String getNumeroParcours() {
+		return numeroParcours;
 	}
 	
 	/**

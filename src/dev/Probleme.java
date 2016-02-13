@@ -120,9 +120,9 @@ public class Probleme {
 			}
 		}
 
-		this.p_i = new int[nParcours];
-		for (int i = 0; i < nParcours; i++) {
-			this.p_i[i]=donnees.getParcours()[i].getIndiceParcours();
+		this.p_i = new int[nPatients];
+		for (int i = 0; i < nPatients; i++) {
+			this.p_i[i]=donnees.getParcours(donnees.getPatients()[i].getParcours().getNumeroParcours());
 		}
 
 	}
