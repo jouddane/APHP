@@ -44,8 +44,8 @@ public class Resolution {
 		//X[i][j][k] : debut du soin k du groupe de soins j du parcours i
 		IntVar[][][] X = new IntVar[this.aResoudre.getnPatients()][][];
 		Integer[][][] solInt = new Integer[this.aResoudre.getnPatients()][][];
+		System.out.println("Nombre de patients: "+aResoudre.getnPatients());
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
-			
 			X[i] = new IntVar[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]][];
 			solInt[i] = new Integer[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]][];
 			

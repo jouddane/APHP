@@ -19,6 +19,7 @@ public class Probleme {
 	private int[][][][] q_ijkr;
 	private int[] p_i;
 	private int[] Cp_ijMax;
+	private int[] nS_i;
 
 
 	public Probleme(int nParcours, int nPatients, int nRessources, int nPeriodes, int hOuverture, int hFermeture,
@@ -71,7 +72,7 @@ public class Probleme {
 			this.nS_ij[i] = new int[this.nG_i[i]];
 			for (int j = 0; j < nG_i[i]; j++) {
 				this.nS_ij[i][j]=donnees.getParcours()[i].getGroupeSoins()[j].nombreDeSoins;
-				System.out.println("i="+i+", j="+j+", n="+this.nS_ij[i][j]);
+				//System.out.println("i="+i+", j="+j+", n="+this.nS_ij[i][j]);
 			}
 		}
 
@@ -119,8 +120,8 @@ public class Probleme {
 			}
 		}
 
-		this.p_i = new int[nPatients];
-		for (int i = 0; i < nPatients; i++) {
+		this.p_i = new int[nParcours];
+		for (int i = 0; i < nParcours; i++) {
 			this.p_i[i]=donnees.getParcours()[i].getIndiceParcours();
 		}
 
@@ -259,10 +260,10 @@ public class Probleme {
 			for(int r=0; r<this.getnRessources(); r++) {
 				ressourcesUtilisees[r] += this.getQ_ijkr()[i][j][k][r];
 				if(this.getQ_ijkr()[i][j][k][r] != 0) {
-					System.out.print(r + " ");
+					//System.out.print(r + " ");
 				}
 			}
-			System.out.println("");
+			//System.out.println("");
 		}
 		return ressourcesUtilisees;
 	}
