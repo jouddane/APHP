@@ -770,7 +770,7 @@ public class Test {
 		System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
 		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
-		//System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
+		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
 
 		//5. Affichage de la solution (a implementer)
 	}

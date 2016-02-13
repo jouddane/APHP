@@ -1,14 +1,18 @@
 package choco;
 
+import dev.Donnees;
 import dev.Probleme;
 
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.constraints.Constraint;
 import org.chocosolver.solver.constraints.ICF;
 import org.chocosolver.solver.constraints.IntConstraintFactory;
+import org.chocosolver.solver.constraints.nary.automata.FA.FiniteAutomaton;
+import org.chocosolver.solver.constraints.nary.automata.FA.IAutomaton;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VariableFactory;
 import org.chocosolver.solver.variables.Task;
+import org.chocosolver.solver.variables.VF;
 
 public class Contraintes {
 
@@ -166,9 +170,44 @@ public class Contraintes {
 		return C5;	
 	}
 	
-	/*
-	public Constraint[] contrainteAutomate(Automate automate){
-		Intvar
+	
+	public Constraint[][] contrainteAutomate(){
+		//Association d'indices a chaque soins, pause et rien
+		
+		Constraint[][] C = new Constraint[aResoudre.getnPatients()][2];
+		
+		//Creation des automates, 1 par parcours
+		Automate[] automates = new Automate[aResoudre.getnParcours()];
+		
+		for (int j = 0; j < aResoudre.getnParcours(); j++) {
+			automates[j] =  new Automate (aResoudre, j);
+		}
+		
+		for (int i = 0; i < aResoudre.getnPatients(); i++) {
+			IntVar[] X = VF.enumeratedArray("X", 10, 0, 4, solver);
+	        IntVar limitRien = VF.bounded("LIMIT", aResoudre.getHOuverture(), aResoudre.getHFermeture(), solver);
+	        
+			C[i][0] = ICF.regular(X, (IAutomaton) automates[aResoudre.getP_i()[i]]);
+			C[i][1] = ICF.count(Automate.RIEN, X, limitRien);
+			
+			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
+				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
+					
+					IntVar V = VF.enumerated("V", -2, 2, solver);
+			        IntVar I = VF.enumerated("I", 0, 5, solver);
+			        solver.post(ICF.element(V, new int[]{2, -2, 1, -1, 0}, I, 0, "none"));   
+			        
+			        
+				}
+			}
+		}
+		
+	 
+		return C;
+		
 	}
-	*/
+	
+	
+
+	
 }
