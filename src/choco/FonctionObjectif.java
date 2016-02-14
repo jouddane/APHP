@@ -16,7 +16,7 @@ public class FonctionObjectif {
 		k nombre de soins dans le groupe de soins */
 	
 	public static IntVar minimiserTemps(IntVar[][][] X, Probleme aResoudre, Solver solver){
-		IntVar OBJ = VF.enumerated("OBJ", 0, aResoudre.getHFermeture()-aResoudre.getHOuverture(), solver);
+		IntVar OBJ = VF.enumerated("OBJ", 0, (aResoudre.getHFermeture()-aResoudre.getHOuverture())*aResoudre.getnPatients(), solver);
 
 		//On calcule le Min et Max pour chaque patient
 		IntVar[] MAX_Patient = VariableFactory.enumeratedArray("MAX_Patient", aResoudre.getnPatients(), 
@@ -27,9 +27,9 @@ public class FonctionObjectif {
 		for(int i=0; i<aResoudre.getnPatients(); i++){
 			
 			//On calcule le Min et Max pour chaque groupe de soins du patient i
-			IntVar[] MAX_PatientI_Groupe = VariableFactory.enumeratedArray("MAX_PatientI_Groupe", aResoudre.getnPatients(), 
+			IntVar[] MAX_PatientI_Groupe = VariableFactory.enumeratedArray("MAX_PatientI_Groupe", aResoudre.getnG_i()[i], 
 					aResoudre.getHOuverture(), aResoudre.getHFermeture(), solver);
-			IntVar[] MIN_PatientI_Groupe = VariableFactory.enumeratedArray("MIN_PatientI_Groupe", aResoudre.getnPatients(), 
+			IntVar[] MIN_PatientI_Groupe = VariableFactory.enumeratedArray("MIN_PatientI_Groupe", aResoudre.getnG_i()[i], 
 					aResoudre.getHOuverture(), aResoudre.getHFermeture(), solver);
 			
 			for(int j=0; j<aResoudre.getnG_i()[i]; j++){
@@ -41,6 +41,7 @@ public class FonctionObjectif {
 		}
 		
 		//TODO : vérifier que c'est juste --> possible source de problème
+		//Ici on veut faire une différence donc on prend l'opposé de chaque somme
 		for(int i=0; i<MIN_Patient.length; i++){
 			MIN_Patient[i] = VariableFactory.minus(MIN_Patient[i]);
 		}
@@ -48,9 +49,9 @@ public class FonctionObjectif {
 		//On calcule la somme des max et des min
 		IntVar SUM[] = VF.enumeratedArray("SUM", 2, aResoudre.getHOuverture()*aResoudre.getnPatients(),
 				aResoudre.getHFermeture()*aResoudre.getnPatients(), solver);
-		solver.post(ICF.sum(MAX_Patient, SUM[0]));
-		solver.post(ICF.sum(MIN_Patient, SUM[1]));
+		solver.post(ICF.sum(MIN_Patient, SUM[0]));
+		solver.post(ICF.sum(MAX_Patient, SUM[1]));
 		solver.post(ICF.sum(SUM, OBJ));
-		return null;
+		return OBJ;
 	}
 }

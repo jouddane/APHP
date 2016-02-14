@@ -3,6 +3,8 @@ package dev;
 public class Ressource {
 
 	private int[] capaciteMaxPeriodeP;
+	
+	//Certainement a supprimer
 	private int[] quantiteUtilisee;
 	private String nom;
 	

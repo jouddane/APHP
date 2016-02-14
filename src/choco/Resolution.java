@@ -46,16 +46,16 @@ public class Resolution {
 		Integer[][][] solInt = new Integer[this.aResoudre.getnPatients()][][];
 		System.out.println("Nombre de patients: "+aResoudre.getnPatients());
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
-			X[i] = new IntVar[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]][];
-			solInt[i] = new Integer[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]][];
+			System.out.println("i = "+i+" : "+this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]);
+			X[i] = new IntVar[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];
+			solInt[i] = new Integer[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];			
 			
-			
-			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]; j++) {
-				X[i][j] = new IntVar[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]];
-				solInt[i][j] = new Integer[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]];
+			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
+				X[i][j] = new IntVar[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]];
+				solInt[i][j] = new Integer[this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]];
 				
 				
-				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]; k++) {
+				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
 					X[i][j][k]= VF.enumerated("X"+i+","+j+","+k, 0, this.aResoudre.getnPeriodes(),solver);
 				}
 			}
@@ -69,18 +69,23 @@ public class Resolution {
 		Constraint[] contrainteCapaciteRessources = contraintes.contrainteCapaciteRessources();
 		
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
+			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
+				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
 					solver.post(contrainteHeureFermeture[i][j][k]);
 					solver.post(contrainteHeureOuverture[i][j][k]);
-					if(j != this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1) {
-						//System.out.println("valeur : "+(this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1));
-						//System.out.println("i = "+i+", j = "+j+", k = "+k);
-						solver.post(contraintePrecedenceGroupe[i][j][k]);
-					}
 				}
 			}
 		}
+		
+		for (int i = 0; i < contraintePrecedenceGroupe.length; i++) {
+			for (int j = 0; j < contraintePrecedenceGroupe[i].length; j++) {
+				for (int k = 0; k < contraintePrecedenceGroupe[i][j].length; k++) {
+					solver.post(contraintePrecedenceGroupe[i][j][k]);
+				}
+			}
+		}
+		
+		
 		
 		for (int i=0; i<this.aResoudre.getnRessources(); i++){
 			if(!(contrainteCapaciteRessources[i] == null)) {
@@ -90,22 +95,22 @@ public class Resolution {
 		
 		
         // 4. Definition de la strategie de resolution
-        //solver.set(IntStrategyFactory.lexico_LB(x, y));
+        //solver.set(IntStrategyFactory.lexico_LB(X));
         
         // 5. Definition de la fonction objectif	
-        //IntVar objective = FonctionObjectif.minimiserTemps(X, aResoudre, solver);
+        IntVar objective = FonctionObjectif.minimiserTemps(X, aResoudre, solver);
         
         // 6. Lancement de la resolution
-        //solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
-		System.out.println("Solution ? "+solver.findSolution());
-		Solution solution = solver.getSolutionRecorder().getLastSolution();
+        solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+		//System.out.println("Solution ? "+solver.findSolution());
+		/*Solution solution = solver.getSolution;
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]-1]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]-1][j]; k++) {
+			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
+				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
 					solInt[i][j][k] = solution.getIntVal(X[i][j][k]);
 				}
 			}
-		}
+		}*/
 		// 7.  Affichage des statistiques de la resolution
         Chatterbox.printStatistics(solver);
         

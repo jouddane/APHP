@@ -25,23 +25,20 @@ import dev.Probleme;
 public class VisuCheckeur extends ApplicationFrame{
 
 
-	public Integer[][][] donnees;
-	public Probleme aResoudre;
-
-	/**
-	 * Construit le graph pour visualiser si la contrainte de ressource est respectée
-	 *
-	 * @param title  the frame title.
-	 */
+/**
+ * Construit le graph pour visualiser si la contrainte de ressource est respectée
+ * @param title
+ * @param donnees
+ * @param aResoudre
+ * @param i
+ */
 	public VisuCheckeur(final String title,Integer[][][] donnees, Probleme aResoudre, int i) {
 
 		super(title);
-		this.donnees=donnees;
-		this.aResoudre=aResoudre;
-		final JFreeChart chart = createCombinedChart(i);
+		final JFreeChart chart = createCombinedChart(donnees, aResoudre, i);
 		chart.setTitle("Occupation Ressource "+i);
 		final ChartPanel panel = new ChartPanel(chart, true, true, true, true, true);
-		panel.setPreferredSize(new java.awt.Dimension(900, 600));
+		panel.setPreferredSize(new java.awt.Dimension(400, 300));
 		setContentPane(panel);
 
 
@@ -50,13 +47,15 @@ public class VisuCheckeur extends ApplicationFrame{
 
 	/**
 	 * Crée un graph
-	 *
-	 * @return The combined chart.
+	 * @param donnees
+	 * @param aResoudre
+	 * @param i
+	 * @return
 	 */
-	private JFreeChart createCombinedChart(int i) {
+	private JFreeChart createCombinedChart(Integer [][][] donnees, Probleme aResoudre, int i) {
 		DateAxis x = new DateAxis("Domaine");
 		x.setTickUnit(new DateTickUnit(DateTickUnitType.MINUTE,1));
-		final CombinedDomainXYPlot plot = new CombinedDomainXYPlot(new DateAxis("Domain"));
+		final CombinedDomainXYPlot plot = new CombinedDomainXYPlot(new DateAxis("Domaine"));
 		plot.setGap(1.0);
 
 
@@ -69,13 +68,12 @@ public class VisuCheckeur extends ApplicationFrame{
 
 
 
-		// create subplots...
 
 
 
-		final XYDataset data1 = createDataset1(i);
+		final XYDataset data1 = createDataset1(donnees, aResoudre, i);
 		final XYItemRenderer renderer1 = new StandardXYItemRenderer();
-		final NumberAxis rangeAxis1 = new NumberAxis("Utilisation RH :"+i);
+		final NumberAxis rangeAxis1 = new NumberAxis("Utilisation Ressources"+i);
 
 
 		final XYPlot subplot1 = new XYPlot(data1, null, rangeAxis1, renderer1);
@@ -87,33 +85,35 @@ public class VisuCheckeur extends ApplicationFrame{
 		plot.add(subplot1, 1);
 
 
-		return new JFreeChart("CombinedDomainXYPlot Demo",
+		return new JFreeChart("Utilisation des Ressources",
 				JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 
 	}
 
-	/**
-	 * Crée les données nécessaires pour la ressource a.
-	 *
-	 * @return Series 1.
-	 */
-	private XYDataset createDataset1(int a) {
+/**
+ *  Crée les données nécessaires pour la ressource a.
+ * @param donnees
+ * @param aResoudre
+ * @param a
+ * @return
+ */
+	private XYDataset createDataset1(Integer [][][] donnees, Probleme aResoudre, int a) {
 		TimeSeriesCollection dataset = new TimeSeriesCollection();
 		dataset.setDomainIsPointsInTime(true);
 		// Ici il faut que je choppe les soins de la ressource a
-		final TimeSeries s1 = new TimeSeries("Capacité "+a, Minute.class);
+		final TimeSeries s1 = new TimeSeries("Utilisation ressource "+a, Minute.class);
 
 
 
 		//Création du tableau ou on stocke toutes les ressources utilisees au cours de la journee
 		int[] tableau= new int[24*60];
-		for(int i=0;i<this.aResoudre.getnPatients();i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
+		for(int i=0;i<aResoudre.getnPatients();i++){
+			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
+				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
 
-					if(this.aResoudre.getQ_ijkr()[this.aResoudre.getP_i()[i]-1][j][k][a]!=0){
-						for (int l=0; l< this.aResoudre.getL_ijk()[i][j][k]; l++){
-							tableau[this.donnees[i][j][k]+l]+=1;
+					if(aResoudre.getQ_ijkr()[aResoudre.getP_i()[i]][j][k][a]!=0){
+						for (int l=0; l< aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k]; l++){
+							tableau[donnees[i][j][k]+l]+=1;
 						}
 					}
 				}
@@ -121,7 +121,7 @@ public class VisuCheckeur extends ApplicationFrame{
 		}
 
 
-			for (int h=0; h<tableau.length; h++){
+			for (int h=aResoudre.getHOuverture(); h<aResoudre.getHFermeture(); h++){
 				int heure = h/60;
 				int minute = h%60;
 				int jour  = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -132,9 +132,9 @@ public class VisuCheckeur extends ApplicationFrame{
 			}
 			
 			
-			final TimeSeries s2 = new TimeSeries("Capacité max RM "+a, Minute.class);
-			s2.add(new Minute(0, 0, Calendar.getInstance().get(Calendar.DAY_OF_MONTH),Calendar.getInstance().get(Calendar.MONTH)+1,Calendar.getInstance().get(Calendar.YEAR)), this.aResoudre.getCpij_max()[a]);
-	        s2.add(new Minute(0, 24, Calendar.getInstance().get(Calendar.DAY_OF_MONTH),Calendar.getInstance().get(Calendar.MONTH)+1,Calendar.getInstance().get(Calendar.YEAR)), this.aResoudre.getCpij_max()[a]);
+			final TimeSeries s2 = new TimeSeries("Capacité max Ressource "+a, Minute.class);
+			s2.add(new Minute(aResoudre.getHOuverture()%60, aResoudre.getHOuverture()/60, Calendar.getInstance().get(Calendar.DAY_OF_MONTH),Calendar.getInstance().get(Calendar.MONTH)+1,Calendar.getInstance().get(Calendar.YEAR)), aResoudre.getCpij_max()[a]);
+	        s2.add(new Minute(aResoudre.getHFermeture()%60, aResoudre.getHFermeture()/60, Calendar.getInstance().get(Calendar.DAY_OF_MONTH),Calendar.getInstance().get(Calendar.MONTH)+1,Calendar.getInstance().get(Calendar.YEAR)), aResoudre.getCpij_max()[a]);
 
 	        dataset.addSeries(s1);
 	        dataset.addSeries(s2);

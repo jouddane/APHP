@@ -48,7 +48,7 @@ public class VisuSolution extends ApplicationFrame{
 		GanttCategoryDataset dataset = createDataset( donnees, aResoudre);
 		JFreeChart chart = createChart(dataset);
 
-		// Ajoute le graph à un Panel
+		// Ajoute le graph ï¿½ un Panel
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(1200, 800));
 		setContentPane(chartPanel);
@@ -56,7 +56,7 @@ public class VisuSolution extends ApplicationFrame{
 
 	}
 /**
- * Crée les donnéees pour le gantt
+ * Crée les données pour le gantt
  * @param donnees
  * @param aResoudre
  * @return
@@ -70,12 +70,12 @@ public class VisuSolution extends ApplicationFrame{
 		TaskSeries P = new TaskSeries("Tous les parcours");
 		for(int i=0; i<aResoudre.getnPatients();i++){
 			String s ="Patient"+i;
-			Task S = new Task(s, new Date(Annee, Mois, Jour, 6,0), new Date(Annee, Mois, Jour, 21,0));
-			for(int j=0; j<aResoudre.getnG_i()[i];j++){
-				for( int k=0; k< aResoudre.getnS_ij()[i][j]; k++){
+			Task S = new Task(s, new Date(Annee, Mois, Jour, aResoudre.getHOuverture()/60,aResoudre.getHOuverture()%60), new Date(Annee, Mois, Jour, aResoudre.getHFermeture()/60,aResoudre.getHFermeture()%60));
+			for(int j=0; j<aResoudre.getnG_i()[aResoudre.getP_i()[i]];j++){
+				for( int k=0; k< aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++){
 					int HeureD=donnees[i][j][k]/60;
 					int MinD=donnees[i][j][k]%60;
-					int Duree=aResoudre.getL_ijk()[i][j][k];
+					int Duree=aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k];
 					int HeureDnext = (donnees[i][j][k]+Duree)/60;
 					int MinDnext =(donnees[i][j][k]+Duree)%60;
 					S.addSubtask(new Task(" Groupe "+j+" Soin "+k, new Date(Annee,Mois,Jour,HeureD,MinD), new Date(Annee,Mois,Jour,HeureDnext,MinDnext)));
@@ -97,7 +97,7 @@ public class VisuSolution extends ApplicationFrame{
 				"Patients", // Domaine des y
 				"Heure", // DOmaine des x
 				dataset, // donnees
-				true, // ajoute une légende
+				true, // ajoute une lï¿½gende
 				true, // "tootltips"
 				false // urls
 				);

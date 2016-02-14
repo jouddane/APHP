@@ -19,6 +19,7 @@ public class Probleme {
 	private int[][][][] q_ijkr;
 	private int[] p_i;
 	private int[] Cp_ijMax;
+	private int[] nS_i;
 
 
 	public Probleme(int nParcours, int nPatients, int nRessources, int nPeriodes, int hOuverture, int hFermeture,
@@ -119,9 +120,9 @@ public class Probleme {
 			}
 		}
 
-		this.p_i = new int[nParcours];
-		for (int i = 0; i < nParcours; i++) {
-			this.p_i[i]=donnees.getParcours()[i].getIndiceParcours();
+		this.p_i = new int[nPatients];
+		for (int i = 0; i < nPatients; i++) {
+			this.p_i[i]=donnees.getParcours(donnees.getPatients()[i].getParcours().getNumeroParcours());
 		}
 
 	}
@@ -251,7 +252,7 @@ public class Probleme {
 		}
 		return tableauRessources;
 	}
-
+	
 	public int[] updateRessourcesAvecSoin(int i, int j, int k, int[] ressourcesUtilisees) {
 		if(ressourcesUtilisees.length != this.getnRessources()) {
 			System.out.println("Pas la bonne taille de tableau !");

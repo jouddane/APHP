@@ -3,7 +3,7 @@ package dev;
 public class ParcoursAffecte extends Parcours{
 
 	public ParcoursAffecte(Parcours parcours){
-		super(parcours.groupeSoins, parcours.indiceParcours);
+		super(parcours.groupeSoins, parcours.numeroParcours);
 		GroupeSoins[] temp = parcours.groupeSoins;
 		this.groupeSoins = new GroupeSoinsAffecte[temp.length];
 		for(int i=0; i<temp.length; i++) {

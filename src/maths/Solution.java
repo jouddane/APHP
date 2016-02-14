@@ -19,10 +19,10 @@ public class Solution {
 		int i=0;
 		while(verifieContrainteHeureFermeture&&(i < this.aResoudre.getnPatients())){
 			int j=0;
-			while(verifieContrainteHeureFermeture&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1])){
+			while(verifieContrainteHeureFermeture&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]])){
 				int k=0;
-				while(verifieContrainteHeureFermeture&&(k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j])){
-					verifieContrainteHeureFermeture=verifieContrainteHeureFermeture&&(Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k]<=this.aResoudre.getHFermeture());
+				while(verifieContrainteHeureFermeture&&(k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j])){
+					verifieContrainteHeureFermeture=verifieContrainteHeureFermeture&&(Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]<=this.aResoudre.getHFermeture());
 					k++;
 				}
 				j++;
@@ -37,9 +37,9 @@ public class Solution {
 		int i=0;
 		while(verifieContrainteHeureOuverture&&(i < this.aResoudre.getnPatients())){
 			int j=0;
-			while(verifieContrainteHeureOuverture&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1])){
+			while(verifieContrainteHeureOuverture&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]])){
 				int k=0;
-				while(verifieContrainteHeureOuverture&&(k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j])){
+				while(verifieContrainteHeureOuverture&&(k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j])){
 					verifieContrainteHeureOuverture=verifieContrainteHeureOuverture&&(Xsol[i][j][k]>=this.aResoudre.getHOuverture());
 					k++;
 				}
@@ -55,12 +55,12 @@ public class Solution {
 		int i=0;
 		while(verifieContraintePrecedenceGroupe&&(i < this.aResoudre.getnPatients())){
 			int j=0;
-			while(verifieContraintePrecedenceGroupe&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1)){
+			while(verifieContraintePrecedenceGroupe&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1)){
 				int k=0;
-				while(verifieContraintePrecedenceGroupe&&(k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j])){
+				while(verifieContraintePrecedenceGroupe&&(k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j])){
 					int u=0;
-					while(verifieContraintePrecedenceGroupe&&(u < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j+1])){
-						verifieContraintePrecedenceGroupe=verifieContraintePrecedenceGroupe&&(Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k]<=Xsol[i][j+1][u]);
+					while(verifieContraintePrecedenceGroupe&&(u < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1])){
+						verifieContraintePrecedenceGroupe=verifieContraintePrecedenceGroupe&&(Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]<=Xsol[i][j+1][u]);
 						u++;
 					}
 					k++;
@@ -75,14 +75,14 @@ public class Solution {
 	
 	public boolean verifieContrainteRessources(){
 		boolean verifieContrainteRessources = true;
-		int p=0;
+		int p=360;
 		while(verifieContrainteRessources&&(p<this.aResoudre.getnPeriodes())){
 			ArrayList<Integer[]>[] S_i = new ArrayList[this.aResoudre.getnPatients()];
 			for (int i = 0; i < this.aResoudre.getnPatients(); i++) {
 				S_i[i] = new ArrayList<Integer[]>(); 
-				for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]; j++) {
-					for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
-						if((Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k]>=p)&&(Xsol[i][j][k]<=p)){
+				for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
+					for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
+						if((Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]>p)&&(Xsol[i][j][k]<=p)){
 							S_i[i].add(new Integer[]{j,k});
 						}
 					} 
@@ -93,7 +93,7 @@ public class Solution {
 			while(verifieContrainteRessources&&(r < this.aResoudre.getnRessources())){
 				for (int i = 0; i < this.aResoudre.getnPatients(); i++) {
 					for (Integer[] soinEnCours : S_i[i]) {
-						ressourceUtilisee_r[r] = ressourceUtilisee_r[r]+this.aResoudre.getQ_ijkr()[this.aResoudre.getP_i()[i]-1][soinEnCours[0]][soinEnCours[1]][r];
+						ressourceUtilisee_r[r] = ressourceUtilisee_r[r]+this.aResoudre.getQ_ijkr()[this.aResoudre.getP_i()[i]][soinEnCours[0]][soinEnCours[1]][r];
 					}
 				}
 				verifieContrainteRessources=verifieContrainteRessources&&(ressourceUtilisee_r[r]<=this.aResoudre.getCp_ij()[r][p]);
@@ -130,14 +130,14 @@ public class Solution {
 		int i=0;
 		while(verifieContrainteAttentePatientsMin&&(i < this.aResoudre.getnPatients())){
 			int j=0;
-			while(verifieContrainteAttentePatientsMin&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1)){
+			while(verifieContrainteAttentePatientsMin&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1)){
 				int k=0;
-				while(verifieContrainteAttentePatientsMin&& (k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j])){
+				while(verifieContrainteAttentePatientsMin&& (k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j])){
 					int [][] attente = new int[2][];
 					for (int u = 0; u < attente.length; u++) {
-						attente[u] = new int[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j+u]] ;
-						for (int m = 0; m < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j+u]; m++) {
-							attente[u][m]=g(Xsol[i][j+u][m]-(Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k]));
+						attente[u] = new int[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+u]] ;
+						for (int m = 0; m < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+u]; m++) {
+							attente[u][m]=g(Xsol[i][j+u][m]-(Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]));
 						}
 					}
 					verifieContrainteAttentePatientsMin=verifieContrainteAttentePatientsMin&&(min(attente))>=this.aResoudre.getA_MIN();
@@ -155,14 +155,14 @@ public class Solution {
 		int i=0;
 		while(verifieContrainteAttentePatientsMax&&(i < this.aResoudre.getnPatients())){
 			int j=0;
-			while(verifieContrainteAttentePatientsMax&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]-1]-1)){
+			while(verifieContrainteAttentePatientsMax&&(j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1)){
 				int k=0;
-				while(verifieContrainteAttentePatientsMax&& (k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j])){
+				while(verifieContrainteAttentePatientsMax&& (k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j])){
 					int [][] attente = new int[2][];
 					for (int u = 0; u < attente.length; u++) {
-						attente[u] = new int[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j+u]] ;
-						for (int m = 0; m < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j+u]; m++) {
-							attente[u][m]=g(Xsol[i][j+u][m]-(Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]-1][j][k]));
+						attente[u] = new int[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+u]] ;
+						for (int m = 0; m < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+u]; m++) {
+							attente[u][m]=g(Xsol[i][j+u][m]-(Xsol[i][j][k]+this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]));
 						}
 					}
 					verifieContrainteAttentePatientsMax=verifieContrainteAttentePatientsMax&&(min(attente))<=this.aResoudre.getA_MAX();
