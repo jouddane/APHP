@@ -222,7 +222,8 @@ public class Automate {
 		    }
         }
         this.finiteAutomaton = auto;
-       	this.finiteAutomaton.minimize();
+        this.finiteAutomaton.minimize();
+        this.finiteAutomaton.reduce();
 	}
 	
 	

@@ -746,8 +746,8 @@ public class Test2 {
 			GroupeSoins[] P26G = {G1P26, G2P26, G3P26, G4P26, G5P26, G6P26};
 			Parcours P26  = new Parcours(P26G, "26");
 			 		
-			donnees.ajoutParcours(P1);
-			donnees.ajoutParcours(P2);
+			donnees.ajoutParcours(P3);
+			/*donnees.ajoutParcours(P2);
 			donnees.ajoutParcours(P3);
 			donnees.ajoutParcours(P4);
 			donnees.ajoutParcours(P5);
@@ -764,7 +764,7 @@ public class Test2 {
 			donnees.ajoutParcours(P22);
 			donnees.ajoutParcours(P23);
 			donnees.ajoutParcours(P25);
-			donnees.ajoutParcours(P26);
+			donnees.ajoutParcours(P26);*/
 
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
 			//donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
