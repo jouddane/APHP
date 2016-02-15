@@ -46,6 +46,7 @@ public class Resolution {
 		IntVar[][][] X = new IntVar[this.aResoudre.getnPatients()][][];
 		Integer[][][] solInt = new Integer[this.aResoudre.getnPatients()][][];
 		System.out.println("Nombre de patients: "+aResoudre.getnPatients());
+		int nombreDeSoins = 0;
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
 			System.out.println("i = "+i+" : "+this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]);
 			X[i] = new IntVar[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];
@@ -58,9 +59,21 @@ public class Resolution {
 				
 				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
 					X[i][j][k]= VF.enumerated("X"+i+","+j+","+k, 0, this.aResoudre.getnPeriodes(),solver);
+					nombreDeSoins++;
 				}
 			}
 		}
+		
+		IntVar[] XFlattened = new IntVar[nombreDeSoins];
+		int indiceTemp = 0;
+		for(int i=0; i< this.aResoudre.getnPatients(); i++){
+            for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
+                for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
+                    XFlattened[indiceTemp] = X[i][j][k];
+                    indiceTemp++;
+                }
+            }
+        }
 		
 		// 3. Creation et post des contraintes 
 		Contraintes contraintes = new Contraintes(this.aResoudre,solver, X);
@@ -70,8 +83,8 @@ public class Resolution {
 		contraintes.contrainteCapaciteRessources();
 		contraintes.contrainteAutomate();
 		
-        // 4. Definition de la strategie de resolution
-        //solver.set(IntStrategyFactory.);
+        
+        solver.set(IntStrategyFactory.activity(XFlattened, 0));
         
 		
         // 5. Definition de la fonction objectif	

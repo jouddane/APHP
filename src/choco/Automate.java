@@ -218,8 +218,8 @@ public class Automate {
         for (int j2 = 0; j2 < etatsFinauxAncienGroupeInt.length; j2++) {
 			auto.addTransition(etatsFinauxAncienGroupeInt[j2],fin,RIEN);
 		}
-       
-        this.finiteAutomaton  = auto;
+ 
+        this.finiteAutomaton =auto ;
 	}
 	
 	
