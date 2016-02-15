@@ -1,6 +1,10 @@
 package dev;
 
-//Cr�ation de donn�es pour un jour donn�
+/**
+ * Classe permettant d'initialiser toutes les donnees du probleme.
+ * Elle est necessaire a la creation d'un objet de type Probleme
+ * 
+ */
 public class Donnees {
 
 	private Patient[] patients;
@@ -13,7 +17,7 @@ public class Donnees {
 	private int A_MIN;
 	
 	/**
-	 * Constructeur initialisant toutes les donn�es � 0
+	 * Constructeur par defaut initialisant toutes les donnees a 0
 	 */
 	public Donnees() {
 		this.patients = new Patient[0];
@@ -27,135 +31,128 @@ public class Donnees {
 	}
 	
 	/**
-	 * Retourne le tableau contenant tous les patiens de la journee
-	 * @return
+	 * @return le tableau contenant tous les patiens de la journee
 	 */
 	public Patient[] getPatients() {
 		return patients;
 	}
 	/**
-	 * Mets � jour le tableau des patients de la journ�e
-	 * @param patients
+	 * @param patients le nouveau le tableau des patients de la journee
 	 */
 	public void setPatients(Patient[] patients) {
 		this.patients = patients;
 	}
 	
-	/**
-	 * Retourne le tableau des parcours de la journ�e 
-	 * @return
+	/** 
+	 * @return le tableau des patients de la journee
 	 */
 	public Parcours[] getParcours() {
 		return parcours;
 	}
 	
 	/**
-	 * Mets � jour le tableau des parcours de la journ�e
-	 * @param parcours
+	 * @param parcours le nouveau tableau des parcours de la journee
 	 */
 	public void setParcours(Parcours[] parcours) {
 		this.parcours = parcours;
 	}
 	
 	/**
-	 * Retourne les ressources disponibles tout au long de la journ�e
-	 * @return
+	 * @return les quantites de ressources disponibles quand aucun soin n'est prevu
 	 */
 	public Ressource[] getRessources() {
 		return ressources;
 	}
 	
 	/**
-	 * Mets � jour les ressources disponibles tout au long de la journ�e
-	 * @param ressources
+	 * @param ressources les nouvelles quantites de ressources disponibles quand aucun soin n'est prevu
 	 */
 	public void setRessources(Ressource[] ressources) {
 		this.ressources = ressources;
 	}
 	
 	/**
-	 * Discretise le temps en nPeriodes
-	 * @param nPeriodes
+	 * Discretise le temps en nPeriodes.
+	 * Pour discretiser en periodes de 5 minutes : 
+	 * 12 * 5 minutes = 1 heure.
+	 * 24 heures = 1 journee.
+	 * Donc nPeriodes = 12*24.
+	 * @param nPeriodes le nombre de periodes
 	 */
 	public void setNPeriodes(int nPeriodes) {
 		this.nPeriodes = nPeriodes;
 	}
 	
 	/**
-	 * retourne le nombre de periodes de la journ�e en minutes
-	 * @return
+	 * @return le nombre de periodes dans la journee
 	 */
 	public int getnPeriodes() {
 		return nPeriodes;
 	}
 	
 	/**
-	 * Mets � jour l'heure de fermeture de la journ�e en minutes ex 20h : 20*60
-	 * @param hFermeture
+	 * Mets a jour l'heure de fermeture de la journee en minutes. 
+	 * Ex pour 20h : 20*60
+	 * @param hFermeture l'heure de fermeture de la journee en minutes
 	 */
 	public void setHFermeture(int hFermeture) {
 		HFermeture = hFermeture;
 	}
 	
 	/**
-	 * Retourne l'heure de fermeture de la journ�e en minutes
-	 * @return
+	 * @return l'heure de fermeture de la journee en minutes
 	 */
 	public int getHFermeture() {
 		return HFermeture;
 	}
 	
 	/**
-	 * Mets � jour l'heure d'ouverture de la journ�e en minutes : ex 8h = 8*60
-	 * @param hOuverture
+	 * Mets a jour l'heure d'ouverture de la journee en minutes.
+	 * Ex pour 8h : 8*60
+	 * @param hOuverture l'heure d'ouverture de la journee en minutes
 	 */
 	public void setHOuverture(int hOuverture) {
 		HOuverture = hOuverture;
 	}
 	
 	/**
-	 * Retourne l'heure d'ouverture de la journ�e en minutes
-	 * @return
+	 * @return l'heure d'ouverture de la journee en minutes
 	 */
 	public int getHOuverture() {
 		return HOuverture;
 	}
 	
 	/**
-	 * Mets � jour le temps d'attente maximum entre deux soins : en min
-	 * @param a_MAX
+	 * @param a_MAX le temps d'attente maximum entre deux soins en min
 	 */
 	public void setA_MAX(int a_MAX) {
 		A_MAX = a_MAX;
 	}
 	
 	/**
-	 * Retourne le temps d'attente maximum entre deux soins : en min
-	 * @return
+	 * @return le temps d'attente maximum entre deux soins en min
 	 */
 	public int getA_MAX() {
 		return A_MAX;
 	}
 	
 	/**
-	 * Mets � jour le temps d'attente minimum entre deux soins : en min
-	 * @param a_MIN
+	 * @param a_MIN le temps d'attente minimum entre deux soins en min
 	 */
 	public void setA_MIN(int a_MIN) {
 		A_MIN = a_MIN;
 	}
 	
 	/**
-	 * Retourne le temps d'attente minimum entre deux soins : en min
-	 * @return
+	 * @return le temps d'attente minimum entre deux soins en min
 	 */
 	public int getA_MIN() {
 		return A_MIN;
 	}
 	
 	/**
-	 * Ajoute un patient � la fin de la liste de patients de la journee
-	 * @param patient
+	 * Ajoute un patient a la fin de la liste de patients de la journee
+	 * @param patient le patient a ajouter
 	 */
 	public void ajoutPatient(Patient patient){
 		int n = this.patients.length;
@@ -168,8 +165,8 @@ public class Donnees {
 	}
 	
 	/**
-	 * Ajoute une ressource � la fin de la liste des ressources de la journee
-	 * @param ressource
+	 * Ajoute une ressource a la fin de la liste des ressources de la journee
+	 * @param ressource la ressource a ajouter
 	 */
 	public void ajoutRessource(Ressource ressource){
 		int n = this.ressources.length;
@@ -182,23 +179,22 @@ public class Donnees {
 	}
 	
 	/**
-	 * Ajoute un parcours � la fin de la liste de parcours de la journ�e
-	 * @param parcours2
+	 * Ajoute un parcours a la fin de la liste de parcours de la journee
+	 * @param parcours le parcours a ajouter
 	 */
-	public void ajoutParcours(Parcours parcours2){
+	public void ajoutParcours(Parcours parcours){
 		int n = this.parcours.length;
 		Parcours[] parcoursNew = new Parcours[n+1];
 		for (int i = 0; i < n; i++) {
 			parcoursNew[i]=this.parcours[i];
 		}
-		parcoursNew[n]=parcours2;
+		parcoursNew[n]=parcours;
 		this.parcours=parcoursNew;
 	}
 	
 	/**
-	 * Retourne l'indice de la ressource dont le nom correspont � nom si elle existe -1 sinon
-	 * @param nom
-	 * @return
+	 * @param nom le nom de la ressource 
+	 * @return l'indice de la ressource dont le nom correspond au nom en parametre si elle existe, -1 sinon
 	 */
 	public int getRessourceNom(String nom){
 		int i=0;
@@ -214,9 +210,8 @@ public class Donnees {
 	}
 	
 	/**
-	 * Retourne l'indice du parcours dont le numero correspont à numero si il existe -1 sinon
-	 * @param nom
-	 * @return
+	 * @param nom  le numero du parcours
+	 * @return l'indice du parcours dont le numero correspond au numero en parametre si il existe, -1 sinon
 	 */
 	public int getParcours(String numero){
 		int i=0;
