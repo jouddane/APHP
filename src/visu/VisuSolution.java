@@ -57,9 +57,9 @@ public class VisuSolution extends ApplicationFrame{
 	}
 /**
  * 
- * @param donnees
- * @param aResoudre
- * @param taillePeriode
+ * @param donnees les donnees du probleme
+ * @param aResoudre le probleme lie a ces donnees
+ * @param taillePeriode la taille de la periode minimale
  * @return Les donnees pour faire un Gantt avec la solution donnee, il represente 1 journee avec tous les patients
  */
 	public GanttCategoryDataset createDataset(Integer[][][] donnees, Probleme aResoudre, int taillePeriode) {
@@ -93,7 +93,7 @@ public class VisuSolution extends ApplicationFrame{
 
 	/**
 	 * 
-	 * @param dataset
+	 * @param dataset les donnees a representer
 	 * @return Le graph de Gantt contenant tous les patients de la journee
 	 */
 	public JFreeChart createChart(GanttCategoryDataset dataset) {

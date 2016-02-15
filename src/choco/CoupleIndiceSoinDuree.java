@@ -31,7 +31,7 @@ public class CoupleIndiceSoinDuree {
 	
 	/**
 	 * setter de la variable d'instance indiceSoin
-	 * @param indiceSoin
+	 * @param indiceSoin le nouvel indice du soin
 	 */
 	public void setIndiceSoin(int indiceSoin) {
 		this.indiceSoin = indiceSoin;

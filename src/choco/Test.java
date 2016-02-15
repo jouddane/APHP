@@ -743,7 +743,7 @@ public class Test {
 		Parcours P26  = new Parcours(P26G, "26");
 		 		
 		donnees.ajoutParcours(P1);
-		donnees.ajoutParcours(P2);
+		/*donnees.ajoutParcours(P2);
 		donnees.ajoutParcours(P3);
 		donnees.ajoutParcours(P4);
 		donnees.ajoutParcours(P5);
@@ -760,7 +760,7 @@ public class Test {
 		donnees.ajoutParcours(P22);
 		donnees.ajoutParcours(P23);
 		donnees.ajoutParcours(P25);
-		donnees.ajoutParcours(P26);
+		donnees.ajoutParcours(P26);*/
 
 		donnees.ajoutPatient(new Patient(P1, new Date(jour,mois,annee)));
 		/*donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));

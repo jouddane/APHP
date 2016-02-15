@@ -27,10 +27,11 @@ public class VisuCheckeur extends ApplicationFrame{
 
 /**
  * Construit le graph pour visualiser si la contrainte de ressource est respectee
- * @param title
- * @param donnees
- * @param aResoudre
- * @param i
+ * @param title le titre du graphe
+ * @param donnees les donnees a representer
+ * @param aResoudre le probleme lie a ces donnees
+ * @param taillePeriode la taille de la periode minimale
+ * @param i le numero de la ressource
  */
 	public VisuCheckeur(final String title,Integer[][][] donnees, Probleme aResoudre, int i, int taillePeriode) {
 
@@ -47,10 +48,11 @@ public class VisuCheckeur extends ApplicationFrame{
 
 	/**
 	 * Cree un graph
-	 * @param donnees
-	 * @param aResoudre
-	 * @param i
-	 * @return Graph de la resssource i avec la solution du problème
+	 * @param donnees les donnees a representer
+	 * @param aResoudre le probleme lie a ces donnees
+	 * @param i le numero de la ressource a representer
+	 * @param taillePeriode la taille de la periode minimale
+	 * @return Graph de la resssource i avec la solution du probleme
 	 */
 	private JFreeChart createCombinedChart(Integer [][][] donnees, Probleme aResoudre, int i, int taillePeriode) {
 		DateAxis x = new DateAxis("Domaine");
@@ -92,9 +94,10 @@ public class VisuCheckeur extends ApplicationFrame{
 
 /**
  *  Cree les donnees necessaires pour la ressource a.
- * @param donnees
- * @param aResoudre
- * @param a
+ * @param donnees les donnees du probleme
+ * @param aResoudre le probleme lie a ces donnees
+ * @param a le numero de la ressource
+ * @param taillePeriode la taille de la periode minimale
  * @return Donnees de la solution pour pouvoir tracer le graph de la ressource a
  */
 	private XYDataset createDataset1(Integer [][][] donnees, Probleme aResoudre, int a, int taillePeriode) {

@@ -62,7 +62,7 @@ public class Resolution {
 		contraintes.contrainteHeureFermeture();
 		contraintes.contraintePrecedenceGroupe();
 		contraintes.contrainteCapaciteRessources();
-		//contraintes.contrainteAutomate(false);
+		contraintes.contrainteAutomate(false);
 		
         // 4. Definition de la strategie de resolution
        // solver.set(IntStrategyFactory.lexico_LB());
