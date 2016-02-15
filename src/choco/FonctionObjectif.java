@@ -92,21 +92,21 @@ public class FonctionObjectif {
 	 * @return OBJ variable correspondant a la somme des durees des sejours des patients en hopital de jour que l'on va chercher a minimiser
 	 */
 	public IntVar minimiserTemps(){
-		IntVar OBJ = VF.enumerated("OBJ", 0, (aResoudre.getHFermeture()-aResoudre.getHOuverture())*aResoudre.getnPatients(), solver);
+		IntVar OBJ = VF.enumerated("OBJ", 0, (aResoudre.getnPeriodes()-1)*aResoudre.getnPatients(), solver);
 
 		//On calcule le Min et Max pour chaque patient
 		IntVar[] MAX_Patient = VariableFactory.enumeratedArray("MAX_Patient", aResoudre.getnPatients(), 
-				aResoudre.getHOuverture(), aResoudre.getHFermeture(), solver);
+				0, aResoudre.getnPeriodes()-1, solver);
 		IntVar[] MIN_Patient = VariableFactory.enumeratedArray("MIN_Patient", aResoudre.getnPatients(), 
-				aResoudre.getHOuverture(), aResoudre.getHFermeture(), solver);
+				0, aResoudre.getnPeriodes()-1, solver);
 		
 		for(int i=0; i<aResoudre.getnPatients(); i++){
 			
 			//On calcule le Min et Max pour chaque groupe de soins du patient i
 			IntVar[] MAX_PatientI_Groupe = VariableFactory.enumeratedArray("MAX_PatientI_Groupe", aResoudre.getnG_i()[aResoudre.getP_i()[i]], 
-					aResoudre.getHOuverture(), aResoudre.getHFermeture(), solver);
+					0, aResoudre.getnPeriodes()-1, solver);
 			IntVar[] MIN_PatientI_Groupe = VariableFactory.enumeratedArray("MIN_PatientI_Groupe", aResoudre.getnG_i()[aResoudre.getP_i()[i]], 
-					aResoudre.getHOuverture(), aResoudre.getHFermeture(), solver);
+					0, aResoudre.getnPeriodes()-1, solver);
 			
 			for(int j=0; j<aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++){
 				solver.post(ICF.maximum(MAX_PatientI_Groupe[j], X[i][j]));
@@ -118,15 +118,18 @@ public class FonctionObjectif {
 		
 		//TODO : vérifier que c'est juste --> possible source de problème
 		//Ici on veut faire une différence donc on prend l'opposé de chaque somme
+		IntVar[] MINUS_MIN_Patient = new IntVar[MIN_Patient.length];
 		for(int i=0; i<MIN_Patient.length; i++){
-			MIN_Patient[i] = VariableFactory.minus(MIN_Patient[i]);
+			MINUS_MIN_Patient[i] = VariableFactory.minus(MIN_Patient[i]);
 		}
 		
 		//On calcule la somme des max et des min
-		IntVar SUM[] = VF.enumeratedArray("SUM", 2, aResoudre.getHOuverture()*aResoudre.getnPatients(),
-				aResoudre.getHFermeture()*aResoudre.getnPatients(), solver);
-		solver.post(ICF.sum(MIN_Patient, SUM[0]));
-		solver.post(ICF.sum(MAX_Patient, SUM[1]));
+		IntVar[] SUM = new IntVar[2];
+		SUM[0] = VF.enumerated("SUM_MAX", 0, (aResoudre.getnPeriodes()-1)*aResoudre.getnPatients(), solver);
+		SUM[1] = VF.enumerated("SUM_MIN", -(aResoudre.getnPeriodes()-1)*aResoudre.getnPatients(), 0, solver);
+		
+		solver.post(ICF.sum(MAX_Patient, SUM[0]));
+		solver.post(ICF.sum(MINUS_MIN_Patient, SUM[1]));
 		solver.post(ICF.sum(SUM, OBJ));
 		return OBJ;
 	}

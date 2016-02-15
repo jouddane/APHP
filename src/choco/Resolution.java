@@ -80,8 +80,11 @@ public class Resolution {
         solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
         Chatterbox.printStatistics(solver);
         //solver.findAllSolutions();
-		//System.out.println("Solution ? "+solver.findSolution());
-		Solution solution = solver.getSolutionRecorder().getLastSolution();
+		System.out.println("Solution ? "+solver.findSolution());
+		//Solution solution = solver.getSolutionRecorder().getSolutions();
+		for (int i = 0; i < solInt.length; i++) {
+			
+		}
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
 				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
