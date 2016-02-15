@@ -78,13 +78,15 @@ public class Resolution {
         
         // 6. Lancement de la resolution
         solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+        
+        // 7.  Affichage des statistiques de la resolution
         Chatterbox.printStatistics(solver);
+        
         //solver.findAllSolutions();
 		System.out.println("Solution ? "+solver.findSolution());
-		//Solution solution = solver.getSolutionRecorder().getSolutions();
-		for (int i = 0; i < solInt.length; i++) {
-			
-		}
+		Solution solution = solver.getSolutionRecorder().getSolutions().get(0);
+	
+		
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
 				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
@@ -92,8 +94,7 @@ public class Resolution {
 				}
 			}
 		}
-		// 7.  Affichage des statistiques de la resolution
-        Chatterbox.printStatistics(solver);
+		
         
         return solInt;
 	}
