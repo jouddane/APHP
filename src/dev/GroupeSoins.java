@@ -1,13 +1,19 @@
 package dev;
 
+/**
+ * Classe representant un groupe de soins d'un parcours.
+ * Cela permet de definir les precedences devant exister entre les soins d'un meme groupe de soins.
+ * 
+ */
+
 public class GroupeSoins {
 
 	protected Soin[] soins;
 	protected int nombreDeSoins;
 	
 	/**
-	 * Constructeur à partir d'un tableau de soins
-	 * @param soins
+	 * Constructeur a partir d'un tableau de soins
+	 * @param soins le tableau de soins
 	 */
 	public GroupeSoins(Soin[] soins){
 		this.nombreDeSoins = soins.length;
@@ -15,9 +21,8 @@ public class GroupeSoins {
 	}
 	
 	/**
-	 * Retourne le soin à l'indice demandé
-	 * @param indice
-	 * @return
+	 * @param indice l'indice d'un soin
+	 * @return le soin a l'indice demande
 	 */
 	public Soin getSoin(int indice){
 		return soins[indice];
@@ -25,41 +30,37 @@ public class GroupeSoins {
 	
 	
 	/**
-	 * Mets à jour le soin à l'indice demandé
-	 * @param indice
-	 * @param soin
+	 * @param indice l'indice du soin a changer
+	 * @param soin le soin a mettre a l'indice indice
 	 */
 	public void setSoin(int indice, Soin soin){
 		this.soins[indice] = soin;
 	}
 
 	/**
-	 * Retourne le tableau de soins du groupe de soins
-	 * @return
+	 * @return le tableau de soins du groupe de soins
 	 */
 	public Soin[] getSoins() {
 		return soins;
 	}
 	
 	/**
-	 * Mets à jour le tableau de soins à partir d'un tableau de soins existants
-	 * @param soins
+	 * @param soins le nouveau tableau de soins
 	 */
 	public void setSoins(Soin[] soins) {
 		this.soins = soins;
 	}
 	
 	/**
-	 * Retourne le nombre de soins du groupe de soins
-	 * @return
+	 * @return le nombre de soins du groupe de soins
 	 */
 	public int getNombreDeSoins(){
 		return this.nombreDeSoins;
 	}
 	
 	/**
-	 * ajoute un soin à la fin du tableau du groupe de soins
-	 * @param soin
+	 * Ajoute un soin a la fin du tableau du groupe de soins
+	 * @param soin le soin a  ajouter
 	 */
 	public void ajoutSoin(Soin soin){
 		int n= this.soins.length;

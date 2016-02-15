@@ -1,58 +1,100 @@
 package dev;
 
-import javax.swing.plaf.synth.SynthScrollBarUI;
-
+/**
+ * Classe reprensentant le probleme a resoudre. Il correspond au modele cree.
+ * 
+ */
 public class Probleme {
 
+    /**
+     * Le nombre de parcours existants
+     */
 	private int nParcours;
+	
+	/**
+	 * Le nombre de patients a traiter dans la journee
+	 */
 	private int nPatients;
+	
+	/**
+	 * Le nombre de ressources existantes
+	 */
 	private int nRessources;
+	
+	/**
+	 * Le nombre de periodes dont est composee la journee
+	 */
 	private int nPeriodes;
+	
+	/**
+	 * L'heure d'ouverture en nombre de periodes
+	 */
 	private int HOuverture;
+	
+	/*
+	 * L'heure de fermeture en nombre de periodes
+	 */
 	private int HFermeture;
+	
+	/**
+	 * Le temps d'attente maximum entre deux soins pour un patient en nombre de periodes
+	 */
 	private int A_MAX;
+	
+	/**
+	 * Le temps d'attente minimum entre deux soins pour un patient en nombre de periodes
+     */
 	private int A_MIN;
+	
+	/**
+	 * Le nombre de groupe de soins composant les parcours
+	 * L'indice i correspond au parcours i
+	 */
 	private int[] nG_i;
+	
+	/**
+	 * Le nombre de soins composant les groupes de soins des differents parcours
+	 * L'indice i correspond au parcours i
+	 * L'indice j correspond au groupe de soins j du parcours i
+	 */
 	private int[][] nS_ij;
-	private int[][] cp_ij;
+	
+	/**
+	 * La duree de chaque soin.
+     * L'indice i correspond au parcours i
+     * L'indice j correspond au groupe de soins j du parcours i
+     * L'indice k correspond au soins k du groupe de soins j du parcours i
+     */
 	private int[][][] l_ijk;
+	
+	/**
+	 * La quantite de ressources necessaires pour chaque soin
+	 * L'indice i correspond au parcours i
+     * L'indice j correspond au groupe de soins j du parcours i
+     * L'indice k correspond au soins k du groupe de soins j du parcours i
+     * L'indice r correspond au numero de la ressource
+     */
 	private int[][][][] q_ijkr;
+	
+	/**
+	 * Tableau stockant les indices des parcours associes aux patients
+	 */
 	private int[] p_i;
+
+    /**
+     * La capacite d'une ressource i a la periode j
+     */
+    private int[][] cp_ij;
+    
+    /**
+     * Tableau contenant les maximums des quantites en ressource i utilisées sur l'ensemble des periodes j 
+     */
 	private int[] Cp_ijMax;
-	private int[] nS_i;
 
-
-	public Probleme(int nParcours, int nPatients, int nRessources, int nPeriodes, int hOuverture, int hFermeture,
-			int a_MAX, int a_MIN, int[] nG_i, int[][] nS_ij, int[][] cp_ij, int[][][] l_ijk, int[][][][] q_ijkr,
-			int[] p_i, int[][][] X_ijk) {
-		this.nParcours = nParcours;
-		this.nPatients = nPatients;
-		this.nRessources = nRessources;
-		this.nPeriodes = nPeriodes;
-		HOuverture = hOuverture;
-		HFermeture = hFermeture;
-		A_MAX = a_MAX;
-		A_MIN = a_MIN;
-		this.nG_i = nG_i;
-		this.nS_ij = nS_ij;
-		this.cp_ij = cp_ij;
-
-		this.Cp_ijMax= new int[cp_ij.length];
-		for(int i=0; i<cp_ij.length;i++){
-			int max=0;
-			for(int j=0;j<cp_ij[i].length;j++){
-				if(cp_ij[i][j]>max){
-					max=cp_ij[i][j];
-				}
-			}
-			this.Cp_ijMax[i]=max;
-		}
-
-		this.l_ijk = l_ijk;
-		this.q_ijkr = q_ijkr;
-		this.p_i = p_i;
-	}
-
+	/**
+	 * Constructeur de l'objet Probleme
+	 * @param donnees un objet de type Donnees a partir duquel on cree le probleme
+	 */
 	public Probleme(Donnees donnees){
 		this.nParcours = donnees.getParcours().length;
 		this.nPatients = donnees.getPatients().length;
@@ -81,7 +123,7 @@ public class Probleme {
 			this.cp_ij[i]=donnees.getRessources()[i].getCapaciteMaxPeriodeP();
 		}
 
-		this.Cp_ijMax= new int[this.cp_ij.length];
+		this.Cp_ijMax= new int[nRessources];
 		for(int i=0; i<this.cp_ij.length;i++){
 			int max=0;
 			for(int j=0;j<this.cp_ij[i].length;j++){
@@ -245,6 +287,13 @@ public class Probleme {
 		return this.Cp_ijMax;
 	}
 
+	/**
+	 * 
+	 * @param i l'indice du parcours voulu
+	 * @param j l'indice du groupe de soins voulu du parcours i
+	 * @param k l'indice du soin voulu du groupe de soins j du parcours i
+	 * @return le tableau des ressources utilisees par le soins k
+	 */
 	public int[] getRessourcesUtilisees(int i, int j, int k) {
 		int[] tableauRessources = new int[this.getnRessources()];
 		for(int r = 0; r<this.getnRessources(); r++) {
@@ -253,17 +302,21 @@ public class Probleme {
 		return tableauRessources;
 	}
 	
+	/**
+	 * Met a jour le tableau des ressources utilisees par l'ensemble du probleme
+	 * @param i l'indice du parcours voulu
+     * @param j l'indice du groupe de soins voulu du parcours i
+     * @param k l'indice du soin voulu du groupe de soins j du parcours i
+     * @param ressourcesUtilisees les ressources utilisees par les autres soins que le soin k
+	 * @return le tableau des ressources utilisees par tous autres soint plus le k
+	 */
 	public int[] updateRessourcesAvecSoin(int i, int j, int k, int[] ressourcesUtilisees) {
 		if(ressourcesUtilisees.length != this.getnRessources()) {
 			System.out.println("Pas la bonne taille de tableau !");
 		} else {
 			for(int r=0; r<this.getnRessources(); r++) {
 				ressourcesUtilisees[r] += this.getQ_ijkr()[i][j][k][r];
-				if(this.getQ_ijkr()[i][j][k][r] != 0) {
-					//System.out.print(r + " ");
-				}
 			}
-			//System.out.println("");
 		}
 		return ressourcesUtilisees;
 	}

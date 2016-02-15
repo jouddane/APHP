@@ -1,5 +1,7 @@
 package dev;
 
+import java.util.ArrayList;
+
 /**
  * Classe permettant d'initialiser toutes les donnees du probleme.
  * Elle est necessaire a la creation d'un objet de type Probleme
@@ -191,6 +193,25 @@ public class Donnees {
 		parcoursNew[n]=parcours;
 		this.parcours=parcoursNew;
 	}
+	
+    /**
+     * Methode retournant un nouveau soin
+     * @param donnees les donnees du probleme
+     * @param listeRessourcesCapacite les ccapacites en ressources necessaires par le soin a creer
+     * @param nom le nom du soin
+     * @param duree la duree du soin
+     * @return le soin cree
+     */
+    public Soin ajoutSoin(ArrayList<CoupleStringInt> listeRessourcesCapacite, String nom , int duree ){
+        int[] capaciteRessourcesNecessaires = new int[this.getRessources().length];
+        for (int i = 0; i < capaciteRessourcesNecessaires.length; i++) {
+            capaciteRessourcesNecessaires[i] = 0;
+        }
+        for (CoupleStringInt ressourceCapacite : listeRessourcesCapacite) {
+            capaciteRessourcesNecessaires[this.getRessourceNom(ressourceCapacite.getNom())]=ressourceCapacite.getCapacite();
+        }
+        return new Soin(duree, capaciteRessourcesNecessaires, nom);
+    }
 	
 	/**
 	 * @param nom le nom de la ressource 
