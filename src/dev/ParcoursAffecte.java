@@ -1,7 +1,16 @@
 package dev;
 
+/**
+ * Classe representant un paurcours affecte a un patient
+ * 
+ */
+
 public class ParcoursAffecte extends Parcours{
 
+    /**
+     * Constructeur effectuant une copie d'un parcours existant mais non affecte a un patient
+     * @param parcours le parcours a affecter
+     */
 	public ParcoursAffecte(Parcours parcours){
 		super(parcours.groupeSoins, parcours.numeroParcours);
 		GroupeSoins[] temp = parcours.groupeSoins;
@@ -11,6 +20,9 @@ public class ParcoursAffecte extends Parcours{
 		}
 	}
 	
+	/**
+	 * @return les groupes de soins composant le parcours affecte a un patient
+	 */
 	public GroupeSoinsAffecte[] getGroupesSoinsAffectes(){
 		return (GroupeSoinsAffecte[])(this.groupeSoins);
 	}

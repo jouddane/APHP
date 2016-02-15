@@ -1,5 +1,9 @@
 package dev;
 
+/**
+ * Classe modelisant un parcours, c'est a dire un ensemble de groupes de soins a realiser.
+ * 
+ */
 public class Parcours {
 
 	protected int nombreDeSoins;
@@ -8,9 +12,9 @@ public class Parcours {
 	protected String numeroParcours;
 	
 	/***
-	 * Constructeur d'un parcours identifi� par un indice donn�,et constitu� � partir d'un tableau de groupe de soins. 
-	 * @param groupesSoins
-	 * @param indice
+	 * Constructeur d'un parcours identifie par un indice donne,et constitue a partir d'un tableau de groupe de soins. 
+	 * @param groupesSoins le tableau de groupes de soins
+	 * @param indice l'indice du parcours
 	 */
 	public Parcours(GroupeSoins[] groupesSoins, String numero){
 		this.nombreDeGroupes = groupesSoins.length;
@@ -22,62 +26,58 @@ public class Parcours {
 	}
 	
 	/**
-	 * Initialise le parcours avec un tableau vide et un indice n�gatif � -1
+	 * Initialise le parcours avec un tableau vide et un indice negatif a -1
 	 */
 	public Parcours(){
 		this(new GroupeSoins[0], "-1");
 	}
 
 	/**
-	 * Retourne le nombre de groupes de soins dans le parcours 
-	 * @return
+	 * @return le nombre de groupes de soins dans le parcours 
 	 */
 	public int getNombreDeGroupes() {
 		return nombreDeGroupes;
 	}
 	
 	/**
-	 * Retourne le tableau de groupe de soins du parcours
-	 * @return
+	 * 
+	 * @return le tableau de groupe de soins du parcours
 	 */
 	public GroupeSoins[] getGroupeSoins() {
 		return groupeSoins;
 	}
 	
 	/**
-	 * Retourne le nombre total de soins du parcours
-	 * @return
+	 * @return le nombre total de soins du parcours
 	 */
 	public int getNombreDeSoins(){
 		return this.nombreDeSoins;
 	}
 	
-	/**
-	 * Mets � jour le numero du parcours 
-	 * @param indiceParcours
+	/** 
+	 * @param indiceParcours le nouvel indice du parcours
 	 */
 	public void setNumeroParcours(String numeroParcours) {
 		this.numeroParcours = numeroParcours;
 	}
 	/**
-	 * Retourne le numero du paarcours
-	 * @return
+	 * @return le numero du parcours
 	 */
 	public String getNumeroParcours() {
 		return numeroParcours;
 	}
 	
 	/**
-	 * Ajoute � la fin du parcours un groupe de soins
-	 * @param groupeSoins2
+	 * Ajoute a la fin du parcours un groupe de soins
+	 * @param groupeSoins le groupe de soins a ajouter
 	 */
-	public void ajoutGroupeSoins(GroupeSoins groupeSoins2){
+	public void ajoutGroupeSoins(GroupeSoins groupeSoins){
 		int n= this.groupeSoins.length;
 		GroupeSoins[] groupeSoinsNew = new GroupeSoins[n+1];
 		for (int i = 0; i < n; i++) {
 			groupeSoinsNew[i]=this.groupeSoins[i];
 		}
-		groupeSoinsNew[n]=groupeSoins2;
+		groupeSoinsNew[n]=groupeSoins;
 		this.groupeSoins = groupeSoinsNew;
 	}
 }
