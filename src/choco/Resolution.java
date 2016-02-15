@@ -67,6 +67,7 @@ public class Resolution {
 		Constraint[][][] contrainteHeureFermeture = contraintes.contrainteHeureFermeture();
 		Constraint[][][] contraintePrecedenceGroupe = contraintes.contraintePrecedenceGroupe();
 		Constraint[] contrainteCapaciteRessources = contraintes.contrainteCapaciteRessources();
+		contraintes.contrainteAutomate();
 		
 		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
@@ -76,6 +77,7 @@ public class Resolution {
 				}
 			}
 		}
+		
 		
 		for (int i = 0; i < contraintePrecedenceGroupe.length; i++) {
 			for (int j = 0; j < contraintePrecedenceGroupe[i].length; j++) {
@@ -94,23 +96,26 @@ public class Resolution {
 		}
 		
 		
+		
+		
         // 4. Definition de la strategie de resolution
         //solver.set(IntStrategyFactory.lexico_LB(X));
         
         // 5. Definition de la fonction objectif	
-        IntVar objective = FonctionObjectif.minimiserTemps(X, aResoudre, solver);
+        //IntVar objective = FonctionObjectif.minimiserTemps(X, aResoudre, solver);
         
         // 6. Lancement de la resolution
-        solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
-		//System.out.println("Solution ? "+solver.findSolution());
-		/*Solution solution = solver.getSolution;
+        //solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+        //solver.findAllSolutions();
+		System.out.println("Solution ? "+solver.findSolution());
+		Solution solution = solver.getSolutionRecorder().getLastSolution();
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
 				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
 					solInt[i][j][k] = solution.getIntVal(X[i][j][k]);
 				}
 			}
-		}*/
+		}
 		// 7.  Affichage des statistiques de la resolution
         Chatterbox.printStatistics(solver);
         

@@ -30,9 +30,11 @@ import dev.Soin;
 
 public class Automate {
 
+	
 	private Probleme p;
 	public static final Integer RIEN = 0;
 	private int[][] indicesSoins;
+	private FiniteAutomaton finiteAutomaton;
 	
 	
 	//Rajouter les pauses entre les taches (toutes) et les mettre correctement entre les groupes
@@ -213,7 +215,7 @@ public class Automate {
         //Initialisation de l'etat d'arrivee de l'automate
         int fin = auto.addState();
    
-        auto.setFinal(debut);
+       auto.setFinal(debut);
         auto.setFinal(fin);
 
         //Ajout transition entre les etats debut et fin
@@ -367,6 +369,7 @@ public class Automate {
 			e.printStackTrace();
 		}
 		*/
+        this.finiteAutomaton = auto;
 	
 	}
 	
@@ -1144,6 +1147,10 @@ public class Automate {
 	
 	public int[][] getIndicesSoins() {
 		return indicesSoins;
+	}
+	
+	public FiniteAutomaton getFiniteAutomaton() {
+		return finiteAutomaton;
 	}
 	
 }

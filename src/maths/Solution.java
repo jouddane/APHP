@@ -115,7 +115,7 @@ public class Solution {
 	public int min(int[][] x){
 		int min =Integer.MAX_VALUE;
 		for (int i = 0; i < x.length; i++) {
-			for (int j = 0; j < x[0].length; j++) {
+			for (int j = 0; j < x[i].length; j++) {
 				if(x[i][j]<min){
 					min=x[i][j];
 				}

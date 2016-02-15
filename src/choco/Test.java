@@ -7,7 +7,7 @@ import java.util.Calendar;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VF;
 //import org.jfree.ui.RefineryUtilities;
-import org.jfree.ui.RefineryUtilities;
+//import org.jfree.ui.RefineryUtilities;
 
 import dev.Donnees;
 import dev.GroupeSoins;
@@ -34,7 +34,7 @@ public class Test {
 		int annee = Calendar.getInstance().get(Calendar.YEAR); 
 
 		donnees.setNPeriodes(nPeriodes);
-		donnees.setA_MAX(60);
+		donnees.setA_MAX(10);
 		donnees.setA_MIN(5);
 		donnees.setHFermeture(20*60);
 		donnees.setHOuverture(8*60);
@@ -134,7 +134,7 @@ public class Test {
 		Soin TOGD = Soin.creerSoin(donnees, listRessourceCapacite11, "TOGD", 20);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite12 = new ArrayList<>();	 	 	 
-		Soin Collation = Soin.creerSoin(donnees, listRessourceCapacite12, "Collation", 0);
+		Soin Collation = Soin.creerSoin(donnees, listRessourceCapacite12, "Collation", 1);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite13 = new ArrayList<>();
 		listRessourceCapacite13.add(new CoupleStringInt("Interne Obesite", 1));
@@ -800,7 +800,9 @@ public class Test {
 		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
 		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
+		System.out.println("Toutes les contraintes ?"+verifierSol.verifieContraintes());
 		
+		/*
 		for (int i=0; i<aResoudre.getnRessources();i++){
 			final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, i);
 			Checkeur.pack();
@@ -810,7 +812,7 @@ public class Test {
 		VisuSolution Gantt = new VisuSolution("Journee", solution, aResoudre);
 		Gantt.pack();
 		RefineryUtilities.centerFrameOnScreen(Gantt);
-		Gantt.setVisible(true);
+		Gantt.setVisible(true);*/
 		//}
 		//5. Affichage de la solution (a implementer)
 	}
