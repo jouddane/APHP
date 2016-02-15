@@ -11,6 +11,9 @@ import org.chocosolver.solver.variables.VF;
 
 public class Resolution {
 	
+    /**
+     * Le probleme a resoudre
+     */
 	private Probleme aResoudre;
 
 	public Resolution(Probleme aResoudre) {
@@ -26,7 +29,9 @@ public class Resolution {
 		this.aResoudre = aResoudre;
 	}
 
-
+	/** 
+	 * @return la solution du probleme contraint
+	 */
 	public Integer[][][] resout(){
 		
 		//1. Initialisation du solver

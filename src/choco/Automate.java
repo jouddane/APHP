@@ -27,12 +27,18 @@ import dev.Soin;
 
 public class Automate {
 
-	//L'entier 0 est utilise pour representer la tache correspondant a RIEN dans l'automate
+	/**
+	 * L'entier 0 est utilise pour representer la tache correspondant a RIEN dans l'automate
+	 */
     public static final Integer RIEN = 0;
     
-	//Represente les valeures entieres utilisees pour representer les soins sous forme de transition dans l'automate
+	/**
+	 * Represente les valeures entieres utilisees pour representer les soins sous forme de transition dans l'automate
+	 */
 	private int[][] indicesSoins;
-	//Represente le FiniteAutomaton utilise pour definir les contraintes
+	/**
+	 * Represente le FiniteAutomaton utilise pour definir les contraintes
+	 */
 	private FiniteAutomaton finiteAutomaton;
 	
 	/**

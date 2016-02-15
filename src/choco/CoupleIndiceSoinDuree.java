@@ -5,9 +5,13 @@ package choco;
  */
 public class CoupleIndiceSoinDuree {
 
-	//L'indice du soin
+	/**
+	 * L'indice du soin
+	 */
 	private int indiceSoin;
-	//La duree du soin
+	/**
+	 * La duree du soin
+	 */
 	private int duree;
 	
 	/**
