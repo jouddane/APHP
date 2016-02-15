@@ -201,7 +201,7 @@ public class Contraintes {
 		for (int i = 0; i < aResoudre.getnPatients(); i++) {
 			int indiceSoinsMax = automates[aResoudre.getP_i()[i]].getIndicesSoins()[automates[aResoudre.getP_i()[i]].getIndicesSoins().length-1][automates[aResoudre.getP_i()[i]].getIndicesSoins()[automates[aResoudre.getP_i()[i]].getIndicesSoins().length-1].length-1];
 			IntVar[] Ai = VF.enumeratedArray("A"+i, aResoudre.getnPeriodes(), 0,indiceSoinsMax , solver);
-			/*
+			
 			int sumLijk = 0;
 			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
 				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
@@ -209,11 +209,11 @@ public class Contraintes {
 				}
 			}
 			
-	        IntVar limitRien = VF.bounded("LIMITRIEN"+i, 0, aResoudre.getnPeriodes()-sumLijk-1, solver);*/
+	        IntVar limitRien = VF.bounded("LIMITRIEN"+i, 0, aResoudre.getnPeriodes()-sumLijk-1, solver);
 	        
 	        Constraint regular  = ICF.regular(Ai, automates[aResoudre.getP_i()[i]].getFiniteAutomaton());
 	        solver.post(regular);
-	        //C[i][aResoudre.getnG_i()[aResoudre.getP_i()[i]]][0][1]  = ICF.count(Automate.RIEN, Ai, limitRien);
+	        solver.post(ICF.count(Automate.RIEN, Ai, limitRien));
 			
 			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
 				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
