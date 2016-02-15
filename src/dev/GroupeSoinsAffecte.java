@@ -1,15 +1,18 @@
 package dev;
 
+/**
+ * Classe representant un groupe de soins d'un parcours affecte a un patient
+ * 
+ */
 public class GroupeSoinsAffecte extends GroupeSoins{
 
 	private int debut;
 	private boolean realise;
-	private boolean enCours;
-	
+	private boolean enCours;	
 	
 	/**
 	 * Constructeur ou les soins deviennent des soins affectes
-	 * @param groupeSoins
+	 * @param groupeSoins l'objet de type GroupeSoins a partir duquel on cree le groupe de soins affecte
 	 */
 	public GroupeSoinsAffecte(GroupeSoins groupeSoins) {
 		super(groupeSoins.soins);
@@ -24,9 +27,9 @@ public class GroupeSoinsAffecte extends GroupeSoins{
 	}	
 	
 	/**
-	 * Constructeur avec un début pour le groupe de soins affectés
-	 * @param soinsAffectes
-	 * @param debut
+	 * Constructeur avec un debut pour le groupe de soins affecte
+	 * @param soinsAffectes le groupe de soins
+	 * @param debut l'heure de debut du soin en nombre de periodes
 	 */
 	public GroupeSoinsAffecte(GroupeSoins soinsAffectes, int debut) {
 		super(soinsAffectes.getSoins());
@@ -34,56 +37,54 @@ public class GroupeSoinsAffecte extends GroupeSoins{
 	}
 	
 	/**
-	 * Retourne true si le groupe de soins affecte est realisé
-	 * @return
+	 * @return true si le groupe de soins affecte est realise (tous les soins du groupes ont ete faits)
 	 */
 	public boolean estRealise() {
 		return realise;
 	}
 	
 	/**
-	 * Mets à jour l'état de réalisation : true si les groupe est réalisé
-	 * @param realise
+	 * Mets a jour l'etat de realisation : true si les groupe est realise
+	 * @param realise le nouvel etat de realisation
 	 */
 	public void setRealise(boolean realise) {
 		this.realise = realise;
 	}
 	
 	/**
-	 * Retourne true si le groupe de soins affectes est en cours de réalisation
-	 * @return
+	 * 
+	 * @return true si le groupe de soins affecte est en cours de realisation
 	 */
 	public boolean estEnCours() {
 		return enCours;
 	}
 
 	/**
-	 * Mets à jours l'état de réalisation du groupe de soins affectes : true si ils sont en cours de réalisation
-	 * @param enCours
+	 * Mets a jour l'etat de realisation du groupe de soins affectes
+	 * @param enCours vaut true si ils sont en cours de realisation
 	 */
 	public void setEnCours(boolean enCours) {
 		this.enCours = enCours;
 	}
 	
 	/**
-	 * Retourne le tableau de soins affectés
-	 * @return
+	 * @return le tableau de soins affecte
 	 */
 	public SoinAffecte[] getSoinsAffectes() {
 		return (SoinAffecte[])(this.getSoins());
 	}
 
 	/**
-	 * Mets à jour le tableau de soins affectes
-	 * @param soins
+	 * Mets a jour le tableau de soins affecte
+	 * @param soins le nouveau tableau de soins
 	 */
 	public void setSoinsAffectes(SoinAffecte[] soins) {
 		this.setSoins(soins);
 	}
 	
 	/**
-	 * Retourne le début du premier soin affecte : en min
-	 * @return
+	 * 
+	 * @return le debut du premier soin affecte en nombre de periodes
 	 */
 	public int getDebut(){
 		if(this.debut == Integer.MAX_VALUE){
@@ -98,27 +99,16 @@ public class GroupeSoinsAffecte extends GroupeSoins{
 	}
 	
 	/**
-	 * Mets à jour le début des soins affectés
-	 * @param debut
+	 * Mets a jour le debut du groupe de soins affecte
+	 * @param debut l'heure de debut en periodes
 	 */
 	public void setDebut(int debut){
 		this.debut = debut;
 	}
-	
-	/*
-	public int debut(){
-		int debut = Integer.MAX_VALUE;
-		for(SoinAffecte s : this.getSoinsAffectes()){
-			if(s.getDebut() < debut)
-				debut = s.getDebut();
-		}
-		return debut;
-	}
-	*/
-	
+		
 	/**
-	 * Retourne la valeur en min du dernier soin affecte
-	 * @return
+	 * 
+	 * @return la valeur en periodes du dernier soin affecte
 	 */
 	public int fin(){
 		int fin = Integer.MIN_VALUE;
@@ -128,5 +118,4 @@ public class GroupeSoinsAffecte extends GroupeSoins{
 		}
 		return fin;
 	}
-	
 }

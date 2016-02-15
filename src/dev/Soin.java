@@ -2,32 +2,47 @@ package dev;
 
 import java.util.ArrayList;
 
+/**
+ * Classe representant un soin d'un parcours.
+ * 
+ */
+
 public class Soin {
 
+    /*
+     * La duree du soin
+     */
 	protected int duree;
+	
+	/**
+	 * Le tableau des quantites necessaires en chaque ressource
+	 */
 	protected int[] capaciteRessourcesNecessaires;
+	
+	/**
+	 * Le nom du soin
+	 */
 	protected String nom;
 	
+	/**
+	 * Constructeur d'un soin
+	 * @param duree la duree du soin
+	 * @param capaciteRessourcesNecessaires ses ressources necessaires (tableau de taille le nombre de ressources du probleme)
+	 * @param nom le nom du soin
+	 */
 	public Soin(int duree, int[] capaciteRessourcesNecessaires, String nom){
 		this.duree = duree;
 		this.nom =nom;
 		this.capaciteRessourcesNecessaires = capaciteRessourcesNecessaires;
 	}
 	
-	public static Soin creerSoin(Donnees donnees, ArrayList<CoupleStringInt> listeRessourcesCapacite, String nom , int duree ){
-		int[] capaciteRessourcesNecessaires = new int[donnees.getRessources().length];
-		for (int i = 0; i < capaciteRessourcesNecessaires.length; i++) {
-			capaciteRessourcesNecessaires[i] = 0;
-		}
-		for (CoupleStringInt ressourceCapacite : listeRessourcesCapacite) {
-			capaciteRessourcesNecessaires[donnees.getRessourceNom(ressourceCapacite.getNom())]=ressourceCapacite.getCapacite();
-		}
-		return new Soin(duree, capaciteRessourcesNecessaires, nom);
-	}
-	
-	public Soin(){
-		this(0, null,"");
-	}
+	/**
+	 * Constructeur par defaut
+	 * Iitialise a un soin d'une duree nulle, ne consommant pas de ressource et n'ayant pas de nom
+	 */
+    public Soin(){
+        this(0, null,"");
+    }
 	
 	public int getDuree(){
 		return this.duree;
