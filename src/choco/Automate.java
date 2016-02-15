@@ -47,7 +47,7 @@ public class Automate {
 	 * @param i_parcours indice du parcours pour lequel on souhaite associe un automate dans prob.getParcours()
 	 * @param exporter true si on souhaite exporter l'automate
 	 */
-	public Automate(Probleme prob, int i_parcours, boolean exporter){
+	public Automate(Probleme prob, int i_parcours){
 
 		//Initialisation des tache (transitions) pause et rien
 		int PAUSE = 1;
@@ -219,18 +219,7 @@ public class Automate {
 			auto.addTransition(etatsFinauxAncienGroupeInt[j2],fin,RIEN);
 		}
        
-        //Exporte le graph representant l'automate sous forme d'un fichier .dot si exporter est true.
-        if(exporter){
-            try {
-			    exportFichierDot(auto.toDot(), i_parcours);
-		    } catch (IOException e) {
-			    // TODO Auto-generated catch block
-			    e.printStackTrace();
-		    }
-        }
-        this.finiteAutomaton = auto;
-        this.finiteAutomaton.minimize();
-        this.finiteAutomaton.reduce();
+        this.finiteAutomaton  = auto;
 	}
 	
 	
@@ -254,12 +243,12 @@ public class Automate {
 	 * @param i_parcours l'indice du parcours a exporter dans l'indice du tableau des parcours
 	 * @throws IOException si il y a un probleme lors de la l'ecriture dans le fichier
 	 */
-	static void exportFichierDot(String aExporter, int i_parcours) throws IOException {
+	static void exportFichierDot(String aExporter, String nom_parcours) throws IOException {
 		BufferedWriter writer = null;
         try {
             //create a temporary file
-            String timeLog = new SimpleDateFormat("Parcours_"+i_parcours+"_yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-            File logFile = new File(timeLog+".dot");
+            //String timeLog = new SimpleDateFormat("Parcours_"+i_parcours+"_yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            File logFile = new File("Parcours_"+nom_parcours+".dot");
 
             // This will output the full path where the file will be written to...
             System.out.println(logFile.getCanonicalPath());
@@ -297,13 +286,16 @@ public class Automate {
 
 		//1. Initialisation des donnees a disposition des clients
 		Donnees donnees = new Donnees();
-		int nPeriodes =60*24;
+		int nPeriodes =12*24;
+		int jour = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		int mois = Calendar.getInstance().get(Calendar.MONTH)+1;
+		int annee = Calendar.getInstance().get(Calendar.YEAR); 
 
 		donnees.setNPeriodes(nPeriodes);
-		donnees.setA_MAX(60);
-		donnees.setA_MIN(5);
-		donnees.setHFermeture(20*60);
-		donnees.setHOuverture(6*60);
+		donnees.setA_MAX(6);
+		donnees.setA_MIN(2);
+		donnees.setHFermeture(20*12);
+		donnees.setHOuverture(8*12);
 
 		//Ajout ressources humaines
 		donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Obesite", 10));
@@ -354,348 +346,348 @@ public class Automate {
 		ArrayList<CoupleStringInt> listRessourceCapacite2 = new ArrayList<>();
 		listRessourceCapacite2.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite2.add(new CoupleStringInt("Box", 1));	 	 	
-		Soin ECG15 = donnees.ajoutSoin(listRessourceCapacite2, "ECG15", 15);
+		Soin ECG15 = donnees.ajoutSoin(listRessourceCapacite2, "ECG15", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite3 = new ArrayList<>();
 		listRessourceCapacite3.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite3.add(new CoupleStringInt("Box Prelevement", 1));	 	 
-		Soin BilanBiologique15 = donnees.ajoutSoin(listRessourceCapacite3, "Bilan Biologique15", 15);
+		Soin BilanBiologique15 = donnees.ajoutSoin(listRessourceCapacite3, "Bilan Biologique15", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite4 = new ArrayList<>();	 
 		listRessourceCapacite4.add(new CoupleStringInt("Hors HDJ",1));	 	 	
-		Soin EchoHepathique = donnees.ajoutSoin(listRessourceCapacite4, "Echo Hepathique", 15);
+		Soin EchoHepathique = donnees.ajoutSoin(listRessourceCapacite4, "Echo Hepathique", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite5 = new ArrayList<>();
 		listRessourceCapacite5.add(new CoupleStringInt("IDE Obesite", 1));
 		listRessourceCapacite5.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
-		Soin Calorimetrie = donnees.ajoutSoin(listRessourceCapacite5, "Calorimetrie", 30);
+		Soin Calorimetrie = donnees.ajoutSoin(listRessourceCapacite5, "Calorimetrie", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite6 = new ArrayList<>();
 		listRessourceCapacite6.add(new CoupleStringInt("Psychologue", 1));
 		listRessourceCapacite6.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin EntretienPsy = donnees.ajoutSoin(listRessourceCapacite6, "Entretien Psy", 40);
+		Soin EntretienPsy = donnees.ajoutSoin(listRessourceCapacite6, "Entretien Psy", 8);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite7 = new ArrayList<>();
 		listRessourceCapacite7.add(new CoupleStringInt("IDE Obesite", 1));
 		listRessourceCapacite7.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
-		Soin EntretienInfirmier = donnees.ajoutSoin(listRessourceCapacite7, "Entretien Infirmier", 30);
+		Soin EntretienInfirmier = donnees.ajoutSoin(listRessourceCapacite7, "Entretien Infirmier", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite8 = new ArrayList<>();
 		listRessourceCapacite8.add(new CoupleStringInt("Dieteticien", 1));
 		listRessourceCapacite8.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
-		Soin EntretienDiet60 = donnees.ajoutSoin(listRessourceCapacite8, "Entretien Diet60", 60);
+		Soin EntretienDiet60 = donnees.ajoutSoin(listRessourceCapacite8, "Entretien Diet60", 12);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite9 = new ArrayList<>();
 		listRessourceCapacite9.add(new CoupleStringInt("Nutritionniste", 1));
 		listRessourceCapacite9.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
-		Soin SyntheseNutriHDJOb = donnees.ajoutSoin(listRessourceCapacite9, "SyntheseNutriHDJOb", 30);
+		Soin SyntheseNutriHDJOb = donnees.ajoutSoin(listRessourceCapacite9, "SyntheseNutriHDJOb", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite10 = new ArrayList<>();
 		listRessourceCapacite10.add(new CoupleStringInt("IDE Obesite", 1));
 		listRessourceCapacite10.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
-		Soin RDVParamedical20 = donnees.ajoutSoin(listRessourceCapacite10, "RDV Paramedical20", 20);
+		Soin RDVParamedical20 = donnees.ajoutSoin(listRessourceCapacite10, "RDV Paramedical20", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite11 = new ArrayList<>();	 
 		listRessourceCapacite11.add(new CoupleStringInt("Hors HDJ",1));	 	 	
-		Soin TOGD = donnees.ajoutSoin(listRessourceCapacite11, "TOGD", 20);
+		Soin TOGD = donnees.ajoutSoin(listRessourceCapacite11, "TOGD", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite12 = new ArrayList<>();	 	 	 
-		Soin Collation = donnees.ajoutSoin(listRessourceCapacite12, "Collation", 15);
+		Soin Collation = donnees.ajoutSoin(listRessourceCapacite12, "Collation", 1);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite13 = new ArrayList<>();
 		listRessourceCapacite13.add(new CoupleStringInt("Interne Obesite", 1));
 		listRessourceCapacite13.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
-		Soin BilanAnthropometrique = donnees.ajoutSoin(listRessourceCapacite13, "Bilan Anthropometrique", 60);
+		Soin BilanAnthropometrique = donnees.ajoutSoin(listRessourceCapacite13, "Bilan Anthropometrique", 12);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite14 = new ArrayList<>();
 		listRessourceCapacite14.add(new CoupleStringInt("Medecin Hepato", 1));
 		listRessourceCapacite14.add(new CoupleStringInt("HDJ Obesite", 1));	 	 
-		Soin Fibroscan = donnees.ajoutSoin(listRessourceCapacite14, "Fibroscan", 10);
+		Soin Fibroscan = donnees.ajoutSoin(listRessourceCapacite14, "Fibroscan", 2);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite15 = new ArrayList<>();
 		listRessourceCapacite15.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite15.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin RDVParamedical15 = donnees.ajoutSoin(listRessourceCapacite15, "RDV Paramedical15", 15);
+		Soin RDVParamedical15 = donnees.ajoutSoin(listRessourceCapacite15, "RDV Paramedical15", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite16 = new ArrayList<>();	 
 		listRessourceCapacite16.add(new CoupleStringInt("Hors HDJ",1));	 	 	
-		Soin ScannerAbdo = donnees.ajoutSoin(listRessourceCapacite16, "Scanner Abdo", 20);
+		Soin ScannerAbdo = donnees.ajoutSoin(listRessourceCapacite16, "Scanner Abdo", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite17 = new ArrayList<>();
 		listRessourceCapacite17.add(new CoupleStringInt("Medecin Hepato", 1));
 		listRessourceCapacite17.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin EntretienHepato = donnees.ajoutSoin(listRessourceCapacite17, "Entretien Hepato", 45);
+		Soin EntretienHepato = donnees.ajoutSoin(listRessourceCapacite17, "Entretien Hepato", 9);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite18 = new ArrayList<>();
 		listRessourceCapacite18.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite18.add(new CoupleStringInt("Box Soin", 1));	 	 
-		Soin TraitementRemicade = donnees.ajoutSoin(listRessourceCapacite18, "Traitement Remicade", 120);
+		Soin TraitementRemicade = donnees.ajoutSoin(listRessourceCapacite18, "Traitement Remicade", 24);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite19 = new ArrayList<>();
 		listRessourceCapacite19.add(new CoupleStringInt("Nutritionniste", 1));
 		listRessourceCapacite19.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin SyntheseNutriCS = donnees.ajoutSoin(listRessourceCapacite19, "SyntheseNutriCS", 30);
+		Soin SyntheseNutriCS = donnees.ajoutSoin(listRessourceCapacite19, "SyntheseNutriCS", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite20 = new ArrayList<>();
 		listRessourceCapacite20.add(new CoupleStringInt("Externe", 1));
 		listRessourceCapacite20.add(new CoupleStringInt("Box Soin", 1));	 	 
-		Soin PonctionAscite = donnees.ajoutSoin(listRessourceCapacite20, "Ponction Ascite", 180);
+		Soin PonctionAscite = donnees.ajoutSoin(listRessourceCapacite20, "Ponction Ascite", 36);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite21 = new ArrayList<>();
 		listRessourceCapacite21.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite21.add(new CoupleStringInt("Box Soin", 1));	 	 
-		Soin SoinsPonction2h15 = donnees.ajoutSoin(listRessourceCapacite21, "Soins Ponction2h15", 135);
+		Soin SoinsPonction2h15 = donnees.ajoutSoin(listRessourceCapacite21, "Soins Ponction2h15", 27);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite22 = new ArrayList<>();
 		listRessourceCapacite22.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite22.add(new CoupleStringInt("Box Soin", 1));	 	 
-		Soin InjectionFerinject = donnees.ajoutSoin(listRessourceCapacite22, "Injection Ferinject", 60);
+		Soin InjectionFerinject = donnees.ajoutSoin(listRessourceCapacite22, "Injection Ferinject", 12);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite23 = new ArrayList<>();
 		listRessourceCapacite23.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite23.add(new CoupleStringInt("Box Prelevement", 1));	 	 
-		Soin Prelevement25 = donnees.ajoutSoin(listRessourceCapacite23, "Prelevement25", 25);
+		Soin Prelevement25 = donnees.ajoutSoin(listRessourceCapacite23, "Prelevement25", 5);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite24 = new ArrayList<>();
 		listRessourceCapacite24.add(new CoupleStringInt("IDE Cardio", 1));
 		listRessourceCapacite24.add(new CoupleStringInt("Box Soin", 1));
 		listRessourceCapacite24.add(new CoupleStringInt("Cardiologue", 1));	 	
-		Soin PoseHolter = donnees.ajoutSoin(listRessourceCapacite24, "Pose Holter", 15);
+		Soin PoseHolter = donnees.ajoutSoin(listRessourceCapacite24, "Pose Holter", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite25 = new ArrayList<>();
 		listRessourceCapacite25.add(new CoupleStringInt("Orthoptiste", 1));
 		listRessourceCapacite25.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin Retinographie = donnees.ajoutSoin(listRessourceCapacite25, "Retinographie", 15);
+		Soin Retinographie = donnees.ajoutSoin(listRessourceCapacite25, "Retinographie", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite26 = new ArrayList<>();	 
 		listRessourceCapacite26.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
-		Soin EchodopplerTSAetMI = donnees.ajoutSoin(listRessourceCapacite26, "Echodoppler TSA et MI", 30);
+		Soin EchodopplerTSAetMI = donnees.ajoutSoin(listRessourceCapacite26, "Echodoppler TSA et MI", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite27 = new ArrayList<>();	 
 		listRessourceCapacite27.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
-		Soin ScannerDesCorronaires = donnees.ajoutSoin(listRessourceCapacite27, "Scanner Des Corronaires", 10);
+		Soin ScannerDesCorronaires = donnees.ajoutSoin(listRessourceCapacite27, "Scanner Des Corronaires", 2);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite28 = new ArrayList<>();	 
 		listRessourceCapacite28.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
-		Soin ScintigraphieMyocardique = donnees.ajoutSoin(listRessourceCapacite28, "Scintigraphie Myocardique", 30);
+		Soin ScintigraphieMyocardique = donnees.ajoutSoin(listRessourceCapacite28, "Scintigraphie Myocardique", 6);
 		//System.out.println("done");
 		ArrayList<CoupleStringInt> listRessourceCapacite29 = new ArrayList<>();	 
 		listRessourceCapacite29.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
-		Soin Injection = donnees.ajoutSoin(listRessourceCapacite29, "Injection", 40);
+		Soin Injection = donnees.ajoutSoin(listRessourceCapacite29, "Injection", 8);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite30 = new ArrayList<>();
 		listRessourceCapacite30.add(new CoupleStringInt("Diabetologue", 1));
 		listRessourceCapacite30.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin RDVMedical40 = donnees.ajoutSoin(listRessourceCapacite30, "RDV Medical40", 40);
+		Soin RDVMedical40 = donnees.ajoutSoin(listRessourceCapacite30, "RDV Medical40", 8);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite31 = new ArrayList<>();
 		listRessourceCapacite31.add(new CoupleStringInt("Dieteticien", 1));
 		listRessourceCapacite31.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin EntretienDiet30 = donnees.ajoutSoin(listRessourceCapacite31, "Entretien Diet30", 30);
+		Soin EntretienDiet30 = donnees.ajoutSoin(listRessourceCapacite31, "Entretien Diet30", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite32 = new ArrayList<>();
 		listRessourceCapacite32.add(new CoupleStringInt("Diabetologue", 1));
 		listRessourceCapacite32.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin RDVMedical35 = donnees.ajoutSoin(listRessourceCapacite32, "RDV Medical35", 35);
+		Soin RDVMedical35 = donnees.ajoutSoin(listRessourceCapacite32, "RDV Medical35", 7);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite33 = new ArrayList<>();
 		listRessourceCapacite33.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite33.add(new CoupleStringInt("Box Prelevement", 1));	 	 
-		Soin Prelevement15 = donnees.ajoutSoin(listRessourceCapacite33, "Prelevement15", 15);
+		Soin Prelevement15 = donnees.ajoutSoin(listRessourceCapacite33, "Prelevement15", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite34 = new ArrayList<>();	 
 		listRessourceCapacite34.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
-		Soin ScannerTMDPiedRadios = donnees.ajoutSoin(listRessourceCapacite34, "Scanner TMD Pied + Radios", 40);
+		Soin ScannerTMDPiedRadios = donnees.ajoutSoin(listRessourceCapacite34, "Scanner TMD Pied + Radios", 8);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite35 = new ArrayList<>();	 
 		listRessourceCapacite35.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
-		Soin DopplerDesArteresDesMI = donnees.ajoutSoin(listRessourceCapacite35, "Doppler Des Arteres Des MI", 30);
+		Soin DopplerDesArteresDesMI = donnees.ajoutSoin(listRessourceCapacite35, "Doppler Des Arteres Des MI", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite36 = new ArrayList<>();
 		listRessourceCapacite36.add(new CoupleStringInt("Podologue", 1));
 		listRessourceCapacite36.add(new CoupleStringInt("IDE Pansement", 1));
 		listRessourceCapacite36.add(new CoupleStringInt("Medecin", 1));
 		listRessourceCapacite36.add(new CoupleStringInt("Salle Pansement", 1));	
-		Soin SoinPansementMesuresIPS = donnees.ajoutSoin(listRessourceCapacite36, "Soin, Pansement, Mesures IPS", 40);
+		Soin SoinPansementMesuresIPS = donnees.ajoutSoin(listRessourceCapacite36, "Soin, Pansement, Mesures IPS", 8);
 		//System.out.println("done");
 		ArrayList<CoupleStringInt> listRessourceCapacite37 = new ArrayList<>();
 		listRessourceCapacite37.add(new CoupleStringInt("IDE Pompe Insuline", 1));
 		listRessourceCapacite37.add(new CoupleStringInt("Diabetologue", 1));
 		listRessourceCapacite37.add(new CoupleStringInt("Bureau CS", 1));	 	
-		Soin PosePompeEtOuHolter = donnees.ajoutSoin(listRessourceCapacite37, "Pose Pompe Et/Ou Holter", 30);
+		Soin PosePompeEtOuHolter = donnees.ajoutSoin(listRessourceCapacite37, "Pose Pompe Et/Ou Holter", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite38 = new ArrayList<>();
 		listRessourceCapacite38.add(new CoupleStringInt("Medecin Sommeil", 1));
 		listRessourceCapacite38.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin RDVMedical20BurCS = donnees.ajoutSoin(listRessourceCapacite38, "RDV Medical20BurCS", 20);
+		Soin RDVMedical20BurCS = donnees.ajoutSoin(listRessourceCapacite38, "RDV Medical20BurCS", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite39 = new ArrayList<>();
 		listRessourceCapacite39.add(new CoupleStringInt("Psychologue", 1));
 		listRessourceCapacite39.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin ConsultationPsy20 = donnees.ajoutSoin(listRessourceCapacite39, "Consultation Psy20", 20);
+		Soin ConsultationPsy20 = donnees.ajoutSoin(listRessourceCapacite39, "Consultation Psy20", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite40 = new ArrayList<>();
 		listRessourceCapacite40.add(new CoupleStringInt("IDE Sommeil", 1));
 		listRessourceCapacite40.add(new CoupleStringInt("Explorations Fonctionnelles", 1));	 
-		Soin Examens30 = donnees.ajoutSoin(listRessourceCapacite40, "Examens30", 30);
+		Soin Examens30 = donnees.ajoutSoin(listRessourceCapacite40, "Examens30", 6);
 		//System.out.println("done");
 		ArrayList<CoupleStringInt> listRessourceCapacite41 = new ArrayList<>();
 		listRessourceCapacite41.add(new CoupleStringInt("IDE Sommeil", 1));
 		listRessourceCapacite41.add(new CoupleStringInt("Piece Isolee Avec Fauteuil", 1));	 
-		Soin Appareillage60 = donnees.ajoutSoin(listRessourceCapacite41, "Appareillage60", 60);
+		Soin Appareillage60 = donnees.ajoutSoin(listRessourceCapacite41, "Appareillage60", 12);
 		//System.out.println("done");
 		ArrayList<CoupleStringInt> listRessourceCapacite42 = new ArrayList<>();
 		listRessourceCapacite42.add(new CoupleStringInt("Medecin Sommeil", 1));
 		listRessourceCapacite42.add(new CoupleStringInt("Bureau Sommeil", 1));	 	 
-		Soin RDVMedical20BurSom = donnees.ajoutSoin(listRessourceCapacite42, "RDV Medical20BurSom", 20);
+		Soin RDVMedical20BurSom = donnees.ajoutSoin(listRessourceCapacite42, "RDV Medical20BurSom", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite43 = new ArrayList<>();
 		listRessourceCapacite43.add(new CoupleStringInt("Medecin Sommeil", 1));
 		listRessourceCapacite43.add(new CoupleStringInt("Psychologue", 1));
 		listRessourceCapacite43.add(new CoupleStringInt("Prestataire", 1));
 		listRessourceCapacite43.add(new CoupleStringInt("Salle ETP Groupe", 1));	
-		Soin ETPSom = donnees.ajoutSoin(listRessourceCapacite43, "ETPSom", 90);
+		Soin ETPSom = donnees.ajoutSoin(listRessourceCapacite43, "ETPSom", 18);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite44 = new ArrayList<>();
 		listRessourceCapacite44.add(new CoupleStringInt("IDE Sommeil", 1));
 		listRessourceCapacite44.add(new CoupleStringInt("Prestataire", 1));
 		listRessourceCapacite44.add(new CoupleStringInt("Salle Avec Lit", 1));	 	
-		Soin Appareillage45 = donnees.ajoutSoin(listRessourceCapacite44, "Appareillage45", 45);
+		Soin Appareillage45 = donnees.ajoutSoin(listRessourceCapacite44, "Appareillage45", 9);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite45 = new ArrayList<>();
 		listRessourceCapacite45.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite45.add(new CoupleStringInt("Box Prelevement", 1));	 	 
-		Soin BilanBiologique20 = donnees.ajoutSoin(listRessourceCapacite45, "Bilan Biologique20", 20);
-		
+		Soin BilanBiologique20 = donnees.ajoutSoin(listRessourceCapacite45, "Bilan Biologique20", 4);
+
 		ArrayList<CoupleStringInt> listRessourceCapacite46 = new ArrayList<>();
 		listRessourceCapacite46.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite46.add(new CoupleStringInt("Box", 1));	 	 	
-		Soin ECG10 = donnees.ajoutSoin(listRessourceCapacite46, "ECG10", 10);
+		Soin ECG10 = donnees.ajoutSoin(listRessourceCapacite46, "ECG10", 2);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite47 = new ArrayList<>();	 	 	 
-		Soin TestDEfforts = donnees.ajoutSoin(listRessourceCapacite47, "Test D'Efforts", 25);
+		Soin TestDEfforts = donnees.ajoutSoin(listRessourceCapacite47, "Test D'Efforts", 5);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite48 = new ArrayList<>();
 		listRessourceCapacite48.add(new CoupleStringInt("Selon Profil", 1));
 		listRessourceCapacite48.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin Consultations = donnees.ajoutSoin(listRessourceCapacite48, "Consultations", 30);
+		Soin Consultations = donnees.ajoutSoin(listRessourceCapacite48, "Consultations", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite49 = new ArrayList<>();	 
 		listRessourceCapacite49.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin ExplorationsFonctionnellesOuMorphologiques = donnees.ajoutSoin(listRessourceCapacite49, "Explorations Fonctionnelles Ou Morphologiques", 40);
+		Soin ExplorationsFonctionnellesOuMorphologiques = donnees.ajoutSoin(listRessourceCapacite49, "Explorations Fonctionnelles Ou Morphologiques", 8);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite50 = new ArrayList<>();
 		listRessourceCapacite50.add(new CoupleStringInt("Cardiologue", 1));
 		listRessourceCapacite50.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin Bilan = donnees.ajoutSoin(listRessourceCapacite50, "Bilan", 30);
+		Soin Bilan = donnees.ajoutSoin(listRessourceCapacite50, "Bilan", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite51 = new ArrayList<>();
 		listRessourceCapacite51.add(new CoupleStringInt("Kine", 1));
 		listRessourceCapacite51.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin TestFonctionnel = donnees.ajoutSoin(listRessourceCapacite51, "Test Fonctionnel", 20);
+		Soin TestFonctionnel = donnees.ajoutSoin(listRessourceCapacite51, "Test Fonctionnel", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite52 = new ArrayList<>();	 
 		listRessourceCapacite52.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin IRM40 = donnees.ajoutSoin(listRessourceCapacite52, "IRM40", 40);
+		Soin IRM40 = donnees.ajoutSoin(listRessourceCapacite52, "IRM40", 8);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite53 = new ArrayList<>();	 
 		listRessourceCapacite53.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin EchoCardiaque = donnees.ajoutSoin(listRessourceCapacite53, "Echo Cardiaque", 20);
+		Soin EchoCardiaque = donnees.ajoutSoin(listRessourceCapacite53, "Echo Cardiaque", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite54 = new ArrayList<>();
 		listRessourceCapacite54.add(new CoupleStringInt("Cardiologue", 1));
 		listRessourceCapacite54.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin ExamenClinique30 = donnees.ajoutSoin(listRessourceCapacite54, "Examen Clinique30", 30);
+		Soin ExamenClinique30 = donnees.ajoutSoin(listRessourceCapacite54, "Examen Clinique30", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite55 = new ArrayList<>();
 		listRessourceCapacite55.add(new CoupleStringInt("IDE Cardio", 1));
 		listRessourceCapacite55.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin ETPCard = donnees.ajoutSoin(listRessourceCapacite55, "ETPCard", 30);
+		Soin ETPCard = donnees.ajoutSoin(listRessourceCapacite55, "ETPCard", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite56 = new ArrayList<>();	 
 		listRessourceCapacite56.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin MedecineNucleaire = donnees.ajoutSoin(listRessourceCapacite56, "Medecine Nucleaire", 30);
+		Soin MedecineNucleaire = donnees.ajoutSoin(listRessourceCapacite56, "Medecine Nucleaire", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite57 = new ArrayList<>();
 		listRessourceCapacite57.add(new CoupleStringInt("Agent Accueil", 1));	 	 	 
-		Soin RDVAccueil = donnees.ajoutSoin(listRessourceCapacite57, "RDV Accueil", 5);
+		Soin RDVAccueil = donnees.ajoutSoin(listRessourceCapacite57, "RDV Accueil", 1);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite58 = new ArrayList<>();
 		listRessourceCapacite58.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite58.add(new CoupleStringInt("Box Prelevement", 1));	 	 
-		Soin Prelevement20 = donnees.ajoutSoin(listRessourceCapacite58, "Prelevement20", 20);
+		Soin Prelevement20 = donnees.ajoutSoin(listRessourceCapacite58, "Prelevement20", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite59 = new ArrayList<>();	 
 		listRessourceCapacite59.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin IRM45 = donnees.ajoutSoin(listRessourceCapacite59, "IRM45", 45);
+		Soin IRM45 = donnees.ajoutSoin(listRessourceCapacite59, "IRM45", 9);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite60 = new ArrayList<>();	 
 		listRessourceCapacite60.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin ARM = donnees.ajoutSoin(listRessourceCapacite60, "ARM", 15);
+		Soin ARM = donnees.ajoutSoin(listRessourceCapacite60, "ARM", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite61 = new ArrayList<>();	 
 		listRessourceCapacite61.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin EchodopplerTSA = donnees.ajoutSoin(listRessourceCapacite61, "Echodoppler TSA", 20);
+		Soin EchodopplerTSA = donnees.ajoutSoin(listRessourceCapacite61, "Echodoppler TSA", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite62 = new ArrayList<>();
 		listRessourceCapacite62.add(new CoupleStringInt("Neurologue", 1));
 		listRessourceCapacite62.add(new CoupleStringInt("Box Soin", 1));	 	 
-		Soin ETT = donnees.ajoutSoin(listRessourceCapacite62, "ETT", 20);
+		Soin ETT = donnees.ajoutSoin(listRessourceCapacite62, "ETT", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite63 = new ArrayList<>();
 		listRessourceCapacite63.add(new CoupleStringInt("IDE Cardio", 1));
 		listRessourceCapacite63.add(new CoupleStringInt("Box Soin", 1));	 	 
-		Soin Holter = donnees.ajoutSoin(listRessourceCapacite63, "Holter", 30);
+		Soin Holter = donnees.ajoutSoin(listRessourceCapacite63, "Holter", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite64 = new ArrayList<>();
 		listRessourceCapacite64.add(new CoupleStringInt("Cardiologue", 1));
 		listRessourceCapacite64.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin BilanCardiaque = donnees.ajoutSoin(listRessourceCapacite64, "Bilan Cardiaque", 20);
+		Soin BilanCardiaque = donnees.ajoutSoin(listRessourceCapacite64, "Bilan Cardiaque", 4);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite65 = new ArrayList<>();
 		listRessourceCapacite65.add(new CoupleStringInt("Neurologue", 1));
 		listRessourceCapacite65.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin SyntheseNeuro = donnees.ajoutSoin(listRessourceCapacite65, "SyntheseNeuro", 30);
+		Soin SyntheseNeuro = donnees.ajoutSoin(listRessourceCapacite65, "SyntheseNeuro", 6);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite66 = new ArrayList<>();
 		listRessourceCapacite66.add(new CoupleStringInt("Neurologue", 1));
 		listRessourceCapacite66.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin ExamenClinique15 = donnees.ajoutSoin(listRessourceCapacite66, "Examen Clinique15", 15);
+		Soin ExamenClinique15 = donnees.ajoutSoin(listRessourceCapacite66, "Examen Clinique15", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite67 = new ArrayList<>();	 
 		listRessourceCapacite67.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin EEG = donnees.ajoutSoin(listRessourceCapacite67, "EEG", 40);
+		Soin EEG = donnees.ajoutSoin(listRessourceCapacite67, "EEG", 8);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite68 = new ArrayList<>();	 
 		listRessourceCapacite68.add(new CoupleStringInt("Hors HDJ", 1));	 	 
-		Soin ScintigraphieCerebrale = donnees.ajoutSoin(listRessourceCapacite68, "Scintigraphie Cérébrale", 40);
+		Soin ScintigraphieCerebrale = donnees.ajoutSoin(listRessourceCapacite68, "Scintigraphie Cérébrale", 8);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite69 = new ArrayList<>();
 		listRessourceCapacite69.add(new CoupleStringInt("Generaliste", 1));
 		listRessourceCapacite69.add(new CoupleStringInt("Box Soin", 1));	 	 
-		Soin PonctionLombaire = donnees.ajoutSoin(listRessourceCapacite69, "Ponction Lombaire", 15);
+		Soin PonctionLombaire = donnees.ajoutSoin(listRessourceCapacite69, "Ponction Lombaire", 3);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite70 = new ArrayList<>();
 		listRessourceCapacite70.add(new CoupleStringInt("IDE", 1));
 		listRessourceCapacite70.add(new CoupleStringInt("Box Soin", 1));	 	 
-		Soin SoinsPonction3h = donnees.ajoutSoin(listRessourceCapacite70, "Soins Ponction3h", 180);
+		Soin SoinsPonction3h = donnees.ajoutSoin(listRessourceCapacite70, "Soins Ponction3h", 36);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite71 = new ArrayList<>();
 		listRessourceCapacite71.add(new CoupleStringInt("Neuropsy", 1));
 		listRessourceCapacite71.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin ConsultationNeuropsy = donnees.ajoutSoin(listRessourceCapacite71, "Consultation Neuropsy", 180);
+		Soin ConsultationNeuropsy = donnees.ajoutSoin(listRessourceCapacite71, "Consultation Neuropsy", 36);
 
 		ArrayList<CoupleStringInt> listRessourceCapacite72 = new ArrayList<>();
 		listRessourceCapacite72.add(new CoupleStringInt("Psychologue", 1));
 		listRessourceCapacite72.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin ConsultationPsy30 = donnees.ajoutSoin(listRessourceCapacite72, "Consultation Psy30", 30);	 	 
+		Soin ConsultationPsy30 = donnees.ajoutSoin(listRessourceCapacite72, "Consultation Psy30", 6);	 	 
 
 		ArrayList<CoupleStringInt> listRessourceCapacite73 = new ArrayList<>();
 		listRessourceCapacite72.add(new CoupleStringInt("Diabetologue", 1));
 		listRessourceCapacite72.add(new CoupleStringInt("Dieteticien", 1));
 		listRessourceCapacite72.add(new CoupleStringInt("IDE Insulonitherapie", 1));
 		listRessourceCapacite72.add(new CoupleStringInt("Bureau CS", 1));	 	 
-		Soin RDVMedicalDiet = donnees.ajoutSoin(listRessourceCapacite73, "RDV Medical Diet", 30);	 	 
+		Soin RDVMedicalDiet = donnees.ajoutSoin(listRessourceCapacite73, "RDV Medical Diet", 6);	 	 
 
 
 
@@ -891,7 +883,7 @@ public class Automate {
 		GroupeSoins[] P15G = {G1P15, G2P15, G3P15, G4P15, G5P15};
 		Parcours P15  = new Parcours(P15G, "15");
 
-/*		// On crée le Parcours 16
+		/*		// On crée le Parcours 16
 		Soin[] G1P16S = {RDVMedical20BurSom};
 		GroupeSoins G1P16 = new GroupeSoins(G1P16S);
 		Soin[] G2P16S = {ETP};
@@ -922,7 +914,7 @@ public class Automate {
 		GroupeSoins G6P17 = new GroupeSoins(G6P17S);
 		GroupeSoins[] P17G = {G1P17, G2P17, G3P17, G4P17, G5P17, G6P17};
 		Parcours P17  = new Parcours(P17G, 17);
-*/
+		 */
 		// On crée le Parcours 7
 		Soin[] G1P20S = {BilanBiologique20};
 		GroupeSoins G1P20 = new GroupeSoins(G1P20S);
@@ -969,7 +961,7 @@ public class Automate {
 		GroupeSoins[] P23G = {G1P23, G2P23, G3P23, G4P23, G5P23};
 		Parcours P23  = new Parcours(P23G, "23");
 
-/*		// On crée le Parcours 24
+		/*		// On crée le Parcours 24
 		Soin[] G1P24S = {RDVAccueil};
 		GroupeSoins G1P24 = new GroupeSoins(G1P24S);
 		Soin[] G2P24S = {ExamenClinique15};
@@ -984,8 +976,8 @@ public class Automate {
 		GroupeSoins G6P24 = new GroupeSoins(G6P24S);
 		GroupeSoins[] P24G = {G1P24, G2P24, G3P24, G4P24, G5P24, G6P24};
 		Parcours P24  = new Parcours(P24G, 24);
-*/
-		
+		 */
+
 		// On crée le Parcours 25
 		Soin[] G1P25S = {RDVAccueil};
 		GroupeSoins G1P25 = new GroupeSoins(G1P25S);
@@ -1019,18 +1011,43 @@ public class Automate {
 		donnees.ajoutParcours(P1);
 		donnees.ajoutParcours(P2);
 		donnees.ajoutParcours(P3);
-
-		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P3, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P1, new Date(25,1,2016)));
-		donnees.ajoutPatient(new Patient(P2, new Date(25,1,2016)));
-
-		//2. Creation du probleme mathematique associee
+		donnees.ajoutParcours(P4);
+		donnees.ajoutParcours(P5);
+		donnees.ajoutParcours(P6);
+		donnees.ajoutParcours(P8);
+		donnees.ajoutParcours(P9);
+		donnees.ajoutParcours(P10);
+		donnees.ajoutParcours(P11);
+		donnees.ajoutParcours(P12);
+		donnees.ajoutParcours(P13);
+		donnees.ajoutParcours(P15);
+		donnees.ajoutParcours(P20);
+		donnees.ajoutParcours(P21);
+		donnees.ajoutParcours(P22);
+		donnees.ajoutParcours(P23);
+		donnees.ajoutParcours(P25);
+		donnees.ajoutParcours(P26);
+		
 		Probleme aResoudre = new Probleme(donnees);
 		
-		Automate automate = new Automate(aResoudre, 2,false);
-}
+		Automate[] automates = new Automate[donnees.getParcours().length];
+		
+		long t0 = System.currentTimeMillis();
+		for (int j = 0; j < donnees.getParcours().length; j++) {
+			automates[j] =  new Automate (aResoudre, j);
+			try {
+				Automate.exportFichierDot(automates[j].getFiniteAutomaton().toDot(),donnees.getParcours()[j].getNumeroParcours() );
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		long t1 = System.currentTimeMillis();
+		long duree =t1-t0;
+		
+		System.out.println("Duree creation des automates : "+duree);
+		    
+	}
 	
 	
 	

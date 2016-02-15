@@ -5,6 +5,7 @@ import dev.Probleme;
 import org.chocosolver.solver.ResolutionPolicy;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.search.solution.Solution;
+import org.chocosolver.solver.search.strategy.IntStrategyFactory;
 import org.chocosolver.solver.trace.Chatterbox;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VF;
@@ -67,11 +68,12 @@ public class Resolution {
 		contraintes.contrainteHeureFermeture();
 		contraintes.contraintePrecedenceGroupe();
 		contraintes.contrainteCapaciteRessources();
-		contraintes.contrainteAutomate(false);
+		contraintes.contrainteAutomate();
 		
         // 4. Definition de la strategie de resolution
-       // solver.set(IntStrategyFactory.lexico_LB());
+        //solver.set(IntStrategyFactory.);
         
+		
         // 5. Definition de la fonction objectif	
 		FonctionObjectif fonctionObjectif = new FonctionObjectif(aResoudre, solver, X);
         IntVar objective = fonctionObjectif.minimiserTemps();

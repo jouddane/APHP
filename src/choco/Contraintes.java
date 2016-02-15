@@ -1,6 +1,9 @@
 package choco;
 
+import dev.Donnees;
 import dev.Probleme;
+
+import java.io.IOException;
 
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.constraints.Constraint;
@@ -190,13 +193,17 @@ public class Contraintes {
 	 * Ajoute les contraintes definies par les automates permettant d'ajouter les contraintes sur : les relations de precedence entre les groupes de soins, la duree des soins et la duree des pauses
 	 * @param export si export true, les graphes des automates utilises seront exportes sous forme de fichiers .dot, sinon pas d'export
 	 */
-	public void contrainteAutomate(boolean export){
+	public void contrainteAutomate(){
 		//Creation des automates, 1 par parcours
 		Automate[] automates = new Automate[aResoudre.getnParcours()];
 		
+		long t0 = System.currentTimeMillis();
 		for (int j = 0; j < aResoudre.getnParcours(); j++) {
-			automates[j] =  new Automate (aResoudre, j, export);
+			automates[j] =  new Automate (aResoudre, j);
 		}
+		long t1 = System.currentTimeMillis();
+		long duree =t1-t0;
+		System.out.println("Duree creation des automates : "+duree);
 		
 		for (int i = 0; i < aResoudre.getnPatients(); i++) {
 			int indiceSoinsMax = automates[aResoudre.getP_i()[i]].getIndicesSoins()[automates[aResoudre.getP_i()[i]].getIndicesSoins().length-1][automates[aResoudre.getP_i()[i]].getIndicesSoins()[automates[aResoudre.getP_i()[i]].getIndicesSoins().length-1].length-1];
