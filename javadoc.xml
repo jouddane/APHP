@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="private" author="true" classpath="/home/mathieu/Travail/Programmation/Java/choco-3.3.3/choco-solver-3.3.3-with-dependencies.jar:/home/mathieu/Travail/Programmation/Java/jfreechart-1.0.19/lib/jfreesvg-2.0.jar:/home/mathieu/Travail/Programmation/Java/jfreechart-1.0.19/lib/orsoncharts-1.4-eval-nofx.jar:/home/mathieu/Travail/Programmation/Java/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar:/home/mathieu/Travail/Programmation/Java/jfreechart-1.0.19/lib/orsonpdf-1.6-eval.jar:/home/mathieu/Travail/Programmation/Java/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar:/home/mathieu/Travail/Programmation/Java/jfreechart-1.0.19/lib/jcommon-1.0.23.jar:/home/mathieu/Travail/Programmation/Java/jfreechart-1.0.19/lib/jfreechart-1.0.19-experimental.jar" destdir="doc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="dev,maths,choco,visu" source="1.8" sourcepath="src" splitindex="true" use="true" version="true">
+            <link href="file:/home/mathieu/Travail/Programmation/Java/newWorkspace/APHP_Projet_Option/doc/"/>
+        </javadoc>
+    </target>
+</project>

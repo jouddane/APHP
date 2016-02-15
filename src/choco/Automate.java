@@ -27,18 +27,25 @@ import dev.Soin;
 
 public class Automate {
 
-	//L'entier 0 est utilise pour representer la tache correspondant a RIEN dans l'automate
+	/**
+	 * L'entier 0 est utilise pour representer la tache correspondant a RIEN dans l'automate
+	 */
     public static final Integer RIEN = 0;
     
-	//Represente les valeures entieres utilisees pour representer les soins sous forme de transition dans l'automate
+	/**
+	 * Represente les valeures entieres utilisees pour representer les soins sous forme de transition dans l'automate
+	 */
 	private int[][] indicesSoins;
-	//Represente le FiniteAutomaton utilise pour definir les contraintes
+	/**
+	 * Represente le FiniteAutomaton utilise pour definir les contraintes
+	 */
 	private FiniteAutomaton finiteAutomaton;
 	
 	/**
 	 * Permet de creer l'automate associe au parcours d'indice i_parcours dans prob.getParcours()
 	 * @param prob le probleme d'optimisation que l'on cherche a resoudre
 	 * @param i_parcours indice du parcours pour lequel on souhaite associe un automate dans prob.getParcours()
+	 * @param exporter true si on souhaite exporter l'automate
 	 */
 	public Automate(Probleme prob, int i_parcours, boolean exporter){
 
@@ -229,8 +236,8 @@ public class Automate {
 	
 	/**
 	 * Methode permettant le calcul de a! 
-	 * @param a
-	 * @return a!
+	 * @param a l'entier dont on veut la factorielle
+	 * @return la factorielle de l'entier
 	 */
 	public static int factoriel(int a){
 		if(a==0){
@@ -244,7 +251,8 @@ public class Automate {
 	/**
 	 * Exporte le graphe associe a l'automate dans un fichier .dot
 	 * @param aExporter String correspondant a la representation du graphes de l'automate au format .dot
-	 * @throws IOException
+	 * @param i_parcours l'indice du parcours a exporter dans l'indice du tableau des parcours
+	 * @throws IOException si il y a un probleme lors de la l'ecriture dans le fichier
 	 */
 	static void exportFichierDot(String aExporter, int i_parcours) throws IOException {
 		BufferedWriter writer = null;

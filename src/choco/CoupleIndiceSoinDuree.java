@@ -5,9 +5,13 @@ package choco;
  */
 public class CoupleIndiceSoinDuree {
 
-	//L'indice du soin
+	/**
+	 * L'indice du soin
+	 */
 	private int indiceSoin;
-	//La duree du soin
+	/**
+	 * La duree du soin
+	 */
 	private int duree;
 	
 	/**
@@ -31,7 +35,7 @@ public class CoupleIndiceSoinDuree {
 	
 	/**
 	 * setter de la variable d'instance indiceSoin
-	 * @param indiceSoin
+	 * @param indiceSoin le nouvel indice du soin
 	 */
 	public void setIndiceSoin(int indiceSoin) {
 		this.indiceSoin = indiceSoin;

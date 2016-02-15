@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="/Users/Baptiste/Documents/Cours_A3/Choco/choco-3.3.3/choco-solver-3.3.3-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="/Users/Baptiste/Documents/Cours_A3/Projet_Option/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar"/>
+	<classpathentry kind="lib" path="/home/mathieu/Travail/Programmation/Java/choco-3.3.3/choco-solver-3.3.3-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="/home/mathieu/Travail/Programmation/Java/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -7,9 +7,13 @@ import java.util.ArrayList;
  */
 public class Etat {
 
-	//Liste des soins realisables, c'est a dire pouvant etre utilise comme transition entre etat et les etats qui lui succedent 
+	/**
+	 * Liste des soins realisables, c'est a dire pouvant etre utilise comme transition entre etat et les etats qui lui succedent 
+	 */
 	private ArrayList<CoupleIndiceSoinDuree> listPossibilite;
-	//Valeur entiere reprensentant la place de l'etat dans l'automate. Cette valeur sera definie par un appel de la methode state() de la classe FinietAutomaton
+	/**
+	 * Valeur entiere reprensentant la place de l'etat dans l'automate. Cette valeur sera definie par un appel de la methode state() de la classe FinietAutomaton
+	 */
 	private int etatInt;
 	
 	/**

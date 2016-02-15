@@ -15,11 +15,17 @@ import org.chocosolver.solver.variables.VariableFactory;
 public class FonctionObjectif {
 
 
-	//Le probleme d'optimisation que l'on cherche a resoudre, pour lequel on souhaite definir une fonction Objectif
+	/**
+	 * Le probleme d'optimisation que l'on cherche a resoudre, pour lequel on souhaite definir une fonction Objectif
+	 */
 	private Probleme aResoudre;
-	//Le solver choco utilise pour la resolution
+	/**
+	 * Le solver choco utilise pour la resolution
+	 */
 	private Solver solver;
-	//Les variables choco X[i][j][k] correspondant aux periodes de debut de realisation des soins
+	/**
+	 * Les variables choco X[i][j][k] correspondant aux periodes de debut de realisation des soins
+	 */
 	private IntVar[][][]  X;
 	
 	/**

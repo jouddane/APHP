@@ -196,7 +196,6 @@ public class Donnees {
 	
     /**
      * Methode retournant un nouveau soin
-     * @param donnees les donnees du probleme
      * @param listeRessourcesCapacite les ccapacites en ressources necessaires par le soin a creer
      * @param nom le nom du soin
      * @param duree la duree du soin
@@ -231,7 +230,7 @@ public class Donnees {
 	}
 	
 	/**
-	 * @param nom  le numero du parcours
+	 * @param numero  le numero du parcours
 	 * @return l'indice du parcours dont le numero correspond au numero en parametre si il existe, -1 sinon
 	 */
 	public int getParcours(String numero){

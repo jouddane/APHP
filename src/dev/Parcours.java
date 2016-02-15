@@ -14,7 +14,7 @@ public class Parcours {
 	/***
 	 * Constructeur d'un parcours identifie par un indice donne,et constitue a partir d'un tableau de groupe de soins. 
 	 * @param groupesSoins le tableau de groupes de soins
-	 * @param indice l'indice du parcours
+	 * @param numero le numero du parcours
 	 */
 	public Parcours(GroupeSoins[] groupesSoins, String numero){
 		this.nombreDeGroupes = groupesSoins.length;
@@ -55,7 +55,7 @@ public class Parcours {
 	}
 	
 	/** 
-	 * @param indiceParcours le nouvel indice du parcours
+	 * @param numeroParcours le nouvel indice du parcours
 	 */
 	public void setNumeroParcours(String numeroParcours) {
 		this.numeroParcours = numeroParcours;
