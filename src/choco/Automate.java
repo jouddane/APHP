@@ -4,10 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.rmi.server.ExportException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,167 +20,28 @@ import dev.Probleme;
 import dev.Ressource;
 import dev.Soin;
 
-/*
- * Classe representant les automates utilisees pour representer la succession de soins (relation de precedence, duree, pauses, etc) que les patients doivent suivre en fonction de leur parcours
+/**
+ * Classe representant les automates utilisees pour definir les contraintes sur : les relations de precedence entre les groupes de soins, la duree des soins et la duree des pauses. 
+ * Il est necessaire de creer un automate pour chaque parcours.
  */
 
 public class Automate {
 
-	
-	private Probleme p;
-	public static final Integer RIEN = 0;
+	//L'entier 0 est utilise pour representer la tache correspondant a RIEN dans l'automate
+    public static final Integer RIEN = 0;
+    
+	//Represente les valeures entieres utilisees pour representer les soins sous forme de transition dans l'automate
 	private int[][] indicesSoins;
+	//Represente le FiniteAutomaton utilise pour definir les contraintes
 	private FiniteAutomaton finiteAutomaton;
 	
-	
-	//Rajouter les pauses entre les taches (toutes) et les mettre correctement entre les groupes
-	//Rajouter le rien a la fin
-	//TEnir compte que collation a une duree de 1
-	
-	/*
-	public Automate(Probleme p, int i_parcours){
-		
-		//Initialisation tache pause et rien
-		int RIEN = 0;
-		int PAUSE = 1;
-		
-		//Association d'indices a chaque soins, pause et rien
-		//IndiceSoins[i][j] represent l'indice utilisee dans l'automate pour representer le soin j du groupe de soin i du parcours p 
-		int[][] indiceSoins = new int[p.getnG_i()[i_parcours]][];
-		int j=0;
-		int indiceSoin =2;
-		while ( j < indiceSoins.length) {
-			indiceSoins[j]=new int[p.getnS_ij()[i_parcours][j]];
-			int k=0;
-			while (k < indiceSoins[j].length) {
-				indiceSoins[j][k]=indiceSoin;
-				k++;
-				indiceSoin++;
-			}
-			j++;
-		}
-		
-		//Creation de l'automate
-        FiniteAutomaton auto = new FiniteAutomaton();
-        int debut = auto.addState();
-        auto.setInitialState(debut);
-        int fin = auto.addState();
-        auto.setFinal(debut);
-        auto.setFinal(fin);
-
-        //Ajout transition entre les etats debut et fin
-        auto.addTransition(debut, debut, RIEN);
-        auto.addTransition(fin, fin, RIEN);
-        
-        //Initialisation de tous les etats possibles (en terme de combinaisons de soins realisables apres l'Etat)
-        Etat[][][] etatsNiveau = new Etat[p.getnG_i()[i_parcours]][][];
-        for (int indiceGroupe = 0; indiceGroupe < p.getnG_i()[i_parcours]; indiceGroupe++) {
-        	etatsNiveau[indiceGroupe] = new Etat[p.getnS_ij()[i_parcours][indiceGroupe]+1][];
-			for (int indiceNiveau = 0; indiceNiveau < etatsNiveau[indiceGroupe].length; indiceNiveau++) {
-				//nombre de soins du groupe indiceGroupe 
-				int nbEtatsNiveauIndiceNiveau = factoriel(p.getnS_ij()[i_parcours][indiceGroupe])/factoriel(p.getnS_ij()[i_parcours][indiceGroupe]-indiceNiveau);
-				etatsNiveau[indiceGroupe][indiceNiveau]= new Etat[nbEtatsNiveauIndiceNiveau];
-				for (int k = 0; k < nbEtatsNiveauIndiceNiveau; k++) {
-					etatsNiveau[indiceGroupe][indiceNiveau][k]= new Etat();
-				}
-			}
-		}
-        
-      //Creation des listes de possibilites (soins realisables) dans le groupe de soin 0 
-        
-        int etatFinalAncienGroupeInt = debut; 
-        
-        //A modif
-        for(int indiceGroupe = 0; indiceGroupe<p.getnG_i()[i_parcours]; indiceGroupe++){
-        	ArrayList<CoupleIndiceSoinDuree> listPossibilitesGroupe = new ArrayList();
-        	for (int j2 = 0; j2 < indiceSoins[indiceGroupe].length; j2++) {
-        		//duree du soin j2 du groupe indicegroupe 
-        		listPossibilitesGroupe.add(new CoupleIndiceSoinDuree(indiceSoins[indiceGroupe][j2],p.getL_ijk()[i_parcours][indiceGroupe][j2]));
-        	}
-
-        	etatsNiveau[indiceGroupe][0][0] = new Etat(listPossibilitesGroupe,auto.addState());
-       
-        
-        	
-        	//Certainement a modifier par la suite (Pause voir meme pas de charactere du tout)
-        	auto.addTransition(etatFinalAncienGroupeInt,etatsNiveau[indiceGroupe][0][0].getEtatInt() , RIEN);
-        	
-        	Etat etatCourant;
-        	for (int indiceNiveau = 0; indiceNiveau < etatsNiveau[indiceGroupe].length-1; indiceNiveau++) {
-        		int indiceEtatsNiveauSuivantIndiceNiveau=0;
-        		for (int indiceNoeudNiveauIndiceNiveau = 0; indiceNoeudNiveauIndiceNiveau < etatsNiveau[indiceGroupe][indiceNiveau].length; indiceNoeudNiveauIndiceNiveau++) {
-        			etatCourant =etatsNiveau[indiceGroupe][indiceNiveau][indiceNoeudNiveauIndiceNiveau];
-        			ArrayList<CoupleIndiceSoinDuree> listeSoinsRealisables = etatCourant.getListPossibilite();
-        			for (int j2 = 0; j2 < listeSoinsRealisables.size(); j2++) {
-        				etatsNiveau[indiceGroupe][indiceNiveau+1][indiceEtatsNiveauSuivantIndiceNiveau] = etatCourant.etatSuivant(listeSoinsRealisables.get(j2).getIndiceSoin());
-                		int E[] = new int[listeSoinsRealisables.get(j2).getDuree()];
-                		for (int k = 0; k < E.length; k++) {
-                			E[k] = auto.addState();
-                		}
-                		auto.addTransition(etatCourant.getEtatInt(), E[0], listeSoinsRealisables.get(j2).getIndiceSoin());
-                        for (int k = 0; k < E.length-1; k++) {
-            				auto.addTransition(E[k], E[k+1], listeSoinsRealisables.get(j2).getIndiceSoin());
-            			}
-                        etatsNiveau[indiceGroupe][indiceNiveau+1][indiceEtatsNiveauSuivantIndiceNiveau].setEtatInt(E[E.length-1]);
-                        indiceEtatsNiveauSuivantIndiceNiveau++;
-					}
-        		}
-			}
-        	
-        	int etatPause = auto.addState();
-        	int dernierNiveau = etatsNiveau[indiceGroupe].length-1;
-        	int nbNoeudsDernierNiveau = etatsNiveau[indiceGroupe][dernierNiveau].length;
-        	for (int j2 = 0; j2 < nbNoeudsDernierNiveau; j2++) {
-        		auto.addTransition(etatsNiveau[indiceGroupe][dernierNiveau][j2].getEtatInt(),etatPause,PAUSE);
-			}
-			
-        	
-        	
-        	
-		}
-       
-        
-        /*Penser a l'ajout de pause*/
-        
-       
-        /*
-        for (int j = 0; j < 1; j++) {
-        	int nb=0;
-        	for (int j2 = 0; j2 < etatsNiveau[j].length; j2++) {
-        		etatCourant = etatsNiveau[j][j2];
-        		for (CoupleIndiceSoinDuree possibiliteDuree : etatCourant.getListPossibilite()) {
-        			etatsNiveau[j+1][nb] = etatCourant.etatSuivant(possibiliteDuree.getIndiceSoin());
-               		int E[] = new int[possibiliteDuree.getDuree()];
-               		for (int k = 0; k < E.length; k++) {
-               			E[k] = auto.addState();
-               		}
-               		auto.addTransition(debut, E[0], possibiliteDuree.getIndiceSoin());
-               		for (int k = 0; k < E.length-1; k++) {
-               			auto.addTransition(E[k], E[k]+1, possibiliteDuree.getIndiceSoin());
-               		}
-               		nb++;
-       			}	
-    	   }
-       }
-        
-        auto.addTransition(etatFinalAncienGroupeInt, fin, RIEN);
-        System.out.printf("%s\n", auto.toDot());
-        
-
-	}
-*/
-	
 	/**
-	 * 
-	 * @param p le parcours pour lequel on souhaite creer la contrainte Automate
-	 * @param Amin temps d'attente minimal entre 2 soins. Doit etre strictement superieur a 1.
-	 * @param Amax temps d'attente maximal entre 2 soins. Doit etre superieur ou egal a Amin.
-	 * @return
+	 * Permet de creer l'automate associe au parcours d'indice i_parcours dans prob.getParcours()
+	 * @param prob le probleme d'optimisation que l'on cherche a resoudre
+	 * @param i_parcours indice du parcours pour lequel on souhaite associe un automate dans prob.getParcours()
 	 */
-	public Automate(Probleme prob, int i_parcours){
+	public Automate(Probleme prob, int i_parcours, boolean exporter){
 
-
-		
 		//Initialisation des tache (transitions) pause et rien
 		int PAUSE = 1;
 		
@@ -203,29 +60,25 @@ public class Automate {
 			}
 			j++;
 		}
-		
 		this.indicesSoins = indiceSoins;
 		
 		//Creation de l'automate
         FiniteAutomaton auto = new FiniteAutomaton();
         
-        //Initialisation de l'etat de debut de l'automate
+        //Initialisation des etats de debut et de fin de l'automate
         int debut = auto.addState();
         auto.setInitialState(debut);
-        //Initialisation de l'etat d'arrivee de l'automate
         int fin = auto.addState();
-   
-       auto.setFinal(debut);
+        auto.setFinal(debut);
         auto.setFinal(fin);
 
-        //Ajout transition entre les etats debut et fin
+        //Ajout des transitions entre les etats debut et fin
         auto.addTransition(debut, debut, RIEN);
         auto.addTransition(fin, fin, RIEN);
         
-        //Initialisation de tous les etats possibles (en terme de combinaisons de soins realisables apres l'Etat)
+        //Initialisation de tous les etats possibles pris par l'automate. Chaque etat correspond a un ensemble de soins realisables pour un groupe de soins donne.
         Etat[][][] etatsNiveau = new Etat[prob.getnG_i()[i_parcours]][][];
         for (int indiceGroupe = 0; indiceGroupe < prob.getnG_i()[i_parcours]; indiceGroupe++) {
-        	
         	etatsNiveau[indiceGroupe] = new Etat[prob.getnS_ij()[i_parcours][indiceGroupe]+1][];
 			for (int indiceNiveau = 0; indiceNiveau < etatsNiveau[indiceGroupe].length; indiceNiveau++) {
 				int nbEtatsNiveauIndiceNiveau = factoriel(prob.getnS_ij()[i_parcours][indiceGroupe])/factoriel(prob.getnS_ij()[i_parcours][indiceGroupe]-indiceNiveau);
@@ -244,7 +97,7 @@ public class Automate {
         for(int indiceGroupe = 0; indiceGroupe<prob.getnG_i()[i_parcours]; indiceGroupe++){
         	
             //Creation d'une liste regroupant l'ensemble de transitions possibles (indices des soins realisables) dans le groupe de soins indiceGroupe
-        	ArrayList<CoupleIndiceSoinDuree> listPossibilitesGroupe = new ArrayList();
+        	ArrayList<CoupleIndiceSoinDuree> listPossibilitesGroupe = new ArrayList<CoupleIndiceSoinDuree>();
         	for (int j2 = 0; j2 < indiceSoins[indiceGroupe].length; j2++) {
         		listPossibilitesGroupe.add(new CoupleIndiceSoinDuree(indiceSoins[indiceGroupe][j2],prob.getL_ijk()[i_parcours][indiceGroupe][j2]));
         	}
@@ -263,9 +116,8 @@ public class Automate {
        				auto.addTransition(etatsFinauxAncienGroupeInt[j2],etatsNiveau[indiceGroupe][0][0].getEtatInt() , PAUSE);
        			}
         	}
-        
         	
-        	//Creation d'un etatCourant representant l'etat que l'on souhaite etendre aux etats qui le succedent
+        	//Creation d'un etatCourant representant l'etat pour lequel on souhaite construire les etats successeurs
         	Etat etatCourant;
         	for (int indiceNiveau = 0; indiceNiveau < etatsNiveau[indiceGroupe].length-1; indiceNiveau++) {
         		int indiceEtatsNiveauSuivantIndiceNiveau=0;
@@ -275,7 +127,6 @@ public class Automate {
         			for (int j2 = 0; j2 < listeSoinsRealisables.size(); j2++) {
         				etatsNiveau[indiceGroupe][indiceNiveau+1][indiceEtatsNiveauSuivantIndiceNiveau] = etatCourant.etatSuivant(listeSoinsRealisables.get(j2).getIndiceSoin());
                 		int E[];
-                		//RAJOUT DE PAUSES ICI
                 		if(indiceNiveau>0){
                 			E = new int[listeSoinsRealisables.get(j2).getDuree()+1];
                      		for (int k = 0; k < E.length; k++) {
@@ -356,23 +207,29 @@ public class Automate {
 		}
        
         
-        /*Penser a l'ajout de pause*/
+        
         for (int j2 = 0; j2 < etatsFinauxAncienGroupeInt.length; j2++) {
 			auto.addTransition(etatsFinauxAncienGroupeInt[j2],fin,RIEN);
 		}
        
-        /*
-        try {
-			//exportFichierDot(auto.toDot());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
+        //Exporte le graph representant l'automate sous forme d'un fichier .dot si exporter est true.
+        if(exporter){
+            try {
+			    exportFichierDot(auto.toDot(), i_parcours);
+		    } catch (IOException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+		    }
+        }
         this.finiteAutomaton = auto;
-	
 	}
 	
+	
+	/**
+	 * Methode permettant le calcul de a! 
+	 * @param a
+	 * @return a!
+	 */
 	public static int factoriel(int a){
 		if(a==0){
 			return 1;
@@ -382,6 +239,49 @@ public class Automate {
 		}
 	}
 
+	/**
+	 * Exporte le graphe associe a l'automate dans un fichier .dot
+	 * @param aExporter String correspondant a la representation du graphes de l'automate au format .dot
+	 * @throws IOException
+	 */
+	static void exportFichierDot(String aExporter, int i_parcours) throws IOException {
+		BufferedWriter writer = null;
+        try {
+            //create a temporary file
+            String timeLog = new SimpleDateFormat("Parcours_"+i_parcours+"_yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            File logFile = new File(timeLog+".dot");
+
+            // This will output the full path where the file will be written to...
+            System.out.println(logFile.getCanonicalPath());
+
+            writer = new BufferedWriter(new FileWriter(logFile));
+            writer.write(aExporter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Close the writer regardless of what happens...
+                writer.close();
+            } catch (Exception e) {
+            }
+        }
+	  }
+	
+	/**
+	 * getter de la variable d'instance indicesSoins
+	 * @return les valeurs entieres representant les soins dans l'automate. 
+	 */
+	public int[][] getIndicesSoins() {
+		return this.indicesSoins;
+	}
+	
+	/**
+	 * getter de la variable d'instance finiteAutomaton
+	 * @return le FiniteAutomaton utilise pour definir les contraintes
+	 */
+	public FiniteAutomaton getFiniteAutomaton() {
+		return finiteAutomaton;
+	}
 	
 	public static void main(String[] args) {
 
@@ -1119,38 +1019,9 @@ public class Automate {
 		//2. Creation du probleme mathematique associee
 		Probleme aResoudre = new Probleme(donnees);
 		
-		Automate automate = new Automate(aResoudre, 2);
+		Automate automate = new Automate(aResoudre, 2,false);
 }
 	
-	static void exportFichierDot(String aExporter) throws IOException {
-		BufferedWriter writer = null;
-        try {
-            //create a temporary file
-            String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-            File logFile = new File(timeLog+".dot");
-
-            // This will output the full path where the file will be written to...
-            System.out.println(logFile.getCanonicalPath());
-
-            writer = new BufferedWriter(new FileWriter(logFile));
-            writer.write(aExporter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Close the writer regardless of what happens...
-                writer.close();
-            } catch (Exception e) {
-            }
-        }
-	  }
 	
-	public int[][] getIndicesSoins() {
-		return indicesSoins;
-	}
-	
-	public FiniteAutomaton getFiniteAutomaton() {
-		return finiteAutomaton;
-	}
 	
 }

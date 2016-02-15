@@ -63,51 +63,24 @@ public class Resolution {
 		
 		// 3. Creation et post des contraintes 
 		Contraintes contraintes = new Contraintes(this.aResoudre,solver, X);
-		Constraint[][][] contrainteHeureOuverture = contraintes.contrainteHeureOuverture();
-		Constraint[][][] contrainteHeureFermeture = contraintes.contrainteHeureFermeture();
-		Constraint[][][] contraintePrecedenceGroupe = contraintes.contraintePrecedenceGroupe();
-		Constraint[] contrainteCapaciteRessources = contraintes.contrainteCapaciteRessources();
-		contraintes.contrainteAutomate();
-		
-		for(int i=0; i< this.aResoudre.getnPatients() ;i++){
-			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					solver.post(contrainteHeureFermeture[i][j][k]);
-					solver.post(contrainteHeureOuverture[i][j][k]);
-				}
-			}
-		}
-		
-		
-		for (int i = 0; i < contraintePrecedenceGroupe.length; i++) {
-			for (int j = 0; j < contraintePrecedenceGroupe[i].length; j++) {
-				for (int k = 0; k < contraintePrecedenceGroupe[i][j].length; k++) {
-					solver.post(contraintePrecedenceGroupe[i][j][k]);
-				}
-			}
-		}
-		
-		
-		
-		for (int i=0; i<this.aResoudre.getnRessources(); i++){
-			if(!(contrainteCapaciteRessources[i] == null)) {
-				solver.post(contrainteCapaciteRessources[i]);
-			}
-		}
-		
-		
-		
+		contraintes.contrainteHeureOuverture();
+		contraintes.contrainteHeureFermeture();
+		contraintes.contraintePrecedenceGroupe();
+		contraintes.contrainteCapaciteRessources();
+		contraintes.contrainteAutomate(false);
 		
         // 4. Definition de la strategie de resolution
-        //solver.set(IntStrategyFactory.lexico_LB(X));
+        solver.set(IntStrategyFactory.lexico_LB());
         
         // 5. Definition de la fonction objectif	
-        //IntVar objective = FonctionObjectif.minimiserTemps(X, aResoudre, solver);
+		FonctionObjectif fonctionObjectif = new FonctionObjectif(aResoudre, solver, X);
+        IntVar objective = fonctionObjectif.minimiserTemps();
         
         // 6. Lancement de la resolution
-        //solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+        solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+        Chatterbox.printStatistics(solver);
         //solver.findAllSolutions();
-		System.out.println("Solution ? "+solver.findSolution());
+		//System.out.println("Solution ? "+solver.findSolution());
 		Solution solution = solver.getSolutionRecorder().getLastSolution();
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
 			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {

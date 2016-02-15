@@ -1,150 +1,141 @@
 package choco;
 
-import dev.Donnees;
 import dev.Probleme;
 
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.constraints.Constraint;
 import org.chocosolver.solver.constraints.ICF;
 import org.chocosolver.solver.constraints.IntConstraintFactory;
-import org.chocosolver.solver.constraints.nary.automata.FA.FiniteAutomaton;
-import org.chocosolver.solver.constraints.nary.automata.FA.IAutomaton;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VariableFactory;
 import org.chocosolver.solver.variables.Task;
 import org.chocosolver.solver.variables.VF;
 
+/**
+ *Classe permettant la definition et l'ajout de l'ensemble des contraintes de notre probleme. 
+ */
 public class Contraintes {
 
+	//Le probleme d'optimisation que l'on cherche a resoudre, pour lequel on souhaite definir des contraintes
 	private Probleme aResoudre;
+	//Le solver choco utilise pour la resolution
 	private Solver solver;
+	//Les variables choco X[i][j][k] correspondant aux periodes de debut de realisation des soins
 	private IntVar[][][]  X;
 
 
+	/**
+	 * Construit un objet de type Contraintes qui associe les variables choco X a un solver choco solver et un probleme d'optimisation aResoudre. Cet object sera utile par la suite pour definir l'ensemble des contraintes du probleme.
+	 * @param aResoudre probleme d'optimisation que l'on cherche a resoudre, pour lequel on souhaite definir des contraintes
+	 * @param solver solver choco utilise pour la resolution
+	 * @param X variables choco X[i][j][k] correspondant aux periodes de debut de realisation des soins
+	 */
 	public Contraintes(Probleme aResoudre, Solver solver, IntVar[][][]  X) {
 		this.aResoudre = aResoudre;
 		this.solver = solver;
 		this.X=X;
-
 	}
 
 
+	/**
+	 * getter de la variable d'instance aResoudre
+	 * @return 	Le probleme d'optimisation que l'on cherche a resoudre, pour lequel on souhaite definir des contraintes
+	 */
 	public Probleme getaResoudre() {
 		return aResoudre;
 	}
 
+	/**
+	 * setter de la variable d'instance aResoudre
+	 * @param aResoudre probleme d'optimisation que l'on cherche a resoudre, pour lequel on souhaite definir des contraintes
+	 */
 	public void setaResoudre(Probleme aResoudre) {
 		this.aResoudre = aResoudre;
 	}
 
+	/**
+	 * setter de la variable d'instance solver
+	 * @param solver solver choco utilise pour la resolution
+	 */
 	public void setSolver(Solver solver) {
 		this.solver = solver;
 	}
-
+	
+	/**
+	 * getter de la variable d'instance solver
+	 * @return Le solver choco utilise pour la resolution
+	 */
 	public Solver getSolver() {
 		return solver;
 	}
-
+	
+	/**
+	 * setter de la variable d'instance X
+	 * @param x variables choco X[i][j][k] correspondant aux periodes de debut de realisation des soins
+	 */
 	public void setX(IntVar[][][] x) {
 		X = x;
 	}
 
+	/**
+	 * getter de la variable d'instance X
+	 * @return x variables choco X[i][j][k] correspondant aux periodes de debut de realisation des soins
+	 */
 	public IntVar[][][] getX() {
 		return X;
 	}
 	
 	/**
-	 * Contrainte assurant que tous les soins se font avant l'heure de fermeture
-	 * @return
+	 * Ajoute les contraintes permettant de garantir que les soins sont realises avant l'heure de fermeture de l'hopital de jour au solver choco.
 	 */
-	public Constraint[][][] contrainteHeureFermeture(){
-		Constraint[][][] C2 = new Constraint[this.aResoudre.getnPatients()][][];
+	public void contrainteHeureFermeture(){
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
-			C2[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]][];
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-				C2[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]];
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					C2[i][j][k]= IntConstraintFactory.arithm(this.X[i][j][k], "<=", this.aResoudre.getHFermeture()-this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]);
+					Constraint C2 = IntConstraintFactory.arithm(this.X[i][j][k], "<=", this.aResoudre.getHFermeture()-this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k]);
+					solver.post(C2);
 				}
 			}
 		}
-		return C2;
 	}
 
 	/**
-	 * COntrainte assurant que tous les soins se font apr�s l'heure d'ouverture
-	 * @return
+	 * Ajoute les contraintes permettant de garantir que les soins sont realises apres l'heure d'ouverture de l'hopital de jour au solver choco.
 	 */
-	public Constraint[][][] contrainteHeureOuverture(){
-		Constraint[][][] C3 = new Constraint[this.aResoudre.getnPatients()][][];
+	public void contrainteHeureOuverture(){
 		for(int i=0;i<this.aResoudre.getnPatients();i++){
-			C3[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]][];
 			for (int j = 0; j < this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++) {
-				C3[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]];
 				for (int k = 0; k < this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
-					C3[i][j][k]= IntConstraintFactory.arithm(this.X[i][j][k], ">=", this.aResoudre.getHOuverture());
+					Constraint C3= IntConstraintFactory.arithm(this.X[i][j][k], ">=", this.aResoudre.getHOuverture());
+					solver.post(C3);
 				}
 			}
 		}
-		return C3;
 	}
 	
 	
 	/**
-	 * Contrainte s'assurant que la pr�c�dence des groupes est respect�e
-	 * @return
+	 * Ajoute les contraintes permettant de s'assurer que les relations de precedence entre les groupes sont respectees
 	 */
-	public Constraint[][][] contraintePrecedenceGroupe(){
-		Constraint[][][] C4 = new Constraint[this.aResoudre.getnPatients()][][];
-
+	public void contraintePrecedenceGroupe(){
 		for(int i=0; i<this.aResoudre.getnPatients(); i++){
-			C4[i] = new Constraint[this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1][];
 			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]-1; j++){
-				C4[i][j] = new Constraint[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]*this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]];
 				for (int k=0; k<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j]; k++) {
 					for(int u=0; u<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]; u++){
 						int duree = this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k];
-						C4[i][j][k*this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]][j+1]+u] = ICF.arithm(this.X[i][j][k], "<=", X[i][j+1][u], "-", duree);
+						Constraint C4 =  ICF.arithm(this.X[i][j][k], "<=", X[i][j+1][u], "-", duree);
+						solver.post(C4);
 					}
 				}
 			}
 		}
-		return C4;
 	}
 
-
-
-	/**
-	 * COntrainte assurant que le patient n'est pas � plusieurs endroits en m�me temps
-	 * @return
-	 */
-	public Constraint [] contrainteEmpilement(){
-		//pour chaque patient je cr�e une contrainte all different avec tous les soins dans des tableaux IntVar
-		Constraint[] C41= new Constraint[aResoudre.getnPatients()];
-		for(int i=0; i<this.aResoudre.getnPatients(); i++){
-			for(int j=0; j<this.aResoudre.getnG_i()[this.aResoudre.getP_i()[i]]; j++){
-				IntVar [] Soins = new IntVar[this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]];
-				for (int k=0; k<this.aResoudre.getnS_ij()[this.aResoudre.getP_i()[i]-1][j]; k++) {
-				}
-			}
-		}
-		return C41;
-	}
-
-	/* 
-	 * Il faut que je fasse un Soin[], Hauteur[], Capacite pour chaque ressource
-	 * puis r�soudre solver.post(ICF.cumulative(Soin[], Hauteur[], Capacite, true)) pour chaque ressource;
-	 * �a fait NbRessources Contraintes.
-	 * Il faut lire tous les soins et voir quelles ressources ils utilisent. Si ils utilisent R[0] l'ajouter au Soin[0], Hauteur[0] et capacite_0
-	 * 
-	 */
 	
 	/**
-	 * Contrainte assurant que la capacit� des ressources n'est jamais d�pass�e
-	 * @return
+	 * Contrainte assurant que la capacite des ressources n'est jamais depasse malgre l'affectation de soins a des periodes
 	 */
-	public Constraint[] contrainteCapaciteRessources(){
-		Constraint[] C5 = new Constraint[this.aResoudre.getnRessources()];
+	public void contrainteCapaciteRessources(){
 		int[] compteurtemp=new int[this.aResoudre.getnRessources()];
 
 		//Premiere boucle pour trouver la taille de Soins[] et leur Hauteur[] 
@@ -159,7 +150,6 @@ public class Contraintes {
 			}
 		}
 
-		// Il faut que je rajoute les contraintes 
 		int compteur2=0;
 		for (int a=0; a<this.aResoudre.getnRessources(); a++){
 			Task[] Soins = new Task[compteurtemp[a]];
@@ -180,32 +170,27 @@ public class Contraintes {
 			}
 			IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCpij_max()[a],solver)	;
 			if(Soins.length>0){
-				C5[compteur2]=IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
+				Constraint C5 =IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
+				solver.post(C5);
 				compteur2++;
 			}
 			else{
 				compteur2++;
 			}
-
-		}
-		return C5;	
+		}	
 	}
 	
-	public void contrainteAutomate(){
-		//Association d'indices a chaque soins, pause et rien
-		
-		
-		
-		
+	/**
+	 * Ajoute les contraintes definies par les automates permettant d'ajouter les contraintes sur : les relations de precedence entre les groupes de soins, la duree des soins et la duree des pauses
+	 * @param export si export true, les graphes des automates utilises seront exportes sous forme de fichiers .dot, sinon pas d'export
+	 */
+	public void contrainteAutomate(boolean export){
 		//Creation des automates, 1 par parcours
 		Automate[] automates = new Automate[aResoudre.getnParcours()];
 		
 		for (int j = 0; j < aResoudre.getnParcours(); j++) {
-			automates[j] =  new Automate (aResoudre, j);
+			automates[j] =  new Automate (aResoudre, j, export);
 		}
-		
-		  
-        
 		
 		for (int i = 0; i < aResoudre.getnPatients(); i++) {
 			int indiceSoinsMax = automates[aResoudre.getP_i()[i]].getIndicesSoins()[automates[aResoudre.getP_i()[i]].getIndicesSoins().length-1][automates[aResoudre.getP_i()[i]].getIndicesSoins()[automates[aResoudre.getP_i()[i]].getIndicesSoins().length-1].length-1];
@@ -220,8 +205,6 @@ public class Contraintes {
 			
 	        IntVar limitRien = VF.bounded("LIMITRIEN"+i, 0, aResoudre.getnPeriodes()-sumLijk-1, solver);*/
 	        
-	        //C[i][aResoudre.getnG_i()[aResoudre.getP_i()[i]]][0][0] =ICF.arithm(X[i][0][0], "=", X[i][0][0]);
-	        //C[i][aResoudre.getnG_i()[aResoudre.getP_i()[i]]][0][1] =ICF.arithm(X[i][0][0], "=", X[i][0][0]);
 	        Constraint regular  = ICF.regular(Ai, automates[aResoudre.getP_i()[i]].getFiniteAutomaton());
 	        solver.post(regular);
 	        //C[i][aResoudre.getnG_i()[aResoudre.getP_i()[i]]][0][1]  = ICF.count(Automate.RIEN, Ai, limitRien);

@@ -3,6 +3,8 @@ package choco;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import org.jfree.ui.RefineryUtilities;
+
 import dev.CoupleStringInt;
 import dev.Date;
 import dev.Donnees;
@@ -13,6 +15,8 @@ import dev.Probleme;
 import dev.Ressource;
 import dev.Soin;
 import maths.Solution;
+import visu.VisuCheckeur;
+import visu.VisuSolution;
 
 public class Test2 {
 
@@ -794,7 +798,7 @@ public class Test2 {
 			System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
 			System.out.println("Toutes les contraintes ?"+verifierSol.verifieContraintes());
 			
-			/*
+			
 			for (int i=0; i<aResoudre.getnRessources();i++){
 				final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, i);
 				Checkeur.pack();
@@ -804,7 +808,7 @@ public class Test2 {
 			VisuSolution Gantt = new VisuSolution("Journee", solution, aResoudre);
 			Gantt.pack();
 			RefineryUtilities.centerFrameOnScreen(Gantt);
-			Gantt.setVisible(true);*/
+			Gantt.setVisible(true);
 			//}
 			//5. Affichage de la solution (a implementer)
 		}
