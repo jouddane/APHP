@@ -67,10 +67,10 @@ public class Resolution {
 		contraintes.contrainteHeureFermeture();
 		contraintes.contraintePrecedenceGroupe();
 		contraintes.contrainteCapaciteRessources();
-		contraintes.contrainteAutomate(false);
+		//contraintes.contrainteAutomate(false);
 		
         // 4. Definition de la strategie de resolution
-        solver.set(IntStrategyFactory.lexico_LB());
+       // solver.set(IntStrategyFactory.lexico_LB());
         
         // 5. Definition de la fonction objectif	
 		FonctionObjectif fonctionObjectif = new FonctionObjectif(aResoudre, solver, X);
@@ -83,7 +83,7 @@ public class Resolution {
         Chatterbox.printStatistics(solver);
         
         //solver.findAllSolutions();
-		System.out.println("Solution ? "+solver.findSolution());
+		//System.out.println("Solution ? "+solver.findSolution());
 		Solution solution = solver.getSolutionRecorder().getSolutions().get(0);
 	
 		
