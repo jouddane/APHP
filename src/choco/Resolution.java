@@ -4,15 +4,10 @@ import dev.Probleme;
 
 import org.chocosolver.solver.ResolutionPolicy;
 import org.chocosolver.solver.Solver;
-import org.chocosolver.solver.constraints.Constraint;
-import org.chocosolver.solver.search.solution.ISolutionRecorder;
-import org.chocosolver.solver.search.solution.LastSolutionRecorder;
 import org.chocosolver.solver.search.solution.Solution;
-import org.chocosolver.solver.search.strategy.IntStrategyFactory;
 import org.chocosolver.solver.trace.Chatterbox;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VF;
-import org.chocosolver.solver.variables.Variable;
 
 public class Resolution {
 	
@@ -94,8 +89,6 @@ public class Resolution {
 				}
 			}
 		}
-		
-        
         return solInt;
 	}
 }

@@ -1,7 +1,5 @@
 package dev;
 
-import java.util.ArrayList;
-
 /**
  * Classe representant un soin d'un parcours.
  * 
@@ -38,7 +36,7 @@ public class Soin {
 	
 	/**
 	 * Constructeur par defaut
-	 * Iitialise a un soin d'une duree nulle, ne consommant pas de ressource et n'ayant pas de nom
+	 * Initialise a un soin d'une duree nulle, ne consommant pas de ressource et n'ayant pas de nom
 	 */
     public Soin(){
         this(0, null,"");
