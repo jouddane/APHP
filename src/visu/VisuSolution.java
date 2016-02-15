@@ -42,13 +42,13 @@ import dev.Probleme;
 public class VisuSolution extends ApplicationFrame{
 
 
-	public VisuSolution(String title, Integer[][][] donnees, Probleme aResoudre){
+	public VisuSolution(String title, Integer[][][] donnees, Probleme aResoudre, int taillePeriode){
 		super(title);
 
-		GanttCategoryDataset dataset = createDataset( donnees, aResoudre);
+		GanttCategoryDataset dataset = createDataset( donnees, aResoudre, taillePeriode);
 		JFreeChart chart = createChart(dataset);
 
-		// Ajoute le graph ï¿½ un Panel
+		// Ajoute le graph a un Panel
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(1200, 800));
 		setContentPane(chartPanel);
@@ -56,12 +56,13 @@ public class VisuSolution extends ApplicationFrame{
 
 	}
 /**
- * Crée les données pour le gantt
+ * 
  * @param donnees
  * @param aResoudre
- * @return
+ * @param taillePeriode
+ * @return Les donnees pour faire un Gantt avec la solution donnee, il represente 1 journee avec tous les patients
  */
-	public GanttCategoryDataset createDataset(Integer[][][] donnees, Probleme aResoudre) {
+	public GanttCategoryDataset createDataset(Integer[][][] donnees, Probleme aResoudre, int taillePeriode) {
 		
 		int Annee = Calendar.getInstance().get(Calendar.YEAR);
 		int Mois =  Calendar.getInstance().get(Calendar.MONTH);
@@ -70,14 +71,14 @@ public class VisuSolution extends ApplicationFrame{
 		TaskSeries P = new TaskSeries("Tous les parcours");
 		for(int i=0; i<aResoudre.getnPatients();i++){
 			String s ="Patient"+i;
-			Task S = new Task(s, new Date(Annee, Mois, Jour, aResoudre.getHOuverture()/60,aResoudre.getHOuverture()%60), new Date(Annee, Mois, Jour, aResoudre.getHFermeture()/60,aResoudre.getHFermeture()%60));
+			Task S = new Task(s, new Date(Annee, Mois, Jour, (aResoudre.getHOuverture()*taillePeriode)/60,(aResoudre.getHOuverture()*taillePeriode)%60), new Date(Annee, Mois, Jour, (aResoudre.getHFermeture()*taillePeriode)/60,(aResoudre.getHFermeture()*taillePeriode)%60));
 			for(int j=0; j<aResoudre.getnG_i()[aResoudre.getP_i()[i]];j++){
 				for( int k=0; k< aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++){
-					int HeureD=donnees[i][j][k]/60;
-					int MinD=donnees[i][j][k]%60;
-					int Duree=aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k];
-					int HeureDnext = (donnees[i][j][k]+Duree)/60;
-					int MinDnext =(donnees[i][j][k]+Duree)%60;
+					int HeureD=(donnees[i][j][k]*taillePeriode)/60;
+					int MinD=(donnees[i][j][k]*taillePeriode)%60;
+					int Duree=aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k]*taillePeriode;
+					int HeureDnext = (donnees[i][j][k]*taillePeriode+Duree)/60;
+					int MinDnext =(donnees[i][j][k]*taillePeriode+Duree)%60;
 					S.addSubtask(new Task(" Groupe "+j+" Soin "+k, new Date(Annee,Mois,Jour,HeureD,MinD), new Date(Annee,Mois,Jour,HeureDnext,MinDnext)));
 				}
 			}
@@ -90,7 +91,11 @@ public class VisuSolution extends ApplicationFrame{
 		return collection;
 	}
 
-	
+	/**
+	 * 
+	 * @param dataset
+	 * @return Le graph de Gantt contenant tous les patients de la journee
+	 */
 	public JFreeChart createChart(GanttCategoryDataset dataset) {
 		JFreeChart chart = ChartFactory.createGanttChart(
 				"Journee ", // Titre du graphe
