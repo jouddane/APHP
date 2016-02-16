@@ -220,6 +220,7 @@ public class Automate {
 		}
  
         this.finiteAutomaton =auto ;
+   
 	}
 	
 	
@@ -1033,7 +1034,7 @@ public class Automate {
 		Automate[] automates = new Automate[donnees.getParcours().length];
 		
 		long t0 = System.currentTimeMillis();
-		for (int j = 0; j < donnees.getParcours().length; j++) {
+		for (int j = 0; j < 5; j++) {
 			automates[j] =  new Automate (aResoudre, j);
 			try {
 				Automate.exportFichierDot(automates[j].getFiniteAutomaton().toDot(),donnees.getParcours()[j].getNumeroParcours() );
@@ -1046,7 +1047,11 @@ public class Automate {
 		long duree =t1-t0;
 		
 		System.out.println("Duree creation des automates : "+duree);
-		    
+		
+		
+		
+		FiniteAutomaton automate = new FiniteAutomaton(automates[1].getFiniteAutomaton().toDot());
+		    System.out.println(""+automate.toDot());
 	}
 	
 	

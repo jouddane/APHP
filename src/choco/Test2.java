@@ -36,49 +36,49 @@ public class Test2 {
 			donnees.setHOuverture(8*12);
 
 			//Ajout ressources humaines
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Obesite", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Nutritionniste", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Dieteticien", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Psychologue", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Interne Obesite", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin Hepato", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Externe", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Cardio", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Cardiologue", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Orthoptiste", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Diabetologue", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Podologue", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Pansement", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Pompe Insuline", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Insulinotherapie", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin Sommeil", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Sommeil", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Prestataire", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Chimio", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Generaliste", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Soignant", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Selon Profil", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Kine", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Agent Accueil", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neurologue", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neuropsy", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Obesite", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Nutritionniste", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Dieteticien", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Psychologue", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Interne Obesite", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin Hepato", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Externe", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Cardio", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Cardiologue", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Orthoptiste", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Diabetologue", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Podologue", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Pansement", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Pompe Insuline", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Insulinotherapie", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin Sommeil", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Sommeil", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Prestataire", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Chimio", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Generaliste", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Soignant", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Selon Profil", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Kine", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Agent Accueil", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neurologue", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neuropsy", 100));
 
 			//Ajout ressources matérielles
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "HDJ Obesite", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box Prelevement", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Hors HDJ", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Bureau CS", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box Soin", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle Pansement", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Explorations Fonctionnelles", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Piece Isolee Avec Fauteuil", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Bureau Sommeil", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle ETP Groupe", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle Avec Lit", 10));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "HDJ Chimio", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "HDJ Obesite", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box Prelevement", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Hors HDJ", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Bureau CS", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box Soin", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle Pansement", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Explorations Fonctionnelles", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Piece Isolee Avec Fauteuil", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Bureau Sommeil", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle ETP Groupe", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle Avec Lit", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "HDJ Chimio", 100));
 
 
 			ArrayList<CoupleStringInt> listRessourceCapacite2 = new ArrayList<>();
@@ -746,7 +746,7 @@ public class Test2 {
 			GroupeSoins[] P26G = {G1P26, G2P26, G3P26, G4P26, G5P26, G6P26};
 			Parcours P26  = new Parcours(P26G, "26");
 			 		
-			donnees.ajoutParcours(P3);
+			donnees.ajoutParcours(P1);
 			donnees.ajoutParcours(P2);
 			donnees.ajoutParcours(P3);
 			donnees.ajoutParcours(P4);
@@ -767,13 +767,13 @@ public class Test2 {
 			donnees.ajoutParcours(P26);
 
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
-			//donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
 			//donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
-			//donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
-			//donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
-			//donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
-			//donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
-			//donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			//donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+			/*donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));*/
 
 			//2. Creation du probleme mathematique associee
 			Probleme aResoudre = new Probleme(donnees);
@@ -782,33 +782,7 @@ public class Test2 {
 			Resolution resolution = new Resolution(aResoudre);
 
 			//4. Lancement de la resolution d probleme
-			Integer[][][] solution = resolution.resout();
-
-//			for(int i=0; i< aResoudre.getnPatients(); i++){
-//				for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
-//					for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
-//						System.out.println("X["+i+"]["+j+"]["+k+"] = "+solution[i][j][k]);
-//					}
-//				}
-//			}
-			Solution verifierSol = new Solution(solution, aResoudre);
-			System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
-			System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
-			System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
-			System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
-			System.out.println("Toutes les contraintes ?"+verifierSol.verifieContraintes());
-			
-			int taillePerdiode =5;
-			for (int i=0; i<aResoudre.getnRessources();i++){
-				final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solution, aResoudre, i, taillePerdiode);
-				Checkeur.pack();
-				RefineryUtilities.centerFrameOnScreen(Checkeur);
-				Checkeur.setVisible(true);
-			}
-			VisuSolution Gantt = new VisuSolution("Journee", solution, aResoudre,taillePerdiode);
-			Gantt.pack();
-			RefineryUtilities.centerFrameOnScreen(Gantt);
-			Gantt.setVisible(true);
+			resolution.resout();
 			//}
 			//5. Affichage de la solution (a implementer)
 		}

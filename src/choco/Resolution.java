@@ -1,6 +1,8 @@
 package choco;
 
 import dev.Probleme;
+import visu.VisuCheckeur;
+import visu.VisuSolution;
 
 import org.chocosolver.solver.ResolutionPolicy;
 import org.chocosolver.solver.Solver;
@@ -9,6 +11,7 @@ import org.chocosolver.solver.search.strategy.IntStrategyFactory;
 import org.chocosolver.solver.trace.Chatterbox;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VF;
+import org.jfree.ui.RefineryUtilities;
 
 public class Resolution {
 	
@@ -33,7 +36,7 @@ public class Resolution {
 	/** 
 	 * @return la solution du probleme contraint
 	 */
-	public Integer[][][] resout(){
+	public void resout(){
 		
 		//1. Initialisation du solver
 		Solver solver = new Solver();
@@ -47,6 +50,8 @@ public class Resolution {
 		Integer[][][] solInt = new Integer[this.aResoudre.getnPatients()][][];
 		System.out.println("Nombre de patients: "+aResoudre.getnPatients());
 		int nombreDeSoins = 0;
+		
+		
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
 			System.out.println("i = "+i+" : "+this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]);
 			X[i] = new IntVar[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];
@@ -63,7 +68,7 @@ public class Resolution {
 				}
 			}
 		}
-		
+		/*
 		IntVar[] XFlattened = new IntVar[nombreDeSoins];
 		int indiceTemp = 0;
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
@@ -74,25 +79,35 @@ public class Resolution {
                 }
             }
         }
+		*/
 		
 		// 3. Creation et post des contraintes 
 		Contraintes contraintes = new Contraintes(this.aResoudre,solver, X);
 		contraintes.contrainteHeureOuverture();
 		contraintes.contrainteHeureFermeture();
 		contraintes.contraintePrecedenceGroupe();
-		contraintes.contrainteCapaciteRessources();
+		//contraintes.contrainteCapaciteRessources();
 		contraintes.contrainteAutomate();
 		
         
-        solver.set(IntStrategyFactory.activity(XFlattened, 0));
+        //solver.set(IntStrategyFactory.activity(XFlattened,0));
+        //solver.set(IntStrategyFactory.se);
         
 		
         // 5. Definition de la fonction objectif	
 		FonctionObjectif fonctionObjectif = new FonctionObjectif(aResoudre, solver, X);
         IntVar objective = fonctionObjectif.minimiserTemps();
         
+        
+        System.out.println("Lancement de la resolution");
+        long t0 = System.currentTimeMillis();
+		
         // 6. Lancement de la resolution
         solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+        
+        long t1 = System.currentTimeMillis();
+		long duree =t1-t0;
+		System.out.println("Duree creation de la resolution : "+duree);
         
         // 7.  Affichage des statistiques de la resolution
         Chatterbox.printStatistics(solver);
@@ -109,6 +124,26 @@ public class Resolution {
 				}
 			}
 		}
-        return solInt;
+		
+		int taillePeriode =25*60/aResoudre.getnPeriodes();
+		for (int i=0; i<aResoudre.getnRessources();i++){
+			final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solInt, aResoudre, i, taillePeriode);
+			Checkeur.pack();
+			RefineryUtilities.centerFrameOnScreen(Checkeur);
+			Checkeur.setVisible(true);
+		}
+		VisuSolution Gantt = new VisuSolution("Journee", solInt, aResoudre,taillePeriode);
+		Gantt.pack();
+		RefineryUtilities.centerFrameOnScreen(Gantt);
+		Gantt.setVisible(true);
+		
+		System.out.println("Checker des solutions :");
+		
+		maths.Solution verifierSol = new maths.Solution(solInt, aResoudre);
+		/*System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
+		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
+		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
+		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());*/
+		System.out.println("Toutes les contraintes sont verifiees ?"+verifierSol.verifieContraintes());
 	}
 }

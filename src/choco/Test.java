@@ -778,7 +778,7 @@ public class Test {
 		Resolution resolution = new Resolution(aResoudre);
 
 		//4. Lancement de la resolution d probleme
-		Integer[][][] solution = resolution.resout();
+		resolution.resout();
 
 //		for(int i=0; i< aResoudre.getnPatients(); i++){
 //			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
@@ -787,12 +787,7 @@ public class Test {
 //				}
 //			}
 //		}
-		Solution verifierSol = new Solution(solution, aResoudre);
-		System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
-		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
-		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
-		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
-		System.out.println("Toutes les contraintes ?"+verifierSol.verifieContraintes());
+		
 		
 		/*
 		for (int i=0; i<aResoudre.getnRessources();i++){
