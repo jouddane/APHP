@@ -84,7 +84,7 @@ public class Resolution {
 		contraintes.contrainteAutomate(false);
 		
         // 4. Definition de la strategie de resolution
-        solver.set(IntStrategyFactory.activity(XFlattened, 0));
+        solver.set(IntStrategyFactory.lexico_LB(XFlattened));
         
         // 5. Definition de la fonction objectif	
 		FonctionObjectif fonctionObjectif = new FonctionObjectif(aResoudre, solver, X);

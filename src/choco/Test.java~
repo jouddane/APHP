@@ -649,7 +649,7 @@ public class Test {
 		GroupeSoins[] P17G = {G1P17, G2P17, G3P17, G4P17, G5P17, G6P17};
 		Parcours P17  = new Parcours(P17G, 17);
 		 */
-		// On crée le Parcours 20
+		// On crée le Parcours 7
 		Soin[] G1P20S = {BilanBiologique20};
 		GroupeSoins G1P20 = new GroupeSoins(G1P20S);
 		Soin[] G2P20S = {Collation};
