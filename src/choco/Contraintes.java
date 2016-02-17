@@ -1,11 +1,16 @@
 package choco;
 
+import dev.Donnees;
 import dev.Probleme;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.constraints.Constraint;
 import org.chocosolver.solver.constraints.ICF;
 import org.chocosolver.solver.constraints.IntConstraintFactory;
+import org.chocosolver.solver.search.strategy.IntStrategyFactory;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VariableFactory;
 import org.chocosolver.solver.variables.Task;
@@ -190,13 +195,23 @@ public class Contraintes {
 	 * Ajoute les contraintes definies par les automates permettant d'ajouter les contraintes sur : les relations de precedence entre les groupes de soins, la duree des soins et la duree des pauses
 	 * @param export si export true, les graphes des automates utilises seront exportes sous forme de fichiers .dot, sinon pas d'export
 	 */
-	public void contrainteAutomate(boolean export){
+	public void contrainteAutomate(){
 		//Creation des automates, 1 par parcours
 		Automate[] automates = new Automate[aResoudre.getnParcours()];
 		
-		for (int j = 0; j < aResoudre.getnParcours(); j++) {
-			automates[j] =  new Automate (aResoudre, j, export);
+		long t0 = System.currentTimeMillis();
+		ArrayList<Integer> automatesCrees = new ArrayList<>();
+		for (int i = 0; i < aResoudre.getnPatients(); i++) {
+			if(!automatesCrees.contains(aResoudre.getP_i()[i])){
+				automates[aResoudre.getP_i()[i]] =  new Automate (aResoudre,aResoudre.getP_i()[i] );
+				automatesCrees.add(aResoudre.getP_i()[i]);
+			}
 		}
+		long t1 = System.currentTimeMillis();
+		long duree =t1-t0;
+		System.out.println("Duree creation des automates : "+duree);
+		
+	
 		
 		for (int i = 0; i < aResoudre.getnPatients(); i++) {
 			int indiceSoinsMax = automates[aResoudre.getP_i()[i]].getIndicesSoins()[automates[aResoudre.getP_i()[i]].getIndicesSoins().length-1][automates[aResoudre.getP_i()[i]].getIndicesSoins()[automates[aResoudre.getP_i()[i]].getIndicesSoins().length-1].length-1];
@@ -215,21 +230,20 @@ public class Contraintes {
 	        solver.post(regular);
 	        solver.post(ICF.count(Automate.RIEN, Ai, limitRien));
 			
+			
+
+	        
 			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
 				for (int k = 0; k < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
 					
-					
 				IntVar Vijk = VF.enumerated("V"+i+","+j+","+k, automates[aResoudre.getP_i()[i]].getIndicesSoins()[j][k], automates[aResoudre.getP_i()[i]].getIndicesSoins()[j][k], solver);
-				//IntVar Iijk = VF.enumerated("I"+i+","+j+","+k, 0, aResoudre.getnPeriodes()-1 , solver);
-			           
+
+					
 			    Constraint element1 = ICF.element(Vijk, Ai, X[i][j][k], 0);
 			    Constraint element2 = ICF.element(Vijk, Ai, X[i][j][k], -aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k]+1);
 			     
 			    solver.post(element1);
 			    solver.post(element2);
-			        
-			   // Constraint arithm = ICF.arithm(X[i][j][k], "=", Iijk);
-			   // solver.post(arithm);
 				}
 			}
 		}
