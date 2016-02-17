@@ -181,8 +181,8 @@ public class Contraintes {
 			}
 			IntVar Capacite = VariableFactory.fixed(this.aResoudre.getCpij_max()[a],solver)	;
 			if(Soins.length>0){
-				Constraint C5 =IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
-				solver.post(C5);
+				Constraint C1 =IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
+				solver.post(C1);
 				compteur2++;
 			}
 			else{
@@ -247,7 +247,19 @@ public class Contraintes {
 				}
 			}
 		}
-		
-		
+	}
+	
+	public void contrainteTempsEntreSoin() {
+	    for(int i=0; i<this.X.length; i++) {
+	        for(int j=0; j<this.X[i].length; j++) {
+	            for(int k=1; k<this.X[i][j].length; k++) {
+	                //System.out.println(this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k-1]+this.aResoudre.getA_MAX());
+	                Constraint C5 = ICF.arithm(this.X[i][j][k], "<=", this.X[i][j][k-1], "+", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k-1]+this.aResoudre.getA_MAX());
+	                Constraint C6 = ICF.arithm(this.X[i][j][k], ">", this.X[i][j][k-1], "+", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k-1]+this.aResoudre.getA_MIN());
+	                solver.post(C5);
+	                solver.post(C6);
+	            }
+	        }
+	    }
 	}
 }

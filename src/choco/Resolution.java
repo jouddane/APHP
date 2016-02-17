@@ -85,8 +85,9 @@ public class Resolution {
 		contraintes.contrainteHeureOuverture();
 		contraintes.contrainteHeureFermeture();
 		contraintes.contraintePrecedenceGroupe();
-		//contraintes.contrainteCapaciteRessources();
-		contraintes.contrainteAutomate();
+		contraintes.contrainteCapaciteRessources();
+		//contraintes.contrainteAutomate();
+		contraintes.contrainteTempsEntreSoin();
 		
         // 4. Definition de la strategie de resolution
         solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
@@ -121,11 +122,12 @@ public class Resolution {
 			for (int j = 0; j < this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]; j++) {
 				for (int k = 0; k < this.aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
 					solInt[i][j][k] = solution.getIntVal(X[i][j][k]);
+					System.out.println("X["+i+"]["+j+"]["+k+"] = "+solInt[i][j][k]);
 				}
 			}
 		}
 		
-		int taillePeriode =25*60/aResoudre.getnPeriodes();
+		/*int taillePeriode =25*60/aResoudre.getnPeriodes();
 		for (int i=0; i<aResoudre.getnRessources();i++){
 			final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solInt, aResoudre, i, taillePeriode);
 			Checkeur.pack();
@@ -135,15 +137,17 @@ public class Resolution {
 		VisuSolution Gantt = new VisuSolution("Journee", solInt, aResoudre,taillePeriode);
 		Gantt.pack();
 		RefineryUtilities.centerFrameOnScreen(Gantt);
-		Gantt.setVisible(true);
+		Gantt.setVisible(true);*/
 		
 		System.out.println("Checker des solutions :");
 		
 		maths.Solution verifierSol = new maths.Solution(solInt, aResoudre);
-		/*System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
+		System.out.println("Ouverture? "+verifierSol.verifieContrainteHeureOuverture());
 		System.out.println("Fermeture? "+verifierSol.verifieContrainteHeureFermeture());
 		System.out.println("Precedence? "+verifierSol.verifieContraintePrecedenceGroupe());
-		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());*/
+		System.out.println("Capacite max? "+verifierSol.verifieContrainteRessources());
+        System.out.println("Temps Attente Min? "+verifierSol.verifieContrainteAttentePatientsMin());
+        System.out.println("Temps Attente Max? "+verifierSol.verifieContrainteAttentePatientsMax());
 		System.out.println("Toutes les contraintes sont verifiees ?"+verifierSol.verifieContraintes());
 	}
 }

@@ -141,6 +141,7 @@ public class Solution {
 						}
 					}
 					verifieContrainteAttentePatientsMin=verifieContrainteAttentePatientsMin&&(min(attente))>=this.aResoudre.getA_MIN();
+					if(!verifieContrainteAttentePatientsMin) System.out.println(i+", "+j+", "+k);
 					k++;
 				}
 				j++;
