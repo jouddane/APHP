@@ -555,7 +555,7 @@ public class Test {
 		GroupeSoins[] P9G = {G1P9, G2P9, G3P9, G4P9, G5P9, G6P9};
 		Parcours P9  = new Parcours(P9G, "9");
 
-		// On crée le Parcours 10
+		/*// On crée le Parcours 10
 		Soin[] G1P10S = {Prelevement25};
 		GroupeSoins G1P10 = new GroupeSoins(G1P10S);
 		Soin[] G2P10S = {Collation};
@@ -565,7 +565,7 @@ public class Test {
 		Soin[] G4P10S = {RDVMedical40};
 		GroupeSoins G4P10 = new GroupeSoins(G4P10S);
 		GroupeSoins[] P10G = {G1P10, G2P10, G3P10, G4P10};
-		Parcours P10  = new Parcours(P10G, "10");
+		Parcours P10  = new Parcours(P10G, "10");*/
 
 		// On crée le Parcours 11
 		Soin[] G1P11S = {Prelevement25};
@@ -743,14 +743,13 @@ public class Test {
 		Parcours P26  = new Parcours(P26G, "26");
 		 		
 		donnees.ajoutParcours(P1);
-		/*donnees.ajoutParcours(P2);
+		donnees.ajoutParcours(P2);
 		donnees.ajoutParcours(P3);
 		donnees.ajoutParcours(P4);
 		donnees.ajoutParcours(P5);
 		donnees.ajoutParcours(P6);
 		donnees.ajoutParcours(P8);
 		donnees.ajoutParcours(P9);
-		donnees.ajoutParcours(P10);
 		donnees.ajoutParcours(P11);
 		donnees.ajoutParcours(P12);
 		donnees.ajoutParcours(P13);
@@ -760,13 +759,13 @@ public class Test {
 		donnees.ajoutParcours(P22);
 		donnees.ajoutParcours(P23);
 		donnees.ajoutParcours(P25);
-		donnees.ajoutParcours(P26);*/
+		donnees.ajoutParcours(P26);
 
 		donnees.ajoutPatient(new Patient(P1, new Date(jour,mois,annee)));
-		/*donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
-		donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
 		donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
-		donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
+		/*donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
+		donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+		donnees.ajoutPatient(new Patient(P11, new Date(jour,mois,annee)));
 		donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
 		donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
 		donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));*/
