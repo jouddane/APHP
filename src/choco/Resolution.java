@@ -86,13 +86,15 @@ public class Resolution {
 		contraintes.contrainteHeureFermeture();
 		contraintes.contraintePrecedenceGroupe();
 		contraintes.contrainteCapaciteRessources();
+		contraintes.C5C6();
 		//contraintes.contrainteAutomate();
-		contraintes.contrainteTempsEntreSoin();
+		//contraintes.contrainteTempsEntreSoin();
 		
         // 4. Definition de la strategie de resolution
-        solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
-        //solver.set(IntStrategyFactory.activity(XFlattened,0));
-        //solver.set(IntStrategyFactory.se);
+        //solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
+        solver.set(IntStrategyFactory.activity(XFlattened,0));
+        //solver.set(IntStrategyFactory.impact(XFlattened,0));
+		//solver.set(IntStrategyFactory.(XFlattened));
         
 		
         // 5. Definition de la fonction objectif	
@@ -104,7 +106,8 @@ public class Resolution {
         long t0 = System.currentTimeMillis();
 		
         // 6. Lancement de la resolution
-        solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+       // solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+      System.out.println("Solution ? "+solver.findSolution());
         
         long t1 = System.currentTimeMillis();
 		long duree =t1-t0;

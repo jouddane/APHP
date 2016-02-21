@@ -10,6 +10,7 @@ import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.constraints.Constraint;
 import org.chocosolver.solver.constraints.ICF;
 import org.chocosolver.solver.constraints.IntConstraintFactory;
+import org.chocosolver.solver.constraints.LogicalConstraintFactory;
 import org.chocosolver.solver.search.strategy.IntStrategyFactory;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VariableFactory;
@@ -248,7 +249,7 @@ public class Contraintes {
 			}
 		}
 	}
-	
+	/*
 	public void contrainteTempsEntreSoin() {
 	    for(int i=0; i<this.X.length; i++) {
 	        for(int j=0; j<this.X[i].length; j++) {
@@ -261,5 +262,78 @@ public class Contraintes {
 	            }
 	        }
 	    }
+	}
+	*/
+	
+	public void C5C6() {
+		
+	    for (int i = 0; i < aResoudre.getnPatients(); i++) {
+			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]-1; j++) {
+				for (int k = 0; k <  aResoudre.getnS_ij()[aResoudre.getP_i()[i]][j]; k++) {
+					IntVar[][]Y = new IntVar[2][];
+					IntVar[][]gY = new IntVar[2][];
+					for (int u = 0; u < 2 ; u++) {
+						Y[u] = new IntVar[aResoudre.getnS_ij()[aResoudre.getP_i()[i]][u+j]];
+						gY[u] = new IntVar[aResoudre.getnS_ij()[aResoudre.getP_i()[i]][u+j]];
+						for (int m = 0; m < aResoudre.getnS_ij()[aResoudre.getP_i()[i]][u+j] ; m++) {
+							//Initialisation variable de la variable Y correspondant a X[i][u+j][m]-(X[i][j][k]+aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k]))
+							Y[u][m] = VF.enumerated("Y"+u+","+m, -(aResoudre.getnPeriodes()+aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k]), aResoudre.getnPeriodes(), solver);
+							
+							//Initialisation des variables formant la somme composant Y[u][m–
+							IntVar[] somme = new IntVar[2];
+					
+							somme[0] = X[i][u+j][m];
+							IntVar tempVar = VF.enumerated("temp", 0, aResoudre.getnPeriodes()+aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k], solver);
+							Constraint contrainteSomme = ICF.arithm(tempVar, "=", X[i][j][k], "+", aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k]);
+							
+							somme[1] =  VariableFactory.minus(tempVar);
+							
+							
+							Constraint contrainteInitialisationY =ICF.sum(somme, Y[u][m]);
+							
+							//Y[u][m] = X[i][u+j][m]-(X[i][j][k]+aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k]));
+							
+		
+							gY[u][m] =  VF.enumerated("gY"+u+","+m,0, aResoudre.getnPeriodes(), solver);
+							
+							//Contrainte sur G: est postee automatiquement
+							LogicalConstraintFactory.ifThenElse(ICF.arithm(Y[u][m], ">=", 0), ICF.arithm(gY[u][m], "=", Y[u][m]), ICF.arithm(gY[u][m], "=", aResoudre.getnPeriodes()));
+
+							//On poste les contraintes
+							solver.post(contrainteSomme);
+							solver.post(contrainteInitialisationY);
+						}
+					}
+					
+							
+					int nbgY =0;
+					for (int u = 0; u < gY.length; u++) {
+						for (int m = 0; m < gY[u].length; m++) {
+							nbgY++;
+						}
+					}
+					
+					IntVar[] gYflattened = new IntVar[nbgY];
+					int indice = 0;
+					for (int u = 0; u < gY.length; u++) {
+						for (int m = 0; m < gY[u].length; m++) {
+							gYflattened[indice] = gY[u][m];
+							indice++;
+						}
+					}
+					
+					IntVar Min = VF.enumerated("Min"+i+","+j+","+k, 0, aResoudre.getnPeriodes(), solver);
+					Constraint contrainteMin = ICF.minimum(Min, gYflattened);
+					
+					solver.post(contrainteMin);
+					
+					Constraint contrainteAmax = ICF.arithm(Min, "<=", aResoudre.getA_MAX());
+					Constraint contrainteAmin = ICF.arithm(Min, ">=", aResoudre.getA_MIN());
+					
+					solver.post(contrainteAmax);
+					solver.post(contrainteAmin);
+				}
+			}
+		}
 	}
 }

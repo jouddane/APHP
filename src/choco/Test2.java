@@ -768,12 +768,29 @@ public class Test2 {
 
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
-			//donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
-			//donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
-			/*donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P1, new Date(jour,mois,annee)));
+			/*donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));*/
+			
 
 			//2. Creation du probleme mathematique associee
 			Probleme aResoudre = new Probleme(donnees);
