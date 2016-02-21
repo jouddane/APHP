@@ -559,7 +559,7 @@ public class Test2 {
 			GroupeSoins[] P9G = {G1P9, G2P9, G3P9, G4P9, G5P9, G6P9};
 			Parcours P9  = new Parcours(P9G, "9");
 
-			// On crée le Parcours 10
+			/*// On crée le Parcours 10
 			Soin[] G1P10S = {Prelevement25};
 			GroupeSoins G1P10 = new GroupeSoins(G1P10S);
 			Soin[] G2P10S = {Collation};
@@ -569,7 +569,7 @@ public class Test2 {
 			Soin[] G4P10S = {RDVMedical40};
 			GroupeSoins G4P10 = new GroupeSoins(G4P10S);
 			GroupeSoins[] P10G = {G1P10, G2P10, G3P10, G4P10};
-			Parcours P10  = new Parcours(P10G, "10");
+			Parcours P10  = new Parcours(P10G, "10");*/
 
 			// On crée le Parcours 11
 			Soin[] G1P11S = {Prelevement25};
@@ -607,7 +607,7 @@ public class Test2 {
 			GroupeSoins[] P13G = {G1P13, G2P13, G3P13, G4P13};
 			Parcours P13  = new Parcours(P13G, "13");
 
-			// On crée le Parcours 15
+			/*// On crée le Parcours 15
 			Soin[] G1P15S = {RDVMedical20BurCS};
 			GroupeSoins G1P15 = new GroupeSoins(G1P15S);
 			Soin[] G2P15S = {ConsultationPsy20};
@@ -619,7 +619,7 @@ public class Test2 {
 			Soin[] G5P15S = {Bilan};
 			GroupeSoins G5P15 = new GroupeSoins(G5P15S);
 			GroupeSoins[] P15G = {G1P15, G2P15, G3P15, G4P15, G5P15};
-			Parcours P15  = new Parcours(P15G, "15");
+			Parcours P15  = new Parcours(P15G, "15");*/
 
 			/*		// On crée le Parcours 16
 			Soin[] G1P16S = {RDVMedical20BurSom};
@@ -653,7 +653,7 @@ public class Test2 {
 			GroupeSoins[] P17G = {G1P17, G2P17, G3P17, G4P17, G5P17, G6P17};
 			Parcours P17  = new Parcours(P17G, 17);
 			 */
-			// On crée le Parcours 7
+			// On crée le Parcours 20
 			Soin[] G1P20S = {BilanBiologique20};
 			GroupeSoins G1P20 = new GroupeSoins(G1P20S);
 			Soin[] G2P20S = {Collation};
@@ -754,11 +754,11 @@ public class Test2 {
 			donnees.ajoutParcours(P6);
 			donnees.ajoutParcours(P8);
 			donnees.ajoutParcours(P9);
-			donnees.ajoutParcours(P10);
+			//donnees.ajoutParcours(P10);
 			donnees.ajoutParcours(P11);
 			donnees.ajoutParcours(P12);
 			donnees.ajoutParcours(P13);
-			donnees.ajoutParcours(P15);
+			//donnees.ajoutParcours(P15);
 			donnees.ajoutParcours(P20);
 			donnees.ajoutParcours(P21);
 			donnees.ajoutParcours(P22);
@@ -770,26 +770,20 @@ public class Test2 {
 			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P1, new Date(jour,mois,annee)));
-			/*donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P10, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P15, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));*/
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
 			
 
 			//2. Creation du probleme mathematique associee
