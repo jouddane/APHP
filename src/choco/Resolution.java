@@ -91,8 +91,8 @@ public class Resolution {
 		//contraintes.contrainteTempsEntreSoin();
 		
         // 4. Definition de la strategie de resolution
-          solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
-       // solver.set(IntStrategyFactory.activity(XFlattened,0));
+         // solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
+        solver.set(IntStrategyFactory.activity(XFlattened,0));
         //solver.set(IntStrategyFactory.impact(XFlattened,0));
 		//solver.set(IntStrategyFactory.(XFlattened));
         

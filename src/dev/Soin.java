@@ -7,7 +7,7 @@ package dev;
 
 public class Soin {
 
-    /*
+    /**
      * La duree du soin
      */
 	protected int duree;
