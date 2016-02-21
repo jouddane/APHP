@@ -697,11 +697,11 @@ public class Test {
 			donnees.ajoutPatient(new Patient(P11, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P13, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P22, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P25, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P26, new Date(jour,mois,annee)));
+//			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+//			donnees.ajoutPatient(new Patient(P22, new Date(jour,mois,annee)));
+//			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+//			donnees.ajoutPatient(new Patient(P25, new Date(jour,mois,annee)));
+//			donnees.ajoutPatient(new Patient(P26, new Date(jour,mois,annee)));
 //			donnees.ajoutPatient(new Patient(P1, new Date(jour,mois,annee)));
 //			donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
 //			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));

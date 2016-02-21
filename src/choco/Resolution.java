@@ -89,8 +89,8 @@ public class Resolution {
 		//contraintes.contrainteTempsEntreSoin();
 		
         // 4. Definition de la strategie de resolution
-          solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
-        //solver.set(IntStrategyFactory.activity(XFlattened,0));
+         // solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
+        solver.set(IntStrategyFactory.activity(XFlattened,0));
         //solver.set(IntStrategyFactory.impact(XFlattened,0));
 		//solver.set(IntStrategyFactory.(XFlattened));
         
@@ -105,17 +105,14 @@ public class Resolution {
 		
         // 6. Lancement de la resolution
         //solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
-      System.out.println("Solution ? "+solver.findSolution());
+        solver.findSolution();
         
-        long t1 = System.currentTimeMillis();
-		long duree =t1-t0;
-		System.out.println("Duree creation de la resolution : "+duree);
+       
         
         // 7.  Affichage des statistiques de la resolution
         Chatterbox.printStatistics(solver);
         
-        //solver.findAllSolutions();
-		//System.out.println("Solution ? "+solver.findSolution());
+       
 		Solution solution = solver.getSolutionRecorder().getSolutions().get(0);
 	
 		
