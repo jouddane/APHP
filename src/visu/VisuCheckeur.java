@@ -103,7 +103,6 @@ public class VisuCheckeur extends ApplicationFrame{
 	private XYDataset createDataset1(Integer [][][] donnees, Probleme aResoudre, int a, int taillePeriode) {
 		TimeSeriesCollection dataset = new TimeSeriesCollection();
 		dataset.setDomainIsPointsInTime(true);
-		// Ici il faut que je choppe les soins de la ressource a
 		final TimeSeries s1 = new TimeSeries("Utilisation ressource "+a, Minute.class);
 
 
@@ -146,18 +145,4 @@ public class VisuCheckeur extends ApplicationFrame{
 
 
 		}
-
-
-		public static void main(final String[] args) {
-			/*for (int i=0; i<20; i++){
-	        final VisuCheckeur demo = new VisuCheckeur("Checkeur",i);
-	        demo.pack();
-	        RefineryUtilities.centerFrameOnScreen(demo);
-	        demo.setVisible(true);
-	    	}*/
-
-		}
-
-
-
 	}

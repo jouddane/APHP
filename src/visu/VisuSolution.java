@@ -112,20 +112,4 @@ public class VisuSolution extends ApplicationFrame{
 
 		return chart;
 	}
-
-
-	public static void main(final String[] args) {
-
-//		VisuSolution demo = new VisuSolution("Parcours");
-//		demo.pack();
-//		RefineryUtilities.centerFrameOnScreen(demo);
-//		demo.setVisible(true);
-
-	}
-
-
-
-
-
-
 }
