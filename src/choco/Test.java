@@ -686,7 +686,6 @@ public class Test {
 			donnees.ajoutParcours(P26);
 			
 			
-			//Lundi
 			donnees.ajoutPatient(new Patient(P1, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
@@ -751,17 +750,16 @@ public class Test {
 //			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
 //			donnees.ajoutPatient(new Patient(P25, new Date(jour,mois,annee)));
 //			donnees.ajoutPatient(new Patient(P26, new Date(jour,mois,annee)));
+			
+			// Fin initialisation des donnees
 
-			//2. Creation du probleme mathematique associee
+			//2. Creation du probleme mathematique associe
 			Probleme aResoudre = new Probleme(donnees);
 
 			//3. Creation de l'outil de resolution du probleme
 			Resolution resolution = new Resolution(aResoudre);
 
 			//4. Lancement de la resolution d probleme
-			double t0= System.currentTimeMillis();
 			resolution.resout();
-			double t1=System.currentTimeMillis()-t0;
-			System.out.println("Temps mis ppour une solution optimale: "+t1);
 		}
 }

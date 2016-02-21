@@ -48,12 +48,10 @@ public class Resolution {
 		//X[i][j][k] : debut du soin k du groupe de soins j du parcours i
 		IntVar[][][] X = new IntVar[this.aResoudre.getnPatients()][][];
 		Integer[][][] solInt = new Integer[this.aResoudre.getnPatients()][][];
-		System.out.println("Nombre de patients: "+aResoudre.getnPatients());
 		int nombreDeSoins = 0;
 		
 		
 		for(int i=0; i< this.aResoudre.getnPatients(); i++){
-			System.out.println("i = "+i+" : "+this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]);
 			X[i] = new IntVar[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];
 			solInt[i] = new Integer[this.aResoudre.getnG_i()[aResoudre.getP_i()[i]]][];			
 			
@@ -91,8 +89,8 @@ public class Resolution {
 		//contraintes.contrainteTempsEntreSoin();
 		
         // 4. Definition de la strategie de resolution
-         // solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
-        solver.set(IntStrategyFactory.activity(XFlattened,0));
+          solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
+        //solver.set(IntStrategyFactory.activity(XFlattened,0));
         //solver.set(IntStrategyFactory.impact(XFlattened,0));
 		//solver.set(IntStrategyFactory.(XFlattened));
         
