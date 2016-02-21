@@ -86,7 +86,7 @@ public class Resolution {
 		contraintes.contrainteHeureFermeture();
 		contraintes.contraintePrecedenceGroupe();
 		contraintes.contrainteCapaciteRessources();
-		contraintes.C5C6();
+		contraintes.contraiteTempsAttente();
 		//contraintes.contrainteAutomate();
 		//contraintes.contrainteTempsEntreSoin();
 		

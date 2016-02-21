@@ -22,7 +22,7 @@ public class Test {
 
 	public static void main(String[] args) {
 
-			//1. Initialisation des donnees a disposition des clients
+			///Initialisation des donnees
 			Donnees donnees = new Donnees();
 			int nPeriodes =12*24;
 			int jour = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -208,7 +208,6 @@ public class Test {
 			ArrayList<CoupleStringInt> listRessourceCapacite28 = new ArrayList<>();	 
 			listRessourceCapacite28.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
 			Soin ScintigraphieMyocardique = donnees.ajoutSoin(listRessourceCapacite28, "Scintigraphie Myocardique", 6);
-			//System.out.println("done");
 			ArrayList<CoupleStringInt> listRessourceCapacite29 = new ArrayList<>();	 
 			listRessourceCapacite29.add(new CoupleStringInt("Hors HDJ", 1));	 	 	
 			Soin Injection = donnees.ajoutSoin(listRessourceCapacite29, "Injection", 8);
@@ -247,7 +246,7 @@ public class Test {
 			listRessourceCapacite36.add(new CoupleStringInt("Medecin", 1));
 			listRessourceCapacite36.add(new CoupleStringInt("Salle Pansement", 1));	
 			Soin SoinPansementMesuresIPS = donnees.ajoutSoin(listRessourceCapacite36, "Soin, Pansement, Mesures IPS", 8);
-			//System.out.println("done");
+			
 			ArrayList<CoupleStringInt> listRessourceCapacite37 = new ArrayList<>();
 			listRessourceCapacite37.add(new CoupleStringInt("IDE Pompe Insuline", 1));
 			listRessourceCapacite37.add(new CoupleStringInt("Diabetologue", 1));
@@ -268,12 +267,12 @@ public class Test {
 			listRessourceCapacite40.add(new CoupleStringInt("IDE Sommeil", 1));
 			listRessourceCapacite40.add(new CoupleStringInt("Explorations Fonctionnelles", 1));	 
 			Soin Examens30 = donnees.ajoutSoin(listRessourceCapacite40, "Examens30", 6);
-			//System.out.println("done");
+			
 			ArrayList<CoupleStringInt> listRessourceCapacite41 = new ArrayList<>();
 			listRessourceCapacite41.add(new CoupleStringInt("IDE Sommeil", 1));
 			listRessourceCapacite41.add(new CoupleStringInt("Piece Isolee Avec Fauteuil", 1));	 
 			Soin Appareillage60 = donnees.ajoutSoin(listRessourceCapacite41, "Appareillage60", 12);
-			//System.out.println("done");
+			
 			ArrayList<CoupleStringInt> listRessourceCapacite42 = new ArrayList<>();
 			listRessourceCapacite42.add(new CoupleStringInt("Medecin Sommeil", 1));
 			listRessourceCapacite42.add(new CoupleStringInt("Bureau Sommeil", 1));	 	 
@@ -521,10 +520,6 @@ public class Test {
 			GroupeSoins[] P6G = {G1P6, G2P6, G3P6, G4P6, G5P6, G6P6};
 			Parcours P6  = new Parcours(P6G, "6");
 
-
-			//Pas de parcours 7 fourni
-
-
 			// On crée le Parcours 8
 			Soin[] G1P8S = {RDVParamedical15};
 			GroupeSoins G1P8 = new GroupeSoins(G1P8S);
@@ -558,18 +553,6 @@ public class Test {
 			GroupeSoins G6P9 = new GroupeSoins(G6P9S);
 			GroupeSoins[] P9G = {G1P9, G2P9, G3P9, G4P9, G5P9, G6P9};
 			Parcours P9  = new Parcours(P9G, "9");
-
-			/*// On crée le Parcours 10
-			Soin[] G1P10S = {Prelevement25};
-			GroupeSoins G1P10 = new GroupeSoins(G1P10S);
-			Soin[] G2P10S = {Collation};
-			GroupeSoins G2P10 = new GroupeSoins(G2P10S);
-			Soin[] G3P10S = {ECG15, PoseHolter, Retinographie, EchodopplerTSAetMI, ScannerDesCorronaires, ScintigraphieMyocardique, Injection};
-			GroupeSoins G3P10 = new GroupeSoins(G3P10S);
-			Soin[] G4P10S = {RDVMedical40};
-			GroupeSoins G4P10 = new GroupeSoins(G4P10S);
-			GroupeSoins[] P10G = {G1P10, G2P10, G3P10, G4P10};
-			Parcours P10  = new Parcours(P10G, "10");*/
 
 			// On crée le Parcours 11
 			Soin[] G1P11S = {Prelevement25};
@@ -607,52 +590,7 @@ public class Test {
 			GroupeSoins[] P13G = {G1P13, G2P13, G3P13, G4P13};
 			Parcours P13  = new Parcours(P13G, "13");
 
-			/*// On crée le Parcours 15
-			Soin[] G1P15S = {RDVMedical20BurCS};
-			GroupeSoins G1P15 = new GroupeSoins(G1P15S);
-			Soin[] G2P15S = {ConsultationPsy20};
-			GroupeSoins G2P15 = new GroupeSoins(G2P15S);
-			Soin[] G3P15S = {Examens30};
-			GroupeSoins G3P15 = new GroupeSoins(G3P15S);
-			Soin[] G4P15S = {Appareillage60};
-			GroupeSoins G4P15 = new GroupeSoins(G4P15S);
-			Soin[] G5P15S = {Bilan};
-			GroupeSoins G5P15 = new GroupeSoins(G5P15S);
-			GroupeSoins[] P15G = {G1P15, G2P15, G3P15, G4P15, G5P15};
-			Parcours P15  = new Parcours(P15G, "15");*/
-
-			/*		// On crée le Parcours 16
-			Soin[] G1P16S = {RDVMedical20BurSom};
-			GroupeSoins G1P16 = new GroupeSoins(G1P16S);
-			Soin[] G2P16S = {ETP};
-			GroupeSoins G2P16 = new GroupeSoins(G2P16S);
-			Soin[] G3P16S = {Collation};
-			GroupeSoins G3P16 = new GroupeSoins(G3P16S);
-			Soin[] G4P16S = {BilanAnthropometrique, Fibroscan};
-			GroupeSoins G4P16 = new GroupeSoins(G4P16S);
-			Soin[] G5P16S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-			GroupeSoins G5P16 = new GroupeSoins(G5P16S);
-			Soin[] G6P16S = {Synthese};
-			GroupeSoins G6P16 = new GroupeSoins(G6P16S);
-			GroupeSoins[] P16G = {G1P16, G2P16, G3P16, G4P16, G5P16, G6P16};
-			Parcours P16  = new Parcours(P16G, 16);
-
-			// On crée le Parcours 17
-			Soin[] G1P17S = {RDVParamedical20};
-			GroupeSoins G1P17 = new GroupeSoins(G1P17S);
-			Soin[] G2P17S = {BilanBiologique15, EchoHepathique, Calorimetrie};
-			GroupeSoins G2P17 = new GroupeSoins(G2P17S);
-			Soin[] G3P17S = {Collation};
-			GroupeSoins G3P17 = new GroupeSoins(G3P17S);
-			Soin[] G4P17S = {BilanAnthropometrique, Fibroscan};
-			GroupeSoins G4P17 = new GroupeSoins(G4P17S);
-			Soin[] G5P17S = {EntretienPsy, EntretienInfirmier, EntretienDiet60};
-			GroupeSoins G5P17 = new GroupeSoins(G5P17S);
-			Soin[] G6P17S = {Synthese};
-			GroupeSoins G6P17 = new GroupeSoins(G6P17S);
-			GroupeSoins[] P17G = {G1P17, G2P17, G3P17, G4P17, G5P17, G6P17};
-			Parcours P17  = new Parcours(P17G, 17);
-			 */
+			
 			// On crée le Parcours 20
 			Soin[] G1P20S = {BilanBiologique20};
 			GroupeSoins G1P20 = new GroupeSoins(G1P20S);
@@ -699,23 +637,6 @@ public class Test {
 			GroupeSoins[] P23G = {G1P23, G2P23, G3P23, G4P23, G5P23};
 			Parcours P23  = new Parcours(P23G, "23");
 
-			/*		// On crée le Parcours 24
-			Soin[] G1P24S = {RDVAccueil};
-			GroupeSoins G1P24 = new GroupeSoins(G1P24S);
-			Soin[] G2P24S = {ExamenClinique15};
-			GroupeSoins G2P24 = new GroupeSoins(G2P24S);
-			Soin[] G3P24S = {Prelevement20};
-			GroupeSoins G3P24 = new GroupeSoins(G3P24S);
-			Soin[] G4P24S = {Collation};
-			GroupeSoins G4P24 = new GroupeSoins(G4P24S);
-			Soin[] G5P24S = {IRM45, EEG, };
-			GroupeSoins G5P24 = new GroupeSoins(G5P24S);
-			Soin[] G6P24S = {Synthese};
-			GroupeSoins G6P24 = new GroupeSoins(G6P24S);
-			GroupeSoins[] P24G = {G1P24, G2P24, G3P24, G4P24, G5P24, G6P24};
-			Parcours P24  = new Parcours(P24G, 24);
-			 */
-
 			// On crée le Parcours 25
 			Soin[] G1P25S = {RDVAccueil};
 			GroupeSoins G1P25 = new GroupeSoins(G1P25S);
@@ -754,11 +675,9 @@ public class Test {
 			donnees.ajoutParcours(P6);
 			donnees.ajoutParcours(P8);
 			donnees.ajoutParcours(P9);
-			//donnees.ajoutParcours(P10);
 			donnees.ajoutParcours(P11);
 			donnees.ajoutParcours(P12);
 			donnees.ajoutParcours(P13);
-			//donnees.ajoutParcours(P15);
 			donnees.ajoutParcours(P20);
 			donnees.ajoutParcours(P21);
 			donnees.ajoutParcours(P22);
@@ -833,8 +752,6 @@ public class Test {
 //			donnees.ajoutPatient(new Patient(P25, new Date(jour,mois,annee)));
 //			donnees.ajoutPatient(new Patient(P26, new Date(jour,mois,annee)));
 
-			
-
 			//2. Creation du probleme mathematique associee
 			Probleme aResoudre = new Probleme(donnees);
 
@@ -846,8 +763,5 @@ public class Test {
 			resolution.resout();
 			double t1=System.currentTimeMillis()-t0;
 			System.out.println("Temps mis ppour une solution optimale: "+t1);
-
-
 		}
-
 }

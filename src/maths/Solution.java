@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dev.Probleme;
 
+
 public class Solution {
 	
 	private Integer[][][] Xsol;
