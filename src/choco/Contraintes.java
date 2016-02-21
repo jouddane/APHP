@@ -162,7 +162,7 @@ public class Contraintes {
 			}
 		}
 
-		int compteur2=0;
+		
 		for (int a=0; a<this.aResoudre.getnRessources(); a++){
 			Task[] Soins = new Task[compteurtemp[a]];
 			IntVar[] Hauteur = new  IntVar[compteurtemp[a]];
@@ -184,17 +184,12 @@ public class Contraintes {
 			if(Soins.length>0){
 				Constraint C1 =IntConstraintFactory.cumulative(Soins, Hauteur, Capacite);
 				solver.post(C1);
-				compteur2++;
-			}
-			else{
-				compteur2++;
 			}
 		}	
 	}
 	
 	/**
 	 * Ajoute les contraintes definies par les automates permettant d'ajouter les contraintes sur : les relations de precedence entre les groupes de soins, la duree des soins et la duree des pauses
-	 * @param export si export true, les graphes des automates utilises seront exportes sous forme de fichiers .dot, sinon pas d'export
 	 */
 	public void contrainteAutomate(){
 		//Creation des automates, 1 par parcours
@@ -249,23 +244,11 @@ public class Contraintes {
 			}
 		}
 	}
-	/*
-	public void contrainteTempsEntreSoin() {
-	    for(int i=0; i<this.X.length; i++) {
-	        for(int j=0; j<this.X[i].length; j++) {
-	            for(int k=1; k<this.X[i][j].length; k++) {
-	                //System.out.println(this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k-1]+this.aResoudre.getA_MAX());
-	                Constraint C5 = ICF.arithm(this.X[i][j][k], "<=", this.X[i][j][k-1], "+", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k-1]+this.aResoudre.getA_MAX());
-	                Constraint C6 = ICF.arithm(this.X[i][j][k], ">", this.X[i][j][k-1], "+", this.aResoudre.getL_ijk()[this.aResoudre.getP_i()[i]][j][k-1]+this.aResoudre.getA_MIN());
-	                solver.post(C5);
-	                solver.post(C6);
-	            }
-	        }
-	    }
-	}
-	*/
 	
-	public void C5C6() {
+	/**
+	 * Ajoute les contraintes C5 et C6 definies dans le modele au solveur. Permet d'assurer que le temps d'attente entre deux soins pour un patient est superieur a Amin et inferieur a Amax
+	 */
+	public void contraiteTempsAttente() {
 		
 	    for (int i = 0; i < aResoudre.getnPatients(); i++) {
 			for (int j = 0; j < aResoudre.getnG_i()[aResoudre.getP_i()[i]]-1; j++) {
@@ -291,9 +274,6 @@ public class Contraintes {
 							
 							Constraint contrainteInitialisationY =ICF.sum(somme, Y[u][m]);
 							
-							//Y[u][m] = X[i][u+j][m]-(X[i][j][k]+aResoudre.getL_ijk()[aResoudre.getP_i()[i]][j][k]));
-							
-		
 							gY[u][m] =  VF.enumerated("gY"+u+","+m,0, aResoudre.getnPeriodes(), solver);
 							
 							//Contrainte sur G: est postee automatiquement
