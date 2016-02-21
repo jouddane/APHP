@@ -91,8 +91,8 @@ public class Resolution {
 		//contraintes.contrainteTempsEntreSoin();
 		
         // 4. Definition de la strategie de resolution
-        //solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
-        solver.set(IntStrategyFactory.activity(XFlattened,0));
+          solver.set(IntStrategyFactory.lexico_LB(XFlattened));        
+       // solver.set(IntStrategyFactory.activity(XFlattened,0));
         //solver.set(IntStrategyFactory.impact(XFlattened,0));
 		//solver.set(IntStrategyFactory.(XFlattened));
         
@@ -106,7 +106,7 @@ public class Resolution {
         long t0 = System.currentTimeMillis();
 		
         // 6. Lancement de la resolution
-       // solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
+        //solver.findOptimalSolution(ResolutionPolicy.MINIMIZE, objective);
       System.out.println("Solution ? "+solver.findSolution());
         
         long t1 = System.currentTimeMillis();
@@ -130,7 +130,7 @@ public class Resolution {
 			}
 		}
 		
-		int taillePeriode =25*60/aResoudre.getnPeriodes();
+		int taillePeriode =24*60/aResoudre.getnPeriodes();
 		for (int i=0; i<aResoudre.getnRessources();i++){
 			final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur ressource "+i,solInt, aResoudre, i, taillePeriode);
 			Checkeur.pack();

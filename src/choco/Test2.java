@@ -36,49 +36,49 @@ public class Test2 {
 			donnees.setHOuverture(8*12);
 
 			//Ajout ressources humaines
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Obesite", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Nutritionniste", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Dieteticien", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Psychologue", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Interne Obesite", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin Hepato", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Externe", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Cardio", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Cardiologue", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Orthoptiste", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Diabetologue", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Podologue", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Pansement", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Pompe Insuline", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Insulinotherapie", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin Sommeil", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Sommeil", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Prestataire", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Chimio", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Generaliste", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Soignant", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Selon Profil", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Kine", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Agent Accueil", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neurologue", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neuropsy", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Obesite", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Nutritionniste", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Dieteticien", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Psychologue", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Interne Obesite", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin Hepato", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Externe", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Cardio", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Cardiologue", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Orthoptiste", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Diabetologue", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Podologue", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Pansement", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Pompe Insuline", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Insulinotherapie", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Medecin Sommeil", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Sommeil", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Prestataire", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "IDE Chimio", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Generaliste", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Soignant", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Selon Profil", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Kine", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Agent Accueil", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neurologue", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Neuropsy", 10));
 
 			//Ajout ressources matérielles
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "HDJ Obesite", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box Prelevement", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Hors HDJ", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Bureau CS", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box Soin", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle Pansement", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Explorations Fonctionnelles", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Piece Isolee Avec Fauteuil", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Bureau Sommeil", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle ETP Groupe", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle Avec Lit", 100));
-			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "HDJ Chimio", 100));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "HDJ Obesite", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box Prelevement", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Hors HDJ", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Bureau CS", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Box Soin", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle Pansement", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Explorations Fonctionnelles", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Piece Isolee Avec Fauteuil", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Bureau Sommeil", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle ETP Groupe", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "Salle Avec Lit", 10));
+			donnees.ajoutRessource(Ressource.RessourceConstante(nPeriodes, "HDJ Chimio", 10));
 
 
 			ArrayList<CoupleStringInt> listRessourceCapacite2 = new ArrayList<>();
@@ -765,25 +765,91 @@ public class Test2 {
 			donnees.ajoutParcours(P23);
 			donnees.ajoutParcours(P25);
 			donnees.ajoutParcours(P26);
-
-			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+			
+			
+			//Lundi
 			donnees.ajoutPatient(new Patient(P1, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P2, new Date(jour,mois,annee)));
-			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P8, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P9, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
 			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P23, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P25, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P26, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P1, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P3, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P4, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P8, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P9, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P9, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P12, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P20, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
+			donnees.ajoutPatient(new Patient(P21, new Date(jour,mois,annee)));
 			
 
 			//2. Creation du probleme mathematique associee
@@ -793,9 +859,12 @@ public class Test2 {
 			Resolution resolution = new Resolution(aResoudre);
 
 			//4. Lancement de la resolution d probleme
+			double t0= System.currentTimeMillis();
 			resolution.resout();
-			//}
-			//5. Affichage de la solution (a implementer)
+			double t1=System.currentTimeMillis()-t0;
+			System.out.println("Temps mis ppour une solution optimale: "+t1);
+
+
 		}
 
 }
