@@ -130,9 +130,9 @@ public class Resolution {
 			}
 		}
 		
-		/*int taillePeriode =25*60/aResoudre.getnPeriodes();
+		int taillePeriode =25*60/aResoudre.getnPeriodes();
 		for (int i=0; i<aResoudre.getnRessources();i++){
-			final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur",solInt, aResoudre, i, taillePeriode);
+			final VisuCheckeur Checkeur = new VisuCheckeur("Checkeur ressource "+i,solInt, aResoudre, i, taillePeriode);
 			Checkeur.pack();
 			RefineryUtilities.centerFrameOnScreen(Checkeur);
 			Checkeur.setVisible(true);
@@ -140,7 +140,7 @@ public class Resolution {
 		VisuSolution Gantt = new VisuSolution("Journee", solInt, aResoudre,taillePeriode);
 		Gantt.pack();
 		RefineryUtilities.centerFrameOnScreen(Gantt);
-		Gantt.setVisible(true);*/
+		Gantt.setVisible(true);
 		
 		System.out.println("Checker des solutions :");
 		
